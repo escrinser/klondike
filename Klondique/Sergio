@@ -1,0 +1,57 @@
+Modelar:
+
+Tablero (donde pongo las cartas y la que se ve, los 4 ases y los 7 montones)
+
+Cartas (52 con 4 palos)
+
+Acciones:
+Colocar las cartas inicialmente (7 montones, en el primero una carta, en el segundo 2 y así sucesivamente). Levantar la última.
+Barajar las cartas
+Sacar una carta nueva
+Mover una carta
+	-del montón a darle la vuelta
+	-de un monton a otro (solo permitimos un número menos y de otro color)
+	-de un montón a los montones de los ases	
+	-dada la vuelta a un montón
+	-dada la vuelta a los montones de los ases
+	
+Mover varias cartas
+	-de un montón a otro
+
+Volver a poner las cartas cuando ya das una vuelta
+
+
+------------
+
+Class Card 
+	variables:
+		number
+		suit
+		
+	methods:
+	
+Class Deck
+	variables:
+		Card (52) (ArrayList)
+	methods:
+		shuffle		
+	    
+
+Class Board (7 piles, 4 foundations, deck downside, card upturned beside deck (downturned))
+	variables:
+		Deck (52 cards at the begining)
+		Deal (52- (1+2+3+4+5+6+7) = 52-28 = 24 cards maximum)
+		7 piles (14, 15, 16, 17, 18, 19, 20 cards maximum) 
+		4 foundations (13 cards maximum)
+		Card from Deck (vector of Card and upturned o downturned)
+		 
+	methods:
+		deal
+		moveBetweenPiles
+		moveBetweenPileAndFoundation
+		moveBetweenDealAndPile
+	
+
+
+
+
