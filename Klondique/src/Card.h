@@ -8,10 +8,21 @@
 #ifndef CARD_H_
 #define CARD_H_
 
+#include "Suit.h"
+
 class Card {
 public:
 	Card();
 	virtual ~Card();
+
+	Card(Suit, int);
+
+	Suit getSuit();
+	int getNumber();
+
+private:
+	Suit suit;
+	int number;
 };
 
 #endif /* CARD_H_ */

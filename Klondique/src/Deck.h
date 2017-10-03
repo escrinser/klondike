@@ -25,10 +25,15 @@ public:
 	Deck();
 	virtual ~Deck();
 
-	vector<Card> loadDeck();
+	void loadDeck();
 
-    vector<Card> shuffle(vector<Card> initialDeck);
+    vector<Card> shuffle();
 
+    vector<Card> getDeck();
+
+    int getNumberOfCards();
+
+private:
     vector<Card> deck;
 
 };
