@@ -31,6 +31,7 @@ int main()
 			   << (*it).getSuit().getSuit() << ", color: " << (*it).getSuit().getColor() << endl;
    }
 
+   cout << "-- Shuffle--" << endl;
    vector<Card> shuffleDeck = deck.shuffle();
 
    // now start at from the beginning
