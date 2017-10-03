@@ -1,7 +1,7 @@
 /*
  * Card.cpp
  *
- *  Created on: 1 oct. 2017
+ *  Created on: 3 oct. 2017
  *      Author: eseogaz
  */
 
