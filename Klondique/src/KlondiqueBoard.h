@@ -34,6 +34,23 @@ public:
 	int moveBetweenPileAndFoundation();
 	int moveBetweenDealAndPile();
 
+	vector<Card> getPile1();
+	vector<Card> getPile2();
+	vector<Card> getPile3();
+	vector<Card> getPile4();
+	vector<Card> getPile5();
+	vector<Card> getPile6();
+	vector<Card> getPile7();
+
+	vector<Card> getFoundationHeart();
+	vector<Card> getFoundationSpade();
+	vector<Card> getFoundationClub();
+	vector<Card> getFoundationDiamond();
+
+	void showBoard();
+
+	void upturnCardInPile();
+
 private:
 	Deck downturnedDeck;
 	Deck upturnedDeck;
@@ -46,10 +63,10 @@ private:
 	vector<Card> pile6;
 	vector<Card> pile7;
 
-	vector<Card> fountation1;
-	vector<Card> fountation2;
-	vector<Card> fountation3;
-	vector<Card> fountation4;
+	vector<Card> fountationHeart;
+	vector<Card> fountationSpade;
+	vector<Card> fountationClub;
+	vector<Card> fountationDiamond;
 
 	//vector<Card, string> cardInBoard;
 };

@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "Deck.h"
+#include "KlondiqueBoard.h"
 
 using namespace std;
 
@@ -42,6 +43,9 @@ int main()
 	   cout << "Card -> number: " << (*it).getNumber() << ", suit: "
 			   << (*it).getSuit().getSuit() << ", color: " << (*it).getSuit().getColor() << endl;
    }
+
+   KlondiqueBoard board;
+   board.showBoard();
 
    return 0;
 }
