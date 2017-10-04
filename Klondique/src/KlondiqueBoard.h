@@ -23,52 +23,64 @@
 #define KLONDIQUEBOARD_H_
 
 #include "Deck.h"
+#include "CardInBoard.h"
 
 class KlondiqueBoard {
 public:
 	KlondiqueBoard();
 	virtual ~KlondiqueBoard();
 
+	KlondiqueBoard(Deck);
+
+	void initBoard();
+	void startPlayingBoard();
+
 	int deal();
 	int moveBetweenPiles();
 	int moveBetweenPileAndFoundation();
 	int moveBetweenDealAndPile();
 
-	vector<Card> getPile1();
-	vector<Card> getPile2();
-	vector<Card> getPile3();
-	vector<Card> getPile4();
-	vector<Card> getPile5();
-	vector<Card> getPile6();
-	vector<Card> getPile7();
+	vector<CardInBoard> getUpturnedDeck();
+	vector<CardInBoard> getDownturnedDeck();
 
-	vector<Card> getFoundationHeart();
-	vector<Card> getFoundationSpade();
-	vector<Card> getFoundationClub();
-	vector<Card> getFoundationDiamond();
+	vector<CardInBoard> getPile1();
+	vector<CardInBoard> getPile2();
+	vector<CardInBoard> getPile3();
+	vector<CardInBoard> getPile4();
+	vector<CardInBoard> getPile5();
+	vector<CardInBoard> getPile6();
+	vector<CardInBoard> getPile7();
+
+	vector<CardInBoard> getFoundationHeart();
+	vector<CardInBoard> getFoundationSpade();
+	vector<CardInBoard> getFoundationClub();
+	vector<CardInBoard> getFoundationDiamond();
 
 	void showBoard();
 
 	void upturnCardInPile();
 
 private:
-	Deck downturnedDeck;
-	Deck upturnedDeck;
+	Deck deck;
 
-	vector<Card> pile1;
-	vector<Card> pile2;
-	vector<Card> pile3;
-	vector<Card> pile4;
-	vector<Card> pile5;
-	vector<Card> pile6;
-	vector<Card> pile7;
+	vector<CardInBoard> downturnedDeck;
+	vector<CardInBoard> upturnedDeck;
 
-	vector<Card> fountationHeart;
-	vector<Card> fountationSpade;
-	vector<Card> fountationClub;
-	vector<Card> fountationDiamond;
 
-	//vector<Card, string> cardInBoard;
+	vector<CardInBoard> pile1;
+	vector<CardInBoard> pile2;
+	vector<CardInBoard> pile3;
+	vector<CardInBoard> pile4;
+	vector<CardInBoard> pile5;
+	vector<CardInBoard> pile6;
+	vector<CardInBoard> pile7;
+
+	vector<CardInBoard> fountationHeart;
+	vector<CardInBoard> fountationSpade;
+	vector<CardInBoard> fountationClub;
+	vector<CardInBoard> fountationDiamond;
+
+	//vector<CardInBoard, string> cardInBoard;
 };
 
 #endif /* KLONDIQUEBOARD_H_ */
