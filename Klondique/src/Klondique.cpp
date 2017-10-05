@@ -52,5 +52,15 @@ int main()
    board.startPlayingBoard();
    board.deal();
 
+   //First movement (upturned to Pile1)
+   board.moveBetweenDealAndPile(board.getUpturnedDeck(), board.getPile1());
+
+   //Second movement (Pile7 to Pile2)
+   board.moveBetweenPiles(board.getPile7(), board.getPile2());
+
+   //Third movement (Pile6 to FoundationHeart)
+   // TODO: First movement to an empty vector
+   //board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart());
+
    return 0;
 }

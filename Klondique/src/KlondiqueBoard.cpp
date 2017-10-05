@@ -143,7 +143,6 @@ KlondiqueBoard::startPlayingBoard()
 int
 KlondiqueBoard::deal()
 {
-
 	upturnedDeck.push_back(downturnedDeck.back());
 	upturnedDeck.back().setUpOrDownTurned("upturned");
 	downturnedDeck.pop_back();
@@ -153,22 +152,97 @@ KlondiqueBoard::deal()
 	return 0;
 }
 
-int
-KlondiqueBoard::moveBetweenPiles()
+bool
+KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> thePileOrigin,
+							     vector<CardInBoard> thePileDestination)
 {
-	return 0;
+	//return 0 -> no movement (not possible, no same pile, same color or not the next number)
+	bool movementCorrect = false;
+
+	//TODO: same pile?
+	//TODO: move a king to a empty Pile (other card not allowed)
+
+	if ((thePileOrigin.back().getCard().getNumber() ==
+			(thePileDestination.back().getCard().getNumber() + 1)) &&
+				(thePileOrigin.back().getCard().getSuit().getColor() !=
+					(thePileDestination.back().getCard().getSuit().getColor())))
+	{
+		// Movement
+		thePileDestination.push_back(thePileOrigin.back());
+		thePileOrigin.pop_back();
+		movementCorrect = true;
+		cout << "MOVE A CARD FROM PILE TO PILE" << endl;
+		showBoard();
+		cout << "END OF MOVE A CARD FROM PILE TO PILE" << endl;
+	}
+	else
+	{
+		cout << "Not possible movement" << endl;
+	}
+
+	return movementCorrect;
 }
 
-int
-KlondiqueBoard::moveBetweenPileAndFoundation()
+bool
+KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard> thePileOrigin,
+		          	  	  	  	  	  	  	 vector<CardInBoard> theFoundationDestination)
 {
-	return 0;
+	//return 0 -> no movement (not possible, different suit or not the next number)
+	bool movementCorrect = false;
+
+	//TODO: First card in empty foundation
+	/*if(theFoundationDestination.empty())
+	{
+
+	}*/
+
+	if ((thePileOrigin.back().getCard().getNumber() ==
+			(theFoundationDestination.back().getCard().getNumber() + 1)) &&
+				(thePileOrigin.back().getCard().getSuit().getSuit() ==
+					(theFoundationDestination.back().getCard().getSuit().getSuit())))
+	{
+		// Movement
+		theFoundationDestination.push_back(thePileOrigin.back());
+		thePileOrigin.pop_back();
+		movementCorrect = true;
+		cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+		showBoard();
+		cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+	}
+	else
+	{
+		cout << "Not possible movement" << endl;
+	}
+
+	return movementCorrect;
 }
 
-int
-KlondiqueBoard::moveBetweenDealAndPile()
+bool
+KlondiqueBoard::moveBetweenDealAndPile(vector<CardInBoard> theDealOrigin,
+									   vector<CardInBoard> thePileDestination)
 {
-	return 0;
+	//return 0 -> no movement (not possible, same color or not the next number)
+	bool movementCorrect = false;
+
+	if ((theDealOrigin.back().getCard().getNumber() ==
+			(thePileDestination.back().getCard().getNumber() + 1)) &&
+				(theDealOrigin.back().getCard().getSuit().getColor() !=
+					(thePileDestination.back().getCard().getSuit().getColor())))
+	{
+		// Movement
+		thePileDestination.push_back(theDealOrigin.back());
+		theDealOrigin.pop_back();
+		movementCorrect = true;
+		cout << "MOVE A CARD FROM DEAL TO PILE" << endl;
+		showBoard();
+		cout << "END OF MOVE A CARD FROM DEAL TO PILE" << endl;
+	}
+	else
+	{
+		cout << "Not possible movement" << endl;
+	}
+
+	return movementCorrect;
 }
 
 vector<CardInBoard>
@@ -228,25 +302,25 @@ KlondiqueBoard::getPile7()
 vector<CardInBoard>
 KlondiqueBoard::getFoundationHeart()
 {
-	return fountationHeart;
+	return foundationHeart;
 }
 
 vector<CardInBoard>
 KlondiqueBoard::getFoundationSpade()
 {
-	return fountationSpade;
+	return foundationSpade;
 }
 
 vector<CardInBoard>
 KlondiqueBoard::getFoundationClub()
 {
-	return fountationClub;
+	return foundationClub;
 }
 
 vector<CardInBoard>
 KlondiqueBoard::getFoundationDiamond()
 {
-	return fountationDiamond;
+	return foundationDiamond;
 }
 
 void
@@ -290,13 +364,13 @@ KlondiqueBoard::showBoard()
 
 	// 3) Foundation Heart (Only Hearts and in order from Ace to King)
 	cout << "== FOUNDATION HEART ==" << endl;
-	if (fountationHeart.empty())
+	if (foundationHeart.empty())
 	{
 		cout << "== EMPTY ==" << endl;
 	}
 	else
 	{
-		for(vector<CardInBoard>::iterator it = fountationHeart.begin(); it != fountationHeart.end(); it++)
+		for(vector<CardInBoard>::iterator it = foundationHeart.begin(); it != foundationHeart.end(); it++)
 		{
 		   cout << "Card in foundation Heart -> number: " << (*it).getCard().getNumber() << ", suit: "
 				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
@@ -306,13 +380,13 @@ KlondiqueBoard::showBoard()
 
 	// 4) Foundation Spade (Only Spades and in order from Ace to King)
 	cout << "== FOUNDATION SPADE ==" << endl;
-	if (fountationSpade.empty())
+	if (foundationSpade.empty())
 	{
 		cout << "== EMPTY ==" << endl;
 	}
 	else
 	{
-		for(vector<CardInBoard>::iterator it = fountationSpade.begin(); it != fountationSpade.end(); it++)
+		for(vector<CardInBoard>::iterator it = foundationSpade.begin(); it != foundationSpade.end(); it++)
 		{
 		   cout << "Card in foundation Spade -> number: " << (*it).getCard().getNumber() << ", suit: "
 				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
@@ -322,13 +396,13 @@ KlondiqueBoard::showBoard()
 
 	// 5) Foundation Club (Only Clubs and in order from Ace to King)
 	cout << "== FOUNDATION CLUB ==" << endl;
-	if (fountationClub.empty())
+	if (foundationClub.empty())
 	{
 		cout << "== EMPTY ==" << endl;
 	}
 	else
 	{
-		for(vector<CardInBoard>::iterator it = fountationClub.begin(); it != fountationClub.end(); it++)
+		for(vector<CardInBoard>::iterator it = foundationClub.begin(); it != foundationClub.end(); it++)
 		{
 		   cout << "Card in foundation Club -> number: " << (*it).getCard().getNumber() << ", suit: "
 				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
@@ -338,13 +412,13 @@ KlondiqueBoard::showBoard()
 
 	// 6) Foundation Diamond (Only Diamonds and in order from Ace to King)
 	cout << "== FOUNDATION DIAMOND ==" << endl;
-	if (fountationDiamond.empty())
+	if (foundationDiamond.empty())
 	{
 		cout << "== EMPTY ==" << endl;
 	}
 	else
 	{
-		for(vector<CardInBoard>::iterator it = fountationDiamond.begin(); it != fountationDiamond.end(); it++)
+		for(vector<CardInBoard>::iterator it = foundationDiamond.begin(); it != foundationDiamond.end(); it++)
 		{
 		   cout << "Card in foundation Diamond -> number: " << (*it).getCard().getNumber() << ", suit: "
 				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
