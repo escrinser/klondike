@@ -143,14 +143,24 @@ KlondiqueBoard::startPlayingBoard()
 int
 KlondiqueBoard::deal()
 {
-	upturnedDeck.push_back(downturnedDeck.back());
-	upturnedDeck.back().setUpOrDownTurned("upturned");
-	downturnedDeck.pop_back();
-	cout << "DEAL A CARD" << endl;
-	showBoard();
-	cout << "END OF DEAL A CARD" << endl;
+	//TODO: Control when downturnedDeck is empty.
+	if (!downturnedDeck.empty())
+	{
+		upturnedDeck.push_back(downturnedDeck.back());
+		upturnedDeck.back().setUpOrDownTurned("upturned");
+		downturnedDeck.pop_back();
+		cout << "DEAL A CARD" << endl;
+		showBoard();
+		cout << "END OF DEAL A CARD" << endl;
+	}
+	else
+	{
+		cout << "There is no cards in downturnedDeck" << endl;
+	}
 	return 0;
 }
+
+//TODO: do the method from the upturned to the downturned when downturned is empty.
 
 bool
 KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> thePileOrigin,
@@ -190,30 +200,44 @@ KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard> thePileOrigin,
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	//TODO: First card in empty foundation
-	/*if(theFoundationDestination.empty())
+	//TODO: First card in empty foundation (I have no clue about the kind of foundation...
+	if(theFoundationDestination.empty())
 	{
-
-	}*/
-
-	if ((thePileOrigin.back().getCard().getNumber() ==
-			(theFoundationDestination.back().getCard().getNumber() + 1)) &&
-				(thePileOrigin.back().getCard().getSuit().getSuit() ==
-					(theFoundationDestination.back().getCard().getSuit().getSuit())))
-	{
-		// Movement
-		theFoundationDestination.push_back(thePileOrigin.back());
-		thePileOrigin.pop_back();
-		movementCorrect = true;
-		cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-		showBoard();
-		cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+		if (thePileOrigin.back().getCard().getNumber() == 1)
+		{
+			// Movement
+			theFoundationDestination.push_back(thePileOrigin.back());
+			thePileOrigin.pop_back();
+			movementCorrect = true;
+			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			showBoard();
+			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+		}
+		else
+		{
+			cout << "Not possible movement" << endl;
+		}
 	}
 	else
 	{
-		cout << "Not possible movement" << endl;
+		if ((thePileOrigin.back().getCard().getNumber() ==
+				(theFoundationDestination.back().getCard().getNumber() + 1)) &&
+					(thePileOrigin.back().getCard().getSuit().getSuit() ==
+						(theFoundationDestination.back().getCard().getSuit().getSuit())))
+		{
+			// Movement
+			theFoundationDestination.push_back(thePileOrigin.back());
+			thePileOrigin.pop_back();
+			movementCorrect = true;
+			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			showBoard();
+			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+		}
+		else
+		{
+			cout << "Not possible movement" << endl;
+		}
 	}
-
 	return movementCorrect;
 }
 
@@ -242,6 +266,54 @@ KlondiqueBoard::moveBetweenDealAndPile(vector<CardInBoard> theDealOrigin,
 		cout << "Not possible movement" << endl;
 	}
 
+	return movementCorrect;
+}
+
+bool
+KlondiqueBoard::moveBetweenDealAndFoundation(vector<CardInBoard> theDealOrigin,
+									   vector<CardInBoard> theFoundationDestination)
+{
+	//return 0 -> no movement (not possible, different suit or not the next number)
+	bool movementCorrect = false;
+
+	//TODO: First card in empty foundation (I have no clue about the kind of foundation...
+	if(theFoundationDestination.empty())
+	{
+		if (theDealOrigin.back().getCard().getNumber() == 1)
+		{
+			// Movement
+			theFoundationDestination.push_back(theDealOrigin.back());
+			theDealOrigin.pop_back();
+			movementCorrect = true;
+			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			showBoard();
+			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+		}
+		else
+		{
+			cout << "Not possible movement" << endl;
+		}
+	}
+	else
+	{
+		if ((theDealOrigin.back().getCard().getNumber() ==
+				(theFoundationDestination.back().getCard().getNumber() + 1)) &&
+					(theDealOrigin.back().getCard().getSuit().getSuit() ==
+						(theFoundationDestination.back().getCard().getSuit().getSuit())))
+		{
+			// Movement
+			theFoundationDestination.push_back(theDealOrigin.back());
+			theDealOrigin.pop_back();
+			movementCorrect = true;
+			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			showBoard();
+			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+		}
+		else
+		{
+			cout << "Not possible movement" << endl;
+		}
+	}
 	return movementCorrect;
 }
 

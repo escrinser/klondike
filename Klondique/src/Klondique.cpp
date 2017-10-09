@@ -6,46 +6,49 @@
  */
 #include <iostream>
 
-#include "Deck.h"
-#include "KlondiqueBoard.h"
+#include "Play.h"
 
 using namespace std;
 
 int main()
 {
+   int choice;
    cout << "The First Version of Klondique." << endl;
-   cout << "=== MENU ===." << endl;
-   cout << "1.) Jugar" << endl;
-   cout << "2.) Salir" << endl;
+   do
+   {
+	   cout << "Chose one option:\n\n";
 
+	   cout << "1  Play\n";
+	   cout << "2  End\n";
+	   cout << "Enter your choice and press return: ";
+	   cin >> choice;
+	   Play start;
+	   switch (choice)
+	   {
+		   case 1:
+			   cout << "Start playing"<<endl;
+			   start.startPlay();
+			   break;
+
+		   case 2:
+			   cout << "End of the game."<<endl;
+			   break;
+
+		   default:
+			   cout << "Not a Valid Choice. Choose again.\n";
+			   break;
+	   }
+   }
+   while (choice != 1 && choice != 2);
+
+   return 0;
+}
+
+/*void
+play()
+{
    Deck deck;
    deck.loadDeck();
-
-   /*vector<Card> initialDeck = deck.getDeck();
-
-
-   vector<Card>::iterator it;  // declare an iterator to a vector of strings
-
-   // now start at from the beginning
-   // and keep iterating over the elements
-   for(it = initialDeck.begin(); it != initialDeck.end(); it++)
-   {
-       // print
-	   cout << "Card -> number: " << (*it).getNumber() << ", suit: "
-			   << (*it).getSuit().getSuit() << ", color: " << (*it).getSuit().getColor() << endl;
-   }
-
-   cout << "-- Shuffle--" << endl;
-   vector<Card> shuffleDeck = deck.shuffle();
-
-   // now start at from the beginning
-   // and keep iterating over the elements
-   for(vector<Card>::iterator it = shuffleDeck.begin(); it != shuffleDeck.end(); it++)
-   {
-       // print
-	   cout << "Card -> number: " << (*it).getNumber() << ", suit: "
-			   << (*it).getSuit().getSuit() << ", color: " << (*it).getSuit().getColor() << endl;
-   }*/
 
    KlondiqueBoard board (deck);
    //board.initBoard();
@@ -53,14 +56,15 @@ int main()
    board.deal();
 
    //First movement (upturned to Pile1)
+   cout << "First movement (upturned to Pile1)" << endl;
    board.moveBetweenDealAndPile(board.getUpturnedDeck(), board.getPile1());
 
    //Second movement (Pile7 to Pile2)
+   cout << "Second movement (Pile7 to Pile2)" << endl;
    board.moveBetweenPiles(board.getPile7(), board.getPile2());
 
    //Third movement (Pile6 to FoundationHeart)
    // TODO: First movement to an empty vector
-   //board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart());
-
-   return 0;
-}
+   cout << "Third movement (Pile6 to FoundationHeart)" << endl;
+   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart());
+}*/

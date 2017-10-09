@@ -40,8 +40,14 @@ public:
 		     	 	 	  vector<CardInBoard> thePileDestination);
 	bool moveBetweenPileAndFoundation(vector<CardInBoard> thePileOrigin,
 	  	  	  	  	 	 	 	 	  vector<CardInBoard> theFoundationDestination);
+
+	//TODO: Similar movement as moveBetweenPiles
 	bool moveBetweenDealAndPile(vector<CardInBoard> theDealOrigin,
 			   	   	   	   	    vector<CardInBoard> thePileDestination);
+
+	//TODO: Similar movement as moveBetweenPileAndFoundation
+	bool moveBetweenDealAndFoundation(vector<CardInBoard> theDealOrigin,
+									  vector<CardInBoard> theFoundationDestination);
 
 	vector<CardInBoard> getUpturnedDeck();
 	vector<CardInBoard> getDownturnedDeck();
