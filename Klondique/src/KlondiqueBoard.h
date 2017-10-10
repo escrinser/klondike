@@ -39,38 +39,38 @@ public:
 	void startPlayingBoard();
 
 	int deal();
-	bool moveBetweenPiles(vector<CardInBoard> thePileOrigin,
-		     	 	 	  vector<CardInBoard> thePileDestination);
-	bool moveBetweenPileAndFoundation(vector<CardInBoard> thePileOrigin,
-	  	  	  	  	 	 	 	 	  vector<CardInBoard> theFoundationDestination);
+	bool moveBetweenPiles(vector<CardInBoard>& thePileOrigin,
+		     	 	 	  vector<CardInBoard>& thePileDestination);
+	bool moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
+	  	  	  	  	 	 	 	 	  vector<CardInBoard>& theFoundationDestination);
 
-	//TODO: Similar movement as moveBetweenPiles
-	bool moveBetweenDealAndPile(vector<CardInBoard> theDealOrigin,
-			   	   	   	   	    vector<CardInBoard> thePileDestination);
+	//TODO: Similar movement as moveBetweenPiles (refactoring)
+	bool moveBetweenWastePileAndPile(vector<CardInBoard>& theDealOrigin,
+			   	   	   	   	    vector<CardInBoard>& thePileDestination);
 
-	//TODO: Similar movement as moveBetweenPileAndFoundation
-	bool moveBetweenDealAndFoundation(vector<CardInBoard> theDealOrigin,
-									  vector<CardInBoard> theFoundationDestination);
+	//TODO: Similar movement as moveBetweenPileAndFoundation (refactoring)
+	bool moveBetweenWastePileAndFoundation(vector<CardInBoard>& theDealOrigin,
+									  vector<CardInBoard>& theFoundationDestination);
 
-	vector<CardInBoard> getUpturnedDeck();
-	vector<CardInBoard> getDownturnedDeck();
+	vector<CardInBoard>& getWastePile();
+	vector<CardInBoard>& getStock();
 
-	vector<CardInBoard> getPile1();
-	vector<CardInBoard> getPile2();
-	vector<CardInBoard> getPile3();
-	vector<CardInBoard> getPile4();
-	vector<CardInBoard> getPile5();
-	vector<CardInBoard> getPile6();
-	vector<CardInBoard> getPile7();
+	vector<CardInBoard>& getPile1();
+	vector<CardInBoard>& getPile2();
+	vector<CardInBoard>& getPile3();
+	vector<CardInBoard>& getPile4();
+	vector<CardInBoard>& getPile5();
+	vector<CardInBoard>& getPile6();
+	vector<CardInBoard>& getPile7();
 
-	vector<CardInBoard> getFoundationHeart();
-	vector<CardInBoard> getFoundationSpade();
-	vector<CardInBoard> getFoundationClub();
-	vector<CardInBoard> getFoundationDiamond();
+	vector<CardInBoard>& getFoundationHeart();
+	vector<CardInBoard>& getFoundationSpade();
+	vector<CardInBoard>& getFoundationClub();
+	vector<CardInBoard>& getFoundationDiamond();
 
 	void showBoard();
 
-	bool upturnCardInPile(vector<CardInBoard> thePile);
+	bool upturnCardInPile(vector<CardInBoard>& thePile);
 
 private:
 	Deck deck;
@@ -78,8 +78,8 @@ private:
 	vector<Pile> piles;
 	vector<Foundation> foundations;
 
-	vector<CardInBoard> downturnedDeck;
-	vector<CardInBoard> upturnedDeck;
+	vector<CardInBoard> stock;
+	vector<CardInBoard> wastePile;
 
 
 	vector<CardInBoard> pile1;

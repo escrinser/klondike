@@ -43,28 +43,3 @@ int main()
 
    return 0;
 }
-
-/*void
-play()
-{
-   Deck deck;
-   deck.loadDeck();
-
-   KlondiqueBoard board (deck);
-   //board.initBoard();
-   board.startPlayingBoard();
-   board.deal();
-
-   //First movement (upturned to Pile1)
-   cout << "First movement (upturned to Pile1)" << endl;
-   board.moveBetweenDealAndPile(board.getUpturnedDeck(), board.getPile1());
-
-   //Second movement (Pile7 to Pile2)
-   cout << "Second movement (Pile7 to Pile2)" << endl;
-   board.moveBetweenPiles(board.getPile7(), board.getPile2());
-
-   //Third movement (Pile6 to FoundationHeart)
-   // TODO: First movement to an empty vector
-   cout << "Third movement (Pile6 to FoundationHeart)" << endl;
-   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart());
-}*/

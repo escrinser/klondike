@@ -14,7 +14,6 @@ public:
 	virtual ~Play();
 
 	void startPlay();
-	int chooseMovement(int thePileNumberOrigin, int thePileNumberDestination);
 };
 
 #endif /* PLAY_H_ */
