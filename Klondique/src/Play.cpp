@@ -26,6 +26,122 @@ Play::startPlay()
 	Deck deck;
 	deck.loadDeck();
 
+	vector<Card> initialDeck = deck.shuffle();
+
+	// Pile1
+	vector<CardInBoard> pile1;
+	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	cout << "Before Pile 1: " << initialDeck.size() << endl;
+	initialDeck.pop_back();
+	cout << "After Pile 1: "<< initialDeck.size() << endl;
+
+	// Pile2
+	vector<CardInBoard> pile2;
+	pile2.push_back(CardInBoard (initialDeck.back(), "downturned"));
+	initialDeck.pop_back();
+	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	cout << "After Pile 2: "<< initialDeck.size() << endl;
+
+	// Pile3
+	vector<CardInBoard> pile3;
+	for (int x=0; x<2; x++)
+	{
+		pile3.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	cout << "After Pile 3: "<< initialDeck.size() << endl;
+
+	// Pile4
+	vector<CardInBoard> pile4;
+	for (int x=0; x<3; x++)
+	{
+		pile4.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	cout << "After Pile 4: "<< initialDeck.size() << endl;
+
+	// Pile5
+	vector<CardInBoard> pile5;
+	for (int x=0; x<4; x++)
+	{
+		pile5.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	cout << "After Pile 5: "<< initialDeck.size() << endl;
+
+	// Pile6
+	vector<CardInBoard> pile6;
+	for (int x=0; x<5; x++)
+	{
+		pile6.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	cout << "After Pile 6: "<< initialDeck.size() << endl;
+
+	// Pile7
+	vector<CardInBoard> pile7;
+	for (int x=0; x<6; x++)
+	{
+		pile7.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	cout << "After Pile 7: "<< initialDeck.size() << endl;
+
+	Pile pileOne (1, pile1);
+	Pile pileTwo (2, pile2);
+	Pile pileThree (3, pile3);
+	Pile pileFour (4, pile4);
+	Pile pileFive (5, pile5);
+	Pile pileSix (6, pile6);
+	Pile pileSeven (7, pile7);
+
+	vector<Pile> piles;
+	piles.push_back(pileOne);
+	piles.push_back(pileTwo);
+	piles.push_back(pileThree);
+	piles.push_back(pileFour);
+	piles.push_back(pileFive);
+	piles.push_back(pileSix);
+	piles.push_back(pileSeven);
+
+
+	//Foundations
+	Suit suitHeart("heart", "red");
+	Suit suitSpade("spade", "black");
+	Suit suitClub("club", "black");
+	Suit suitDiamond("diamond", "red");
+
+	vector<CardInBoard> foundationHearts;
+	Foundation foundationHeart (suitHeart, foundationHearts);
+
+	vector<CardInBoard> foundationSpades;
+	Foundation foundationSpade (suitSpade, foundationSpades);
+
+	vector<CardInBoard> foundationClubs;
+	Foundation foundationClub (suitClub, foundationClubs);
+
+	vector<CardInBoard> foundationDiamonds;
+	Foundation foundationDiamond (suitDiamond, foundationDiamonds);
+
+	vector<Foundation> foundations;
+	foundations.push_back(foundationHeart);
+	foundations.push_back(foundationSpade);
+	foundations.push_back(foundationClub);
+	foundations.push_back(foundationDiamond);
+
+	KlondiqueBoard boardSergio (deck, piles, foundations);
+
 	KlondiqueBoard board (deck);
 	//board.initBoard();
 	board.startPlayingBoard();
@@ -34,6 +150,9 @@ Play::startPlay()
 	int movement;
 	int pileNumber;
 	int foundationNumber; //TODO: Enter String with the suit, not numbers.
+
+	int pileNumberOrigin;
+	int pileNumberDestination;
 
 	cout << "The First Movement." << endl;
 	do
@@ -59,6 +178,7 @@ Play::startPlay()
 
 		   case 2:
 			   cout << "Move a card between upturned to Pile"<<endl;
+			   cout << "\nPile Destination: ";
 			   cin >> pileNumber; //TODO: Number between 1-7
 			   //First movement (upturned to Pile1)
 			   cout << "First movement from upturned to Pile: " << pileNumber  << endl;
@@ -92,17 +212,238 @@ Play::startPlay()
 			   break;
 
 		   case 3:
+		   {
 			   cout << "Move a card between Piles"<<endl;
+			   cout << "\nPile Origin: ";
+			   cin >> pileNumberOrigin;
+			   cout << "\nPile Destination: ";
+			   cin >> pileNumberDestination;
+			   cout << "Pile Origin: " << pileNumberOrigin << " Pile Destination: " << pileNumberDestination  << endl;
+			   //chooseMovement(pileNumberOrigin, pileNumberDestination);
 			   //Second movement (Pile7 to Pile2)
-			   cout << "Second movement (Pile7 to Pile2)" << endl;
-			   board.moveBetweenPiles(board.getPile7(), board.getPile2());
+			   //cout << "Second movement (Pile7 to Pile2)" << endl;
+			   //board.moveBetweenPiles(board.getPile7(), board.getPile2());
+				switch (pileNumberOrigin)
+				{
+					case 1:
+					{
+						switch (pileNumberDestination)
+						{
+							case 2:
+							{
+							   board.moveBetweenPiles(board.getPile1(), board.getPile2());
+							}
+							case 3:
+							{
+							   board.moveBetweenPiles(board.getPile1(), board.getPile3());
+							}
+							case 4:
+							{
+							   board.moveBetweenPiles(board.getPile1(), board.getPile4());
+							}
+							case 5:
+							{
+							   board.moveBetweenPiles(board.getPile1(), board.getPile5());
+							}
+							case 6:
+							{
+							   board.moveBetweenPiles(board.getPile1(), board.getPile6());
+							}
+							case 7:
+							{
+							   board.moveBetweenPiles(board.getPile1(), board.getPile7());
+							}
+						}
+					}
+					case 2:
+					{
+						switch (pileNumberDestination)
+						{
+							case 1:
+							{
+							   board.moveBetweenPiles(board.getPile2(), board.getPile1());
+							}
+							case 3:
+							{
+							   board.moveBetweenPiles(board.getPile2(), board.getPile3());
+							}
+							case 4:
+							{
+							   board.moveBetweenPiles(board.getPile2(), board.getPile4());
+							}
+							case 5:
+							{
+							   board.moveBetweenPiles(board.getPile2(), board.getPile5());
+							}
+							case 6:
+							{
+							   board.moveBetweenPiles(board.getPile2(), board.getPile6());
+							}
+							case 7:
+							{
+							   board.moveBetweenPiles(board.getPile2(), board.getPile7());
+							}
+						}
+					}
+					case 3:
+					{
+						switch (pileNumberDestination)
+						{
+							case 1:
+							{
+							   board.moveBetweenPiles(board.getPile3(), board.getPile1());
+							}
+							case 2:
+							{
+							   board.moveBetweenPiles(board.getPile3(), board.getPile2());
+							}
+							case 4:
+							{
+							   board.moveBetweenPiles(board.getPile3(), board.getPile4());
+							}
+							case 5:
+							{
+							   board.moveBetweenPiles(board.getPile3(), board.getPile5());
+							}
+							case 6:
+							{
+							   board.moveBetweenPiles(board.getPile3(), board.getPile6());
+							}
+							case 7:
+							{
+							   board.moveBetweenPiles(board.getPile3(), board.getPile7());
+							}
+						}
+					}
+					case 4:
+					{
+						switch (pileNumberDestination)
+						{
+							case 1:
+							{
+							   board.moveBetweenPiles(board.getPile4(), board.getPile1());
+							}
+							case 2:
+							{
+							   board.moveBetweenPiles(board.getPile4(), board.getPile2());
+							}
+							case 3:
+							{
+							   board.moveBetweenPiles(board.getPile4(), board.getPile3());
+							}
+							case 5:
+							{
+							   board.moveBetweenPiles(board.getPile4(), board.getPile5());
+							}
+							case 6:
+							{
+							   board.moveBetweenPiles(board.getPile4(), board.getPile6());
+							}
+							case 7:
+							{
+							   board.moveBetweenPiles(board.getPile4(), board.getPile7());
+							}
+						}
+					}
+					case 5:
+					{
+						switch (pileNumberDestination)
+						{
+							case 1:
+							{
+							   board.moveBetweenPiles(board.getPile5(), board.getPile1());
+							}
+							case 2:
+							{
+							   board.moveBetweenPiles(board.getPile5(), board.getPile2());
+							}
+							case 3:
+							{
+							   board.moveBetweenPiles(board.getPile5(), board.getPile3());
+							}
+							case 4:
+							{
+							   board.moveBetweenPiles(board.getPile5(), board.getPile4());
+							}
+							case 6:
+							{
+							   board.moveBetweenPiles(board.getPile5(), board.getPile6());
+							}
+							case 7:
+							{
+							   board.moveBetweenPiles(board.getPile5(), board.getPile7());
+							}
+						}
+					}
+					case 6:
+					{
+						switch (pileNumberDestination)
+						{
+							case 1:
+							{
+							   board.moveBetweenPiles(board.getPile6(), board.getPile1());
+							}
+							case 2:
+							{
+							   board.moveBetweenPiles(board.getPile6(), board.getPile2());
+							}
+							case 3:
+							{
+							   board.moveBetweenPiles(board.getPile6(), board.getPile3());
+							}
+							case 4:
+							{
+							   board.moveBetweenPiles(board.getPile6(), board.getPile4());
+							}
+							case 5:
+							{
+							   board.moveBetweenPiles(board.getPile6(), board.getPile5());
+							}
+							case 7:
+							{
+							   board.moveBetweenPiles(board.getPile6(), board.getPile7());
+							}
+						}
+					}
+					case 7:
+					{
+						switch (pileNumberDestination)
+						{
+							case 1:
+							{
+							   board.moveBetweenPiles(board.getPile7(), board.getPile1());
+							}
+							case 2:
+							{
+							   board.moveBetweenPiles(board.getPile7(), board.getPile2());
+							}
+							case 3:
+							{
+							   board.moveBetweenPiles(board.getPile7(), board.getPile3());
+							}
+							case 4:
+							{
+							   board.moveBetweenPiles(board.getPile7(), board.getPile4());
+							}
+							case 5:
+							{
+							   board.moveBetweenPiles(board.getPile7(), board.getPile5());
+							}
+							case 6:
+							{
+							   board.moveBetweenPiles(board.getPile7(), board.getPile6());
+							}
+						}
+					}
+				}
 			   break;
-
+		   }
 		   case 4:
 		   {
 			   cout << "Move a card between Pile and Foundation"<<endl;
-
+			   cout << "\nPile Origin: ";
 			   cin >> pileNumber;
+			   cout << "\nFoundation Destination: ";
 			   cin >> foundationNumber;
 			   cout << "Pile: " << pileNumber << " Foundation: " << foundationNumber  << endl;
 
@@ -212,6 +553,7 @@ Play::startPlay()
 		   {
 			   cout << "Move a card between upturned and Foundation"<<endl;
 			   cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
+			   cout << "\nFoundation Number: ";
 			   cin >> foundationNumber; //TODO: Heart= 1, Spade=2, Club=3, Diamond=4
 			   cout << "Foundation: " << foundationNumber  << endl;
 
@@ -250,6 +592,226 @@ Play::startPlay()
 
 //TODO: Upturn one card
 //
+
+int
+Play::chooseMovement(int thePileNumberOrigin, int thePileNumberDestination)
+{
+	/*switch (thePileNumberOrigin)
+	{
+		case 1:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 2:
+				{
+				   board.moveBetweenPiles(board.getPile1(), board.getPile2());
+				}
+				case 3:
+				{
+				   board.moveBetweenPiles(board.getPile1(), board.getPile3());
+				}
+				case 4:
+				{
+				   board.moveBetweenPiles(board.getPile1(), board.getPile4());
+				}
+				case 5:
+				{
+				   board.moveBetweenPiles(board.getPile1(), board.getPile5());
+				}
+				case 6:
+				{
+				   board.moveBetweenPiles(board.getPile1(), board.getPile6());
+				}
+				case 7:
+				{
+				   board.moveBetweenPiles(board.getPile1(), board.getPile7());
+				}
+			}
+		}
+		case 2:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 1:
+				{
+				   board.moveBetweenPiles(board.getPile2(), board.getPile1());
+				}
+				case 3:
+				{
+				   board.moveBetweenPiles(board.getPile2(), board.getPile3());
+				}
+				case 4:
+				{
+				   board.moveBetweenPiles(board.getPile2(), board.getPile4());
+				}
+				case 5:
+				{
+				   board.moveBetweenPiles(board.getPile2(), board.getPile5());
+				}
+				case 6:
+				{
+				   board.moveBetweenPiles(board.getPile2(), board.getPile6());
+				}
+				case 7:
+				{
+				   board.moveBetweenPiles(board.getPile2(), board.getPile7());
+				}
+			}
+		}
+		case 3:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 1:
+				{
+				   board.moveBetweenPiles(board.getPile3(), board.getPile1());
+				}
+				case 2:
+				{
+				   board.moveBetweenPiles(board.getPile3(), board.getPile2());
+				}
+				case 4:
+				{
+				   board.moveBetweenPiles(board.getPile3(), board.getPile4());
+				}
+				case 5:
+				{
+				   board.moveBetweenPiles(board.getPile3(), board.getPile5());
+				}
+				case 6:
+				{
+				   board.moveBetweenPiles(board.getPile3(), board.getPile6());
+				}
+				case 7:
+				{
+				   board.moveBetweenPiles(board.getPile3(), board.getPile7());
+				}
+			}
+		}
+		case 4:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 1:
+				{
+				   board.moveBetweenPiles(board.getPile4(), board.getPile1());
+				}
+				case 2:
+				{
+				   board.moveBetweenPiles(board.getPile4(), board.getPile2());
+				}
+				case 3:
+				{
+				   board.moveBetweenPiles(board.getPile4(), board.getPile3());
+				}
+				case 5:
+				{
+				   board.moveBetweenPiles(board.getPile4(), board.getPile5());
+				}
+				case 6:
+				{
+				   board.moveBetweenPiles(board.getPile4(), board.getPile6());
+				}
+				case 7:
+				{
+				   board.moveBetweenPiles(board.getPile4(), board.getPile7());
+				}
+			}
+		}
+		case 5:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 1:
+				{
+				   board.moveBetweenPiles(board.getPile5(), board.getPile1());
+				}
+				case 2:
+				{
+				   board.moveBetweenPiles(board.getPile5(), board.getPile2());
+				}
+				case 3:
+				{
+				   board.moveBetweenPiles(board.getPile5(), board.getPile3());
+				}
+				case 4:
+				{
+				   board.moveBetweenPiles(board.getPile5(), board.getPile4());
+				}
+				case 6:
+				{
+				   board.moveBetweenPiles(board.getPile5(), board.getPile6());
+				}
+				case 7:
+				{
+				   board.moveBetweenPiles(board.getPile5(), board.getPile7());
+				}
+			}
+		}
+		case 6:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 1:
+				{
+				   board.moveBetweenPiles(board.getPile6(), board.getPile1());
+				}
+				case 2:
+				{
+				   board.moveBetweenPiles(board.getPile6(), board.getPile2());
+				}
+				case 3:
+				{
+				   board.moveBetweenPiles(board.getPile6(), board.getPile3());
+				}
+				case 4:
+				{
+				   board.moveBetweenPiles(board.getPile6(), board.getPile4());
+				}
+				case 5:
+				{
+				   board.moveBetweenPiles(board.getPile6(), board.getPile5());
+				}
+				case 7:
+				{
+				   board.moveBetweenPiles(board.getPile6(), board.getPile7());
+				}
+			}
+		}
+		case 7:
+		{
+			switch (thePileNumberDestination)
+			{
+				case 1:
+				{
+				   board.moveBetweenPiles(board.getPile7(), board.getPile1());
+				}
+				case 2:
+				{
+				   board.moveBetweenPiles(board.getPile7(), board.getPile2());
+				}
+				case 3:
+				{
+				   board.moveBetweenPiles(board.getPile7(), board.getPile3());
+				}
+				case 4:
+				{
+				   board.moveBetweenPiles(board.getPile7(), board.getPile4());
+				}
+				case 5:
+				{
+				   board.moveBetweenPiles(board.getPile7(), board.getPile5());
+				}
+				case 6:
+				{
+				   board.moveBetweenPiles(board.getPile7(), board.getPile6());
+				}
+			}
+		}
+	}
+	*/
+	return 0;
+}
 
 
 

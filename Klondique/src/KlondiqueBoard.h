@@ -24,6 +24,8 @@
 
 #include "Deck.h"
 #include "CardInBoard.h"
+#include "Pile.h"
+#include "Foundation.h"
 
 class KlondiqueBoard {
 public:
@@ -31,6 +33,7 @@ public:
 	virtual ~KlondiqueBoard();
 
 	KlondiqueBoard(Deck);
+	KlondiqueBoard(Deck, vector<Pile>, vector<Foundation>);
 
 	void initBoard();
 	void startPlayingBoard();
@@ -67,10 +70,13 @@ public:
 
 	void showBoard();
 
-	void upturnCardInPile();
+	bool upturnCardInPile(vector<CardInBoard> thePile);
 
 private:
 	Deck deck;
+
+	vector<Pile> piles;
+	vector<Foundation> foundations;
 
 	vector<CardInBoard> downturnedDeck;
 	vector<CardInBoard> upturnedDeck;
@@ -89,7 +95,6 @@ private:
 	vector<CardInBoard> foundationClub;
 	vector<CardInBoard> foundationDiamond;
 
-	//vector<CardInBoard, string> cardInBoard;
 };
 
 #endif /* KLONDIQUEBOARD_H_ */
