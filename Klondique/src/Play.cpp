@@ -537,6 +537,7 @@ Play::startPlay()
 			   cout << "Move a card between Pile and Foundation"<<endl;
 			   cout << "\nPile Origin: ";
 			   cin >> pileNumber;
+			   cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
 			   cout << "\nFoundation Destination: ";
 			   cin >> foundationNumber;
 			   cout << "Pile: " << pileNumber << " Foundation: " << foundationNumber  << endl;

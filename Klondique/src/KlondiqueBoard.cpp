@@ -210,80 +210,79 @@ KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
 	}
 	else
 	{
-		//TODO: Check if theCardOriginNumber is upturned
-		// 1. Recorro el  thePileOrigin y de los upturned veo si el número que me han pasado es una carta
-		/*for(vector<Card>::iterator it = thePileOrigin.begin(); it != thePileOrigin.end(); it++)
+		if (theCardOriginNumber == 0)
 		{
-
-
-		}*/
-		//TODO: Check mover todas de un pile a otro cuando se acaba ese pile....
-		vector<CardInBoard> pileOrigin2 = thePileOrigin;
-		vector<CardInBoard> pileOriginReverse;
-		cout << "Pile Origin size: " << thePileOrigin.size() << endl;
-		do
-		{
-			if (pileOrigin2.back().getUpOrDownTurned() == "upturned" &&
-							pileOrigin2.back().getCard().getNumber() == theCardOriginNumber)
+			if ((thePileOrigin.back().getCard().getNumber() ==
+						(thePileDestination.back().getCard().getNumber() - 1)) &&
+							(thePileOrigin.back().getCard().getSuit().getColor() !=
+								(thePileDestination.back().getCard().getSuit().getColor())))
 			{
-				cout << "I found the card" << endl;
-				cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-				// 2. De esta carta (posición del array hasta el final los llevo al otro thePileDestination
-				if ((pileOrigin2.back().getCard().getNumber() ==
-									(thePileDestination.back().getCard().getNumber() - 1)) &&
-										(pileOrigin2.back().getCard().getSuit().getColor() !=
-											(thePileDestination.back().getCard().getSuit().getColor())))
-				{
-					// Movement
-					// 3. Put all the cards in the Pile Destination
-					pileOriginReverse.push_back(pileOrigin2.back());
-					pileOrigin2.pop_back();
-
-					// 4. Delete from the Pile Origin all the cards
-					do
-					{
-						// 5. Put in the destination all the cards
-						thePileDestination.push_back(pileOriginReverse.back());
-						pileOriginReverse.pop_back();
-						thePileOrigin.pop_back();
-					} while (pileOriginReverse.size() != 0);
-
-					movementCorrect = true;
-					cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
-					showBoard();
-					cout << "END OF MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
-				}
-				else
-				{
-					cout << "Not possible movement" << endl;
-				}
-				break;
+				// Movement
+				thePileDestination.push_back(thePileOrigin.back());
+				thePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A CARD FROM PILE TO PILE" << endl;
+				showBoard();
+				cout << "END OF MOVE A CARD FROM PILE TO PILE" << endl;
 			}
 			else
 			{
-				cout << "This is not the card" << endl;
-				pileOriginReverse.push_back(pileOrigin2.back());
-				pileOrigin2.pop_back();
+				cout << "Not possible movement" << endl;
 			}
 		}
-		while  (pileOrigin2.size() != 0);
+		else // Movement of more than 1 card...
+		{
+			//TODO: Check if theCardOriginNumber is upturned
+			//TODO: Check mover todas de un pile a otro cuando se acaba ese pile....
+			vector<CardInBoard> pileOrigin2 = thePileOrigin;
+			vector<CardInBoard> pileOriginReverse;
+			cout << "Pile Origin size: " << thePileOrigin.size() << endl;
+			do
+			{
+				if (pileOrigin2.back().getUpOrDownTurned() == "upturned" &&
+								pileOrigin2.back().getCard().getNumber() == theCardOriginNumber)
+				{
+					cout << "I found the card" << endl;
+					cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
+					// 2. De esta carta (posición del array hasta el final los llevo al otro thePileDestination
+					if ((pileOrigin2.back().getCard().getNumber() ==
+										(thePileDestination.back().getCard().getNumber() - 1)) &&
+											(pileOrigin2.back().getCard().getSuit().getColor() !=
+												(thePileDestination.back().getCard().getSuit().getColor())))
+					{
+						// Movement
+						// 3. Put all the cards in the Pile Destination
+						pileOriginReverse.push_back(pileOrigin2.back());
+						pileOrigin2.pop_back();
 
-		if ((thePileOrigin.back().getCard().getNumber() ==
-					(thePileDestination.back().getCard().getNumber() - 1)) &&
-						(thePileOrigin.back().getCard().getSuit().getColor() !=
-							(thePileDestination.back().getCard().getSuit().getColor())))
-		{
-			// Movement
-			thePileDestination.push_back(thePileOrigin.back());
-			thePileOrigin.pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM PILE TO PILE" << endl;
-			showBoard();
-			cout << "END OF MOVE A CARD FROM PILE TO PILE" << endl;
-		}
-		else
-		{
-			cout << "Not possible movement" << endl;
+						// 4. Delete from the Pile Origin all the cards
+						do
+						{
+							// 5. Put in the destination all the cards
+							thePileDestination.push_back(pileOriginReverse.back());
+							pileOriginReverse.pop_back();
+							thePileOrigin.pop_back();
+						} while (pileOriginReverse.size() != 0);
+
+						movementCorrect = true;
+						cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+						showBoard();
+						cout << "END OF MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+					}
+					else
+					{
+						cout << "Not possible movement" << endl;
+					}
+					break;
+				}
+				else
+				{
+					cout << "This is not the card" << endl;
+					pileOriginReverse.push_back(pileOrigin2.back());
+					pileOrigin2.pop_back();
+				}
+			}
+			while  (pileOrigin2.size() != 0);
 		}
 	}
 
