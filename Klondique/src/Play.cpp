@@ -153,6 +153,7 @@ Play::startPlay()
 
 	int pileNumberOrigin;
 	int pileNumberDestination;
+	int pileNumberOriginNumber = 0;
 
 	cout << "The First Movement." << endl;
 	do
@@ -160,10 +161,10 @@ Play::startPlay()
 		cout << "Chose one option:\n\n";
 
 		cout << "1  Deal\n";
-		cout << "2  Move a card between upturned to Pile\n";
+		cout << "2  Move a card between Waste Pile to Pile\n";
 		cout << "3  Move a card between Piles\n";
 		cout << "4  Move a card between Pile to Foundation\n";
-		cout << "5  Move a card between upturned to Foundation\n";
+		cout << "5  Move a card between Waste Pile to Foundation\n";
 		cout << "22 Exit\n";
 		cout << "Enter your choice and press return: ";
 		cin >> movement;
@@ -213,12 +214,22 @@ Play::startPlay()
 
 		   case 3:
 		   {
-			   cout << "Move a card between Piles"<<endl;
+			   cout << "Move card/cards between Piles"<<endl;
 			   cout << "\nPile Origin: ";
 			   cin >> pileNumberOrigin;
+			   cout << "\nPile Origin Card Number: ";
+			   cin >> pileNumberOriginNumber;
 			   cout << "\nPile Destination: ";
 			   cin >> pileNumberDestination;
-			   cout << "Pile Origin: " << pileNumberOrigin << " Pile Destination: " << pileNumberDestination  << endl;
+			   if (pileNumberOriginNumber != 0)
+			   {
+				   cout << "Pile Origin: " << pileNumberOrigin << " number: " << pileNumberOriginNumber <<" Pile Destination: " << pileNumberDestination  << endl;
+			   }
+			   else
+			   {
+				   cout << "Pile Origin: " << pileNumberOrigin << " Pile Destination: " << pileNumberDestination  << endl;
+			   }
+
 			   if (pileNumberOrigin == pileNumberDestination)
 			   {
 				   cout << "Impossible movement, the same pile. Pile Origin: " << pileNumberOrigin << " and Pile Destination: " << pileNumberDestination  << endl;
@@ -233,32 +244,32 @@ Play::startPlay()
 						{
 							case 2:
 							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile2());
+							   board.moveBetweenPiles(board.getPile1(), board.getPile2(), pileNumberOriginNumber);
 							   break;
 							}
 							case 3:
 							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile3());
+							   board.moveBetweenPiles(board.getPile1(), board.getPile3(), pileNumberOriginNumber);
 							   break;
 							}
 							case 4:
 							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile4());
+							   board.moveBetweenPiles(board.getPile1(), board.getPile4(), pileNumberOriginNumber);
 							   break;
 							}
 							case 5:
 							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile5());
+							   board.moveBetweenPiles(board.getPile1(), board.getPile5(), pileNumberOriginNumber);
 							   break;
 							}
 							case 6:
 							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile6());
+							   board.moveBetweenPiles(board.getPile1(), board.getPile6(), pileNumberOriginNumber);
 							   break;
 							}
 							case 7:
 							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile7());
+							   board.moveBetweenPiles(board.getPile1(), board.getPile7(), pileNumberOriginNumber);
 							   break;
 							}
 
@@ -274,32 +285,32 @@ Play::startPlay()
 						{
 							case 1:
 							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile1());
+							   board.moveBetweenPiles(board.getPile2(), board.getPile1(), pileNumberOriginNumber);
 							   break;
 							}
 							case 3:
 							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile3());
+							   board.moveBetweenPiles(board.getPile2(), board.getPile3(), pileNumberOriginNumber);
 							   break;
 							}
 							case 4:
 							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile4());
+							   board.moveBetweenPiles(board.getPile2(), board.getPile4(), pileNumberOriginNumber);
 							   break;
 							}
 							case 5:
 							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile5());
+							   board.moveBetweenPiles(board.getPile2(), board.getPile5(), pileNumberOriginNumber);
 							   break;
 							}
 							case 6:
 							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile6());
+							   board.moveBetweenPiles(board.getPile2(), board.getPile6(), pileNumberOriginNumber);
 							   break;
 							}
 							case 7:
 							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile7());
+							   board.moveBetweenPiles(board.getPile2(), board.getPile7(), pileNumberOriginNumber);
 							   break;
 							}
 
@@ -315,32 +326,32 @@ Play::startPlay()
 						{
 							case 1:
 							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile1());
+							   board.moveBetweenPiles(board.getPile3(), board.getPile1(), pileNumberOriginNumber);
 							   break;
 							}
 							case 2:
 							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile2());
+							   board.moveBetweenPiles(board.getPile3(), board.getPile2(), pileNumberOriginNumber);
 							   break;
 							}
 							case 4:
 							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile4());
+							   board.moveBetweenPiles(board.getPile3(), board.getPile4(), pileNumberOriginNumber);
 							   break;
 							}
 							case 5:
 							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile5());
+							   board.moveBetweenPiles(board.getPile3(), board.getPile5(), pileNumberOriginNumber);
 							   break;
 							}
 							case 6:
 							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile6());
+							   board.moveBetweenPiles(board.getPile3(), board.getPile6(), pileNumberOriginNumber);
 							   break;
 							}
 							case 7:
 							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile7());
+							   board.moveBetweenPiles(board.getPile3(), board.getPile7(), pileNumberOriginNumber);
 							   break;
 							}
 
@@ -356,32 +367,32 @@ Play::startPlay()
 						{
 							case 1:
 							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile1());
+							   board.moveBetweenPiles(board.getPile4(), board.getPile1(), pileNumberOriginNumber);
 							   break;
 							}
 							case 2:
 							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile2());
+							   board.moveBetweenPiles(board.getPile4(), board.getPile2(), pileNumberOriginNumber);
 							   break;
 							}
 							case 3:
 							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile3());
+							   board.moveBetweenPiles(board.getPile4(), board.getPile3(), pileNumberOriginNumber);
 							   break;
 							}
 							case 5:
 							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile5());
+							   board.moveBetweenPiles(board.getPile4(), board.getPile5(), pileNumberOriginNumber);
 							   break;
 							}
 							case 6:
 							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile6());
+							   board.moveBetweenPiles(board.getPile4(), board.getPile6(), pileNumberOriginNumber);
 							   break;
 							}
 							case 7:
 							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile7());
+							   board.moveBetweenPiles(board.getPile4(), board.getPile7(), pileNumberOriginNumber);
 							   break;
 							}
 
@@ -397,32 +408,32 @@ Play::startPlay()
 						{
 							case 1:
 							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile1());
+							   board.moveBetweenPiles(board.getPile5(), board.getPile1(), pileNumberOriginNumber);
 							   break;
 							}
 							case 2:
 							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile2());
+							   board.moveBetweenPiles(board.getPile5(), board.getPile2(), pileNumberOriginNumber);
 							   break;
 							}
 							case 3:
 							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile3());
+							   board.moveBetweenPiles(board.getPile5(), board.getPile3(), pileNumberOriginNumber);
 							   break;
 							}
 							case 4:
 							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile4());
+							   board.moveBetweenPiles(board.getPile5(), board.getPile4(), pileNumberOriginNumber);
 							   break;
 							}
 							case 6:
 							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile6());
+							   board.moveBetweenPiles(board.getPile5(), board.getPile6(), pileNumberOriginNumber);
 							   break;
 							}
 							case 7:
 							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile7());
+							   board.moveBetweenPiles(board.getPile5(), board.getPile7(), pileNumberOriginNumber);
 							   break;
 							}
 
@@ -438,32 +449,32 @@ Play::startPlay()
 						{
 							case 1:
 							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile1());
+							   board.moveBetweenPiles(board.getPile6(), board.getPile1(), pileNumberOriginNumber);
 							   break;
 							}
 							case 2:
 							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile2());
+							   board.moveBetweenPiles(board.getPile6(), board.getPile2(), pileNumberOriginNumber);
 							   break;
 							}
 							case 3:
 							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile3());
+							   board.moveBetweenPiles(board.getPile6(), board.getPile3(), pileNumberOriginNumber);
 							   break;
 							}
 							case 4:
 							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile4());
+							   board.moveBetweenPiles(board.getPile6(), board.getPile4(), pileNumberOriginNumber);
 							   break;
 							}
 							case 5:
 							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile5());
+							   board.moveBetweenPiles(board.getPile6(), board.getPile5(), pileNumberOriginNumber);
 							   break;
 							}
 							case 7:
 							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile7());
+							   board.moveBetweenPiles(board.getPile6(), board.getPile7(), pileNumberOriginNumber);
 							   break;
 							}
 
@@ -479,32 +490,32 @@ Play::startPlay()
 						{
 							case 1:
 							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile1());
+							   board.moveBetweenPiles(board.getPile7(), board.getPile1(), pileNumberOriginNumber);
 							   break;
 							}
 							case 2:
 							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile2());
+							   board.moveBetweenPiles(board.getPile7(), board.getPile2(), pileNumberOriginNumber);
 							   break;
 							}
 							case 3:
 							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile3());
+							   board.moveBetweenPiles(board.getPile7(), board.getPile3(), pileNumberOriginNumber);
 							   break;
 							}
 							case 4:
 							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile4());
+							   board.moveBetweenPiles(board.getPile7(), board.getPile4(), pileNumberOriginNumber);
 							   break;
 							}
 							case 5:
 							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile5());
+							   board.moveBetweenPiles(board.getPile7(), board.getPile5(), pileNumberOriginNumber);
 							   break;
 							}
 							case 6:
 							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile6());
+							   board.moveBetweenPiles(board.getPile7(), board.getPile6(), pileNumberOriginNumber);
 							   break;
 							}
 

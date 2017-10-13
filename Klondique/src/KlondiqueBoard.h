@@ -40,16 +40,17 @@ public:
 
 	int deal();
 	bool moveBetweenPiles(vector<CardInBoard>& thePileOrigin,
-		     	 	 	  vector<CardInBoard>& thePileDestination);
+		     	 	 	  vector<CardInBoard>& thePileDestination,
+						  int theCardOriginNumber);
 	bool moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
 	  	  	  	  	 	 	 	 	  vector<CardInBoard>& theFoundationDestination);
 
 	//TODO: Similar movement as moveBetweenPiles (refactoring)
-	bool moveBetweenWastePileAndPile(vector<CardInBoard>& theDealOrigin,
+	bool moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOrigin,
 			   	   	   	   	    vector<CardInBoard>& thePileDestination);
 
 	//TODO: Similar movement as moveBetweenPileAndFoundation (refactoring)
-	bool moveBetweenWastePileAndFoundation(vector<CardInBoard>& theDealOrigin,
+	bool moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
 									  vector<CardInBoard>& theFoundationDestination);
 
 	vector<CardInBoard>& getWastePile();

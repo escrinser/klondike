@@ -180,7 +180,8 @@ KlondiqueBoard::deal()
 
 bool
 KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
-							     vector<CardInBoard> &thePileDestination)
+							     vector<CardInBoard> &thePileDestination,
+								 int theCardOriginNumber)
 {
 	//return 0 -> no movement (not possible, no same pile, same color or not the next number)
 	bool movementCorrect = false;
@@ -209,6 +210,64 @@ KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
 	}
 	else
 	{
+		//TODO: Check if theCardOriginNumber is upturned
+		// 1. Recorro el  thePileOrigin y de los upturned veo si el número que me han pasado es una carta
+		/*for(vector<Card>::iterator it = thePileOrigin.begin(); it != thePileOrigin.end(); it++)
+		{
+
+
+		}*/
+		//TODO: Check mover todas de un pile a otro cuando se acaba ese pile....
+		vector<CardInBoard> pileOrigin2 = thePileOrigin;
+		vector<CardInBoard> pileOriginReverse;
+		cout << "Pile Origin size: " << thePileOrigin.size() << endl;
+		do
+		{
+			if (pileOrigin2.back().getUpOrDownTurned() == "upturned" &&
+							pileOrigin2.back().getCard().getNumber() == theCardOriginNumber)
+			{
+				cout << "I found the card" << endl;
+				cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
+				// 2. De esta carta (posición del array hasta el final los llevo al otro thePileDestination
+				if ((pileOrigin2.back().getCard().getNumber() ==
+									(thePileDestination.back().getCard().getNumber() - 1)) &&
+										(pileOrigin2.back().getCard().getSuit().getColor() !=
+											(thePileDestination.back().getCard().getSuit().getColor())))
+				{
+					// Movement
+					// 3. Put all the cards in the Pile Destination
+					pileOriginReverse.push_back(pileOrigin2.back());
+					pileOrigin2.pop_back();
+
+					// 4. Delete from the Pile Origin all the cards
+					do
+					{
+						// 5. Put in the destination all the cards
+						thePileDestination.push_back(pileOriginReverse.back());
+						pileOriginReverse.pop_back();
+						thePileOrigin.pop_back();
+					} while (pileOriginReverse.size() != 0);
+
+					movementCorrect = true;
+					cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+					showBoard();
+					cout << "END OF MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+				}
+				else
+				{
+					cout << "Not possible movement" << endl;
+				}
+				break;
+			}
+			else
+			{
+				cout << "This is not the card" << endl;
+				pileOriginReverse.push_back(pileOrigin2.back());
+				pileOrigin2.pop_back();
+			}
+		}
+		while  (pileOrigin2.size() != 0);
+
 		if ((thePileOrigin.back().getCard().getNumber() ==
 					(thePileDestination.back().getCard().getNumber() - 1)) &&
 						(thePileOrigin.back().getCard().getSuit().getColor() !=
@@ -243,9 +302,6 @@ KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	//cout << "Prueba Número: " << thePileOrigin.back().getCard().getNumber() << " vs " << (theFoundationDestination.back().getCard().getNumber() - 1)  << endl;
-	//cout << "Prueba Color: " << thePileOrigin.back().getCard().getSuit().getColor() << " != " << theFoundationDestination.back().getCard().getSuit().getColor() << endl;
-
 	if(theFoundationDestination.empty())
 	{
 		if (thePileOrigin.back().getCard().getNumber() == 1)
@@ -265,8 +321,11 @@ KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
 	}
 	else
 	{
+		//cout << "Prueba Número: " << thePileOrigin.back().getCard().getNumber() << " vs " << (theFoundationDestination.back().getCard().getNumber() + 1)  << endl;
+	    //cout << "Prueba Color: " << thePileOrigin.back().getCard().getSuit().getColor() << " != " << theFoundationDestination.back().getCard().getSuit().getColor() << endl;
+
 		if ((thePileOrigin.back().getCard().getNumber() ==
-				(theFoundationDestination.back().getCard().getNumber() - 1)) &&
+				(theFoundationDestination.back().getCard().getNumber() + 1)) &&
 					(thePileOrigin.back().getCard().getSuit().getSuit() ==
 						(theFoundationDestination.back().getCard().getSuit().getSuit())))
 		{
@@ -293,53 +352,82 @@ KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
 }
 
 bool
-KlondiqueBoard::moveBetweenWastePileAndPile(vector<CardInBoard>& theDealOrigin,
+KlondiqueBoard::moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOrigin,
 									   vector<CardInBoard>& thePileDestination)
 {
 	//return 0 -> no movement (not possible, same color or not the next number)
 	bool movementCorrect = false;
 
-	//cout << "Prueba Número: " << theDealOrigin.back().getCard().getNumber() << " vs " << (thePileDestination.back().getCard().getNumber() - 1)  << endl;
-	//cout << "Prueba Color: " << theDealOrigin.back().getCard().getSuit().getColor() << " != " << thePileDestination.back().getCard().getSuit().getColor() << endl;
-
-	if ((theDealOrigin.back().getCard().getNumber() ==
-			(thePileDestination.back().getCard().getNumber() - 1)) &&
-				(theDealOrigin.back().getCard().getSuit().getColor() !=
-					(thePileDestination.back().getCard().getSuit().getColor())))
+	//cout << "Prueba Número: " << theWastePileOrigin.back().getCard().getNumber() << " vs " << (thePileDestination.back().getCard().getNumber() - 1)  << endl;
+	//cout << "Prueba Color: " << theWastePileOrigin.back().getCard().getSuit().getColor() << " != " << thePileDestination.back().getCard().getSuit().getColor() << endl;
+	if (!theWastePileOrigin.empty())
 	{
-		// Movement
-		thePileDestination.push_back(theDealOrigin.back());
-		theDealOrigin.pop_back();
-		movementCorrect = true;
-		cout << "MOVE A CARD FROM DEAL TO PILE" << endl;
-		showBoard();
-		cout << "END OF MOVE A CARD FROM DEAL TO PILE" << endl;
+		//Move a king to a empty Pile (other card is not allowed)
+		if (thePileDestination.empty())
+		{
+			cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
+			if (theWastePileOrigin.back().getCard().getNumber()==13)
+			{
+				// Movement
+				thePileDestination.push_back(theWastePileOrigin.back());
+				theWastePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
+				showBoard();
+				cout << "END OF MOVE A KING FROM PILE TO EMPTY PILE" << endl;
+			}
+			else
+			{
+				cout << "Not possible movement" << endl;
+			}
+		}
+		else
+		{
+			if ((theWastePileOrigin.back().getCard().getNumber() ==
+							(thePileDestination.back().getCard().getNumber() - 1)) &&
+								(theWastePileOrigin.back().getCard().getSuit().getColor() !=
+									(thePileDestination.back().getCard().getSuit().getColor())))
+			{
+				// Movement
+				thePileDestination.push_back(theWastePileOrigin.back());
+				theWastePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A CARD FROM WASTE PILE TO PILE" << endl;
+				showBoard();
+				cout << "END OF MOVE A CARD FROM WASTE PILE TO PILE" << endl;
+			}
+			else
+			{
+				cout << "Not possible movement" << endl;
+			}
+		}
 	}
 	else
 	{
-		cout << "Not possible movement" << endl;
+		cout << "Not possible movement - Waste Pile Empty" << endl;
 	}
-
 	return movementCorrect;
 }
 
+
+//TODO: Check from waste pile to foundation > 1
 bool
-KlondiqueBoard::moveBetweenWastePileAndFoundation(vector<CardInBoard>& theDealOrigin,
+KlondiqueBoard::moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
 									   vector<CardInBoard>& theFoundationDestination)
 {
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	//cout << "Prueba Número: " << theDealOrigin.back().getCard().getNumber() << " vs " << (theFoundationDestination.back().getCard().getNumber() - 1)  << endl;
-	//cout << "Prueba Color: " << theDealOrigin.back().getCard().getSuit().getColor() << " != " << theFoundationDestination.back().getCard().getSuit().getColor() << endl;
+	//cout << "Prueba Número: " << theWastePileOrigin.back().getCard().getNumber() << " vs " << (theFoundationDestination.back().getCard().getNumber() - 1)  << endl;
+	//cout << "Prueba Color: " << theWastePileOrigin.back().getCard().getSuit().getColor() << " != " << theFoundationDestination.back().getCard().getSuit().getColor() << endl;
 
 	if(theFoundationDestination.empty())
 	{
-		if (theDealOrigin.back().getCard().getNumber() == 1)
+		if (theWastePileOrigin.back().getCard().getNumber() == 1)
 		{
 			// Movement
-			theFoundationDestination.push_back(theDealOrigin.back());
-			theDealOrigin.pop_back();
+			theFoundationDestination.push_back(theWastePileOrigin.back());
+			theWastePileOrigin.pop_back();
 			movementCorrect = true;
 			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
 			showBoard();
@@ -352,14 +440,16 @@ KlondiqueBoard::moveBetweenWastePileAndFoundation(vector<CardInBoard>& theDealOr
 	}
 	else
 	{
-		if ((theDealOrigin.back().getCard().getNumber() ==
-				(theFoundationDestination.back().getCard().getNumber() - 1)) &&
-					(theDealOrigin.back().getCard().getSuit().getSuit() ==
+		cout << "Prueba Número: " << theWastePileOrigin.back().getCard().getNumber() << " vs " << (theFoundationDestination.back().getCard().getNumber() + 1)  << endl;
+	    cout << "Prueba Color: " << theWastePileOrigin.back().getCard().getSuit().getColor() << " != " << theFoundationDestination.back().getCard().getSuit().getColor() << endl;
+		if ((theWastePileOrigin.back().getCard().getNumber() ==
+				(theFoundationDestination.back().getCard().getNumber() +1)) &&
+					(theWastePileOrigin.back().getCard().getSuit().getSuit() ==
 						(theFoundationDestination.back().getCard().getSuit().getSuit())))
 		{
 			// Movement
-			theFoundationDestination.push_back(theDealOrigin.back());
-			theDealOrigin.pop_back();
+			theFoundationDestination.push_back(theWastePileOrigin.back());
+			theWastePileOrigin.pop_back();
 			movementCorrect = true;
 			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
 			showBoard();
