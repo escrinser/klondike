@@ -36,3 +36,9 @@ Pile::getNumber()
 {
 	return number;
 }
+
+void
+Pile::addCards(vector<CardInBoard> theCards)
+{
+	cards = theCards;
+}

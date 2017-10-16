@@ -37,6 +37,7 @@ public:
 
 	void initBoard();
 	void startPlayingBoard();
+	void startPlayingBoard2();
 
 	int deal();
 	bool moveBetweenPiles(vector<CardInBoard>& thePileOrigin,

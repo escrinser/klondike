@@ -71,16 +71,16 @@ KlondiqueBoard::startPlayingBoard()
 
 	// Pile1
 	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	cout << "Before Pile 1: " << initialDeck.size() << endl;
+	//cout << "Before Pile 1: " << initialDeck.size() << endl;
 	initialDeck.pop_back();
-	cout << "After Pile 1: "<< initialDeck.size() << endl;
+	//cout << "After Pile 1: "<< initialDeck.size() << endl;
 
 	// Pile2
 	pile2.push_back(CardInBoard (initialDeck.back(), "downturned"));
 	initialDeck.pop_back();
 	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 2: "<< initialDeck.size() << endl;
+	//cout << "After Pile 2: "<< initialDeck.size() << endl;
 
 	// Pile3
 	for (int x=0; x<2; x++)
@@ -90,7 +90,7 @@ KlondiqueBoard::startPlayingBoard()
 	}
 	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 3: "<< initialDeck.size() << endl;
+	//cout << "After Pile 3: "<< initialDeck.size() << endl;
 
 	// Pile4
 	for (int x=0; x<3; x++)
@@ -100,7 +100,7 @@ KlondiqueBoard::startPlayingBoard()
 	}
 	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 4: "<< initialDeck.size() << endl;
+	//cout << "After Pile 4: "<< initialDeck.size() << endl;
 
 	// Pile5
 	for (int x=0; x<4; x++)
@@ -110,7 +110,7 @@ KlondiqueBoard::startPlayingBoard()
 	}
 	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 5: "<< initialDeck.size() << endl;
+	//cout << "After Pile 5: "<< initialDeck.size() << endl;
 
 	// Pile6
 	for (int x=0; x<5; x++)
@@ -120,7 +120,7 @@ KlondiqueBoard::startPlayingBoard()
 	}
 	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 6: "<< initialDeck.size() << endl;
+	//cout << "After Pile 6: "<< initialDeck.size() << endl;
 
 	// Pile7
 	for (int x=0; x<6; x++)
@@ -130,10 +130,115 @@ KlondiqueBoard::startPlayingBoard()
 	}
 	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 7: "<< initialDeck.size() << endl;
+	//cout << "After Pile 7: "<< initialDeck.size() << endl;
 
 	// stock
-	cout << "Stock number of cards: "<< initialDeck.size() << endl;
+	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
+	for(vector<Card>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+	{
+	   stock.push_back(CardInBoard ((*it), "downturned"));
+	}
+
+	cout << "INIT PLAYING BOARD" << endl;
+	showBoard();
+	cout << "END OF INIT PLAYING BOARD" << endl;
+}
+
+void
+KlondiqueBoard::startPlayingBoard2()
+{
+	vector<Card> initialDeck = deck.shuffle();
+	// upturnedDeck empty
+
+	// Foundation Hearts empty
+	cout << "Foundations size: " << foundations.size() << endl;
+	//cout << foundations.back().getSuit() << endl;
+	// Foundation Spades empty
+	// Foundation Clubs empty
+	// Foundation Diamonds empty
+
+	// Pile1
+	cout << "Piles size: " << piles.size() << endl;
+	cout << piles.back().getNumber() << endl;
+
+	for (vector<Pile>::iterator it = piles.begin(); it != piles.end(); it++)
+	{
+		cout << "Pile number: " << (*it).number << endl;
+	}
+
+	cout << "Pile 2: " << piles.at(1).getNumber() << endl;
+
+	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	//cout << "Before Pile 1: " << initialDeck.size() << endl;
+	initialDeck.pop_back();
+	//cout << "After Pile 1: "<< initialDeck.size() << endl;
+	piles.at(0).addCards(pile1);
+
+	// Pile2
+	pile2.push_back(CardInBoard (initialDeck.back(), "downturned"));
+	initialDeck.pop_back();
+	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	//cout << "After Pile 2: "<< initialDeck.size() << endl;
+	piles.at(1).addCards(pile2);
+
+	// Pile3
+	for (int x=0; x<2; x++)
+	{
+		pile3.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	//cout << "After Pile 3: "<< initialDeck.size() << endl;
+	piles.at(2).addCards(pile3);
+
+	// Pile4
+	for (int x=0; x<3; x++)
+	{
+		pile4.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	//cout << "After Pile 4: "<< initialDeck.size() << endl;
+	piles.at(3).addCards(pile4);
+
+	// Pile5
+	for (int x=0; x<4; x++)
+	{
+		pile5.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	//cout << "After Pile 5: "<< initialDeck.size() << endl;
+	piles.at(4).addCards(pile5);
+
+	// Pile6
+	for (int x=0; x<5; x++)
+	{
+		pile6.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	//cout << "After Pile 6: "<< initialDeck.size() << endl;
+	piles.at(5).addCards(pile6);
+
+	// Pile7
+	for (int x=0; x<6; x++)
+	{
+		pile7.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		initialDeck.pop_back();
+	}
+	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	initialDeck.pop_back();
+	//cout << "After Pile 7: "<< initialDeck.size() << endl;
+	piles.at(6).addCards(pile7);
+
+	// stock
+	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
 	for(vector<Card>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
 	   stock.push_back(CardInBoard ((*it), "downturned"));

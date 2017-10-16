@@ -28,9 +28,9 @@ Play::startPlay()
 	// Pile1
 	vector<CardInBoard> pile1;
 	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	cout << "Before Pile 1: " << initialDeck.size() << endl;
+	//cout << "Before Pile 1: " << initialDeck.size() << endl;
 	initialDeck.pop_back();
-	cout << "After Pile 1: "<< initialDeck.size() << endl;
+	//cout << "After Pile 1: "<< initialDeck.size() << endl;
 
 	// Pile2
 	vector<CardInBoard> pile2;
@@ -38,7 +38,7 @@ Play::startPlay()
 	initialDeck.pop_back();
 	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 2: "<< initialDeck.size() << endl;
+	//cout << "After Pile 2: "<< initialDeck.size() << endl;
 
 	// Pile3
 	vector<CardInBoard> pile3;
@@ -49,7 +49,7 @@ Play::startPlay()
 	}
 	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 3: "<< initialDeck.size() << endl;
+	//cout << "After Pile 3: "<< initialDeck.size() << endl;
 
 	// Pile4
 	vector<CardInBoard> pile4;
@@ -60,7 +60,7 @@ Play::startPlay()
 	}
 	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 4: "<< initialDeck.size() << endl;
+	//cout << "After Pile 4: "<< initialDeck.size() << endl;
 
 	// Pile5
 	vector<CardInBoard> pile5;
@@ -71,7 +71,7 @@ Play::startPlay()
 	}
 	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 5: "<< initialDeck.size() << endl;
+	//cout << "After Pile 5: "<< initialDeck.size() << endl;
 
 	// Pile6
 	vector<CardInBoard> pile6;
@@ -82,7 +82,7 @@ Play::startPlay()
 	}
 	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 6: "<< initialDeck.size() << endl;
+	//cout << "After Pile 6: "<< initialDeck.size() << endl;
 
 	// Pile7
 	vector<CardInBoard> pile7;
@@ -93,7 +93,7 @@ Play::startPlay()
 	}
 	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	cout << "After Pile 7: "<< initialDeck.size() << endl;
+	//cout << "After Pile 7: "<< initialDeck.size() << endl;
 
 	Pile pileOne (1, pile1);
 	Pile pileTwo (2, pile2);
@@ -138,10 +138,11 @@ Play::startPlay()
 	foundations.push_back(foundationDiamond);
 
 	KlondiqueBoard boardSergio (deck, piles, foundations);
+	boardSergio.startPlayingBoard2();
 
 	KlondiqueBoard board (deck);
 	//board.initBoard();
-	board.startPlayingBoard();
+	//board.startPlayingBoard();
 	//board.deal();
 
 	int movement;

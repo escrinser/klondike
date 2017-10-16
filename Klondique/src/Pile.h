@@ -22,6 +22,8 @@ public:
 	vector<CardInBoard> getCards();
 	int getNumber();
 
+	void addCards(vector<CardInBoard> cards);
+
 	int number;
 	vector<CardInBoard> cards;
 };
