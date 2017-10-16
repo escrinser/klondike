@@ -8,12 +8,9 @@
 #include "Suit.h"
 
 Suit::Suit() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Suit::~Suit() {
-	// TODO Auto-generated destructor stub
 }
 
 Suit::Suit(string theSuit, string theColor)

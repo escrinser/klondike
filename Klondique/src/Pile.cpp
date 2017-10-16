@@ -8,12 +8,9 @@
 #include "Pile.h"
 
 Pile::Pile() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Pile::~Pile() {
-	// TODO Auto-generated destructor stub
 }
 
 Pile::Pile(int theNumber, vector<CardInBoard> theCards)

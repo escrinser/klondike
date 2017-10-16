@@ -18,12 +18,9 @@
 
 
 Deck::Deck() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Deck::~Deck() {
-	// TODO Auto-generated destructor stub
 }
 
 void

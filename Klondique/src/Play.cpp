@@ -11,12 +11,9 @@
 #include "KlondiqueBoard.h"
 
 Play::Play() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Play::~Play() {
-	// TODO Auto-generated destructor stub
 }
 
 
@@ -155,7 +152,6 @@ Play::startPlay()
 	int pileNumberDestination;
 	int pileNumberOriginNumber = 0;
 
-	cout << "The First Movement." << endl;
 	do
 	{
 		cout << "Chose one option:\n\n";
@@ -178,11 +174,10 @@ Play::startPlay()
 			   break;
 
 		   case 2:
-			   cout << "Move a card between upturned to Pile"<<endl;
+			   cout << "Move a card between Waste Pile to Pile"<<endl;
 			   cout << "\nPile Destination: ";
 			   cin >> pileNumber; //TODO: Number between 1-7
-			   //First movement (upturned to Pile1)
-			   cout << "First movement from upturned to Pile: " << pileNumber  << endl;
+			   cout << "Movement from Waste Pile to Pile: " << pileNumber  << endl;
 			   switch (pileNumber)
 			   {
 				   case 1:
@@ -646,31 +641,34 @@ Play::startPlay()
 		   }
 		   case 5:
 		   {
-			   cout << "Move a card between upturned and Foundation"<<endl;
-			   cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
-			   cout << "\nFoundation Number: ";
-			   cin >> foundationNumber; //TODO: Heart= 1, Spade=2, Club=3, Diamond=4
-			   cout << "Foundation: " << foundationNumber  << endl;
-
-			   switch (foundationNumber)
+			   do
 			   {
-				   case 1:
-					   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationHeart());
-					   break;
-				   case 2:
-					   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationSpade());
-					   break;
-				   case 3:
-					   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationClub());
-					   break;
-				   case 4:
-					   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationDiamond());
-					   break;
+				   cout << "Move a card between Waste Pile and Foundation"<<endl;
+				   cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
+				   cout << "\nFoundation Number: ";
+			       cin >> foundationNumber; //TODO: Heart= 1, Spade=2, Club=3, Diamond=4
+				   cout << "Foundation: " << foundationNumber  << endl;
 
-				   default:
-					   cout << "Not a Valid Foundation Number.\n";
-					   break;
-			   }
+				   switch (foundationNumber)
+				   {
+					   case 1:
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationHeart());
+						   break;
+					   case 2:
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationSpade());
+						   break;
+					   case 3:
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationClub());
+						   break;
+					   case 4:
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationDiamond());
+						   break;
+
+					   default:
+						   cout << "Not a Valid Foundation Number. Choose again\n";
+						   break;
+				   }
+			   } while (foundationNumber != 1 && foundationNumber != 2 && foundationNumber != 3 && foundationNumber != 1);
 			   break;
 		   }
 		   case 22:

@@ -9,12 +9,9 @@
 
 
 Card::Card() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Card::~Card() {
-	// TODO Auto-generated destructor stub
 }
 
 Card::Card(Suit theSuit, int theNumber)

@@ -8,12 +8,9 @@
 #include "CardInBoard.h"
 
 CardInBoard::CardInBoard() {
-	// TODO Auto-generated constructor stub
-
 }
 
 CardInBoard::~CardInBoard() {
-	// TODO Auto-generated destructor stub
 }
 
 CardInBoard::CardInBoard(Card theCard, string theUpOrDownTurned)

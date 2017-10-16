@@ -8,12 +8,9 @@
 #include "Foundation.h"
 
 Foundation::Foundation() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Foundation::~Foundation() {
-	// TODO Auto-generated destructor stub
 }
 
 
