@@ -138,11 +138,11 @@ Play::startPlay()
 	foundations.push_back(foundationDiamond);
 
 	KlondiqueBoard boardSergio (deck, piles, foundations);
-	boardSergio.startPlayingBoard2();
+	//boardSergio.startPlayingBoard2();
 
 	KlondiqueBoard board (deck);
 	//board.initBoard();
-	//board.startPlayingBoard();
+	board.startPlayingBoard();
 	//board.deal();
 
 	int movement;
@@ -155,6 +155,8 @@ Play::startPlay()
 
 	do
 	{
+		board.showBoard();
+
 		cout << "Chose one option:\n\n";
 
 		cout << "1  Deal\n";
@@ -547,91 +549,91 @@ Play::startPlay()
 			   switch (suma)
 			   {
 				   case 11:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationHeart(), foundationNumber);
 					   break;
 				   case 12:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationHeart(), foundationNumber);
 					   break;
 				   case 13:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationHeart(), foundationNumber);
 					   break;
 				   case 14:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationHeart(), foundationNumber);
 					   break;
 				   case 15:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationHeart(), foundationNumber);
 					   break;
 				   case 16:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart(), foundationNumber);
 					   break;
 				   case 17:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationHeart());
+					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationHeart(), foundationNumber);
 					   break;
 
 				   case 21:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationSpade(), foundationNumber);
 					   break;
 				   case 22:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationSpade(), foundationNumber);
 					   break;
 				   case 23:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationSpade(), foundationNumber);
 					   break;
 				   case 24:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationSpade(), foundationNumber);
 					   break;
 				   case 25:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationSpade(), foundationNumber);
 					   break;
 				   case 26:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationSpade(), foundationNumber);
 					   break;
 				   case 27:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationSpade());
+					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationSpade(), foundationNumber);
 					   break;
 
 				   case 31:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationClub(), foundationNumber);
 					   break;
 				   case 32:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationClub(), foundationNumber);
 					   break;
 				   case 33:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationClub(), foundationNumber);
 					   break;
 				   case 34:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationClub(), foundationNumber);
 					   break;
 				   case 35:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationClub(), foundationNumber);
 					   break;
 				   case 36:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationClub(), foundationNumber);
 					   break;
 				   case 37:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationClub());
+					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationClub(), foundationNumber);
 					   break;
 
 				   case 41:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 				   case 42:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 				   case 43:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 				   case 44:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 				   case 45:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 				   case 46:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 				   case 47:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationDiamond());
+					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationDiamond(), foundationNumber);
 					   break;
 
 				   default:
@@ -653,16 +655,16 @@ Play::startPlay()
 				   switch (foundationNumber)
 				   {
 					   case 1:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationHeart());
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationHeart(), foundationNumber);
 						   break;
 					   case 2:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationSpade());
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationSpade(), foundationNumber);
 						   break;
 					   case 3:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationClub());
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationClub(), foundationNumber);
 						   break;
 					   case 4:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationDiamond());
+						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationDiamond(), foundationNumber);
 						   break;
 
 					   default:
@@ -681,5 +683,35 @@ Play::startPlay()
 			   break;
 		}
 	}
-	while (movement != 22);
+	while ((movement != 22) && (!hasWon(board)));
+}
+
+
+bool
+Play::hasWon(KlondiqueBoard theBoard)
+{
+	if (!theBoard.getFoundationHeart().empty()
+			&& !theBoard.getFoundationSpade().empty()
+				&& !theBoard.getFoundationClub().empty()
+					&& !theBoard.getFoundationDiamond().empty())
+	{
+		if ((theBoard.getFoundationHeart().back().getCard().getNumber() == 13)
+				&& (theBoard.getFoundationSpade().back().getCard().getNumber() == 13)
+					 && (theBoard.getFoundationClub().back().getCard().getNumber() == 13)
+						&& (theBoard.getFoundationDiamond().back().getCard().getNumber() == 13))
+		{
+			cout << "You win!!!" << endl;
+			return true;
+		}
+		else
+		{
+			cout << "You are on the way to win, keep trying..." << endl;
+			return false;
+		}
+	}
+	else
+	{
+		cout << "You are on the way to win, keep trying..." << endl;
+		return false;
+	}
 }

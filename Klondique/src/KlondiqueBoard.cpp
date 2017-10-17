@@ -258,8 +258,6 @@ KlondiqueBoard::deal()
 		wastePile.back().setUpOrDownTurned("upturned");
 		stock.pop_back();
 		cout << "DEAL A CARD" << endl;
-		showBoard();
-		cout << "END OF DEAL A CARD" << endl;
 	}
 	else
 	{
@@ -297,8 +295,6 @@ KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
 			thePileOrigin.pop_back();
 			movementCorrect = true;
 			cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
-			showBoard();
-			cout << "END OF MOVE A KING FROM PILE TO EMPTY PILE" << endl;
 		}
 		else
 		{
@@ -319,8 +315,6 @@ KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
 				thePileOrigin.pop_back();
 				movementCorrect = true;
 				cout << "MOVE A CARD FROM PILE TO PILE" << endl;
-				showBoard();
-				cout << "END OF MOVE A CARD FROM PILE TO PILE" << endl;
 			}
 			else
 			{
@@ -360,8 +354,6 @@ KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
 
 						movementCorrect = true;
 						cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
-						showBoard();
-						cout << "END OF MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
 					}
 					else
 					{
@@ -390,7 +382,8 @@ KlondiqueBoard::moveBetweenPiles(vector<CardInBoard> &thePileOrigin,
 
 bool
 KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
-		          	  	  	  	  	  	  	 vector<CardInBoard>& theFoundationDestination)
+		          	  	  	  	  	  	  	 vector<CardInBoard>& theFoundationDestination,
+											 int theFoundationNumber)
 {
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
@@ -399,17 +392,26 @@ KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
 	{
 		if (thePileOrigin.back().getCard().getNumber() == 1)
 		{
-			// Movement
-			theFoundationDestination.push_back(thePileOrigin.back());
-			thePileOrigin.pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-			showBoard();
-			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			// Check if the foundation is the correct
+			if ((thePileOrigin.back().getCard().getSuit().getSuit() == "heart" && theFoundationNumber == 1)
+				   ||(thePileOrigin.back().getCard().getSuit().getSuit() == "spade" && theFoundationNumber == 2)
+					   ||(thePileOrigin.back().getCard().getSuit().getSuit() == "club" && theFoundationNumber == 3)
+							||(thePileOrigin.back().getCard().getSuit().getSuit() == "diamond" && theFoundationNumber == 4))
+			{
+				// Movement
+				theFoundationDestination.push_back(thePileOrigin.back());
+				thePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			}
+			else
+			{
+				cout << "Not possible movement. Incorrect Foundation" << endl;
+			}
 		}
 		else
 		{
-			cout << "Not possible movement" << endl;
+			cout << "Not possible movement, it is not an Ace" << endl;
 		}
 	}
 	else
@@ -424,8 +426,6 @@ KlondiqueBoard::moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
 			thePileOrigin.pop_back();
 			movementCorrect = true;
 			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-			showBoard();
-			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
 		}
 		else
 		{
@@ -461,8 +461,6 @@ KlondiqueBoard::moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOri
 				theWastePileOrigin.pop_back();
 				movementCorrect = true;
 				cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
-				showBoard();
-				cout << "END OF MOVE A KING FROM PILE TO EMPTY PILE" << endl;
 			}
 			else
 			{
@@ -481,8 +479,6 @@ KlondiqueBoard::moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOri
 				theWastePileOrigin.pop_back();
 				movementCorrect = true;
 				cout << "MOVE A CARD FROM WASTE PILE TO PILE" << endl;
-				showBoard();
-				cout << "END OF MOVE A CARD FROM WASTE PILE TO PILE" << endl;
 			}
 			else
 			{
@@ -499,27 +495,36 @@ KlondiqueBoard::moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOri
 
 bool
 KlondiqueBoard::moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
-									              vector<CardInBoard>& theFoundationDestination)
+									              vector<CardInBoard>& theFoundationDestination,
+												  int theFoundationNumber)
 {
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
 	if(theFoundationDestination.empty())
 	{
-		//TODO: There is no way to know which foundation is (In Foundation Club is possible to move 1 Heart)
-		if (theWastePileOrigin.back().getCard().getNumber() == 1)
+		if (theWastePileOrigin.back().getCard().getNumber() == 1) // Check if it is an Ace
 		{
-			// Movement
-			theFoundationDestination.push_back(theWastePileOrigin.back());
-			theWastePileOrigin.pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-			showBoard();
-			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
+			// Check if the foundation is the correct
+			if ((theWastePileOrigin.back().getCard().getSuit().getSuit() == "heart" && theFoundationNumber == 1)
+				   ||(theWastePileOrigin.back().getCard().getSuit().getSuit() == "spade" && theFoundationNumber == 2)
+					   ||(theWastePileOrigin.back().getCard().getSuit().getSuit() == "club" && theFoundationNumber == 3)
+							||(theWastePileOrigin.back().getCard().getSuit().getSuit() == "diamond" && theFoundationNumber == 4))
+			{
+				// Movement
+				theFoundationDestination.push_back(theWastePileOrigin.back());
+				theWastePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A CARD FROM WASTE PILE TO FOUNDATION" << endl;
+			}
+			else
+			{
+				cout << "Not possible movement. Incorrect Foundation" << endl;
+			}
 		}
 		else
 		{
-			cout << "Not possible movement" << endl;
+			cout << "Not possible movement, the card is not an Ace" << endl;
 		}
 	}
 	else
@@ -534,8 +539,6 @@ KlondiqueBoard::moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWasteP
 			theWastePileOrigin.pop_back();
 			movementCorrect = true;
 			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-			showBoard();
-			cout << "END OF MOVE A CARD FROM PILE TO FOUNDATION" << endl;
 		}
 		else
 		{
@@ -557,8 +560,6 @@ KlondiqueBoard::upturnCardInPile(vector<CardInBoard>& thePile)
 			thePile.back().setUpOrDownTurned("upturned");
 			upturnedCorrect = true;
 			cout << "UPTURNED A CARD FROM PILE" << endl;
-			showBoard();
-			cout << "END OF UPTURNED A CARD FROM PILE" << endl;
 		}
 	}
 	else
@@ -655,213 +656,90 @@ KlondiqueBoard::showBoard()
 
 	// 1) Stock
     cout << "== STOCK ==" << endl;
-    if (stock.empty())
+    showElement(stock);
+
+	// 2) Waste Pile
+    cout << "== WASTE PILE ==" << endl;
+    showElement(wastePile);
+
+	// 3) Foundation Heart (Only Hearts and in order from Ace to King)
+	cout << "== FOUNDATION HEART ==" << endl;
+	showElement(foundationHeart);
+
+	// 4) Foundation Spade (Only Spades and in order from Ace to King)
+	cout << "== FOUNDATION SPADE ==" << endl;
+	showElement(foundationSpade);
+
+	// 5) Foundation Club (Only Clubs and in order from Ace to King)
+	cout << "== FOUNDATION CLUB ==" << endl;
+	showElement(foundationClub);
+
+	// 6) Foundation Diamond (Only Diamonds and in order from Ace to King)
+	cout << "== FOUNDATION DIAMOND ==" << endl;
+	showElement(foundationDiamond);
+
+	// 7) Pile 1 (maximum 13 Cards, no downturned)
+	cout << "== PILE 1 ==" << endl;
+	showElement(pile1);
+
+	// 8) Pile 2 (maximum 14 Cards, 1 possible downturned)
+	cout << "== PILE 2 ==" << endl;
+	showElement(pile2);
+
+	// 9) Pile 3 (maximum 15 Cards, 2 possible downturned)
+	cout << "== PILE 3 ==" << endl;
+	showElement(pile3);
+
+	// 10) Pile 4 (maximum 16 Cards, 3 possible downturned)
+	cout << "== PILE 4 ==" << endl;
+	showElement(pile4);
+
+	// 11) Pile 5 (maximum 17 Cards, 4 possible downturned)
+	cout << "== PILE 5 ==" << endl;
+	showElement(pile5);
+
+	// 12) Pile 6 (maximum 18 Cards, 5 possible downturned)
+	cout << "== PILE 6 ==" << endl;
+	showElement(pile6);
+
+	// 13) Pile 7 (maximum 19 Cards, 6 possible downturned)
+	cout << "== PILE 7 ==" << endl;
+	showElement(pile7);
+
+	cout << "== END BOARD ==" << endl;
+}
+
+void
+KlondiqueBoard::showElement(vector<CardInBoard>& theElement)
+{
+    if (theElement.empty())
     {
     	cout << "== EMPTY ==" << endl;
     }
     else
     {
-    	for(vector<CardInBoard>::iterator it = stock.begin(); it != stock.end(); it++)
+    	cout << "Cards:";
+    	for(vector<CardInBoard>::iterator it = theElement.begin(); it != theElement.end(); it++)
 		{
-		   cout << "Card in stock -> number: " << (*it).getCard().getNumber() << ", suit: "
+    		//Only show cards upturned, X for downturned
+    		cout << " ";
+    		if ((*it).getUpOrDownTurned() == "downturned")
+    		{
+    			cout << "X";
+    		}
+    		else if ((*it).getUpOrDownTurned() == "upturned")
+    		{
+    			cout << (*it).getCard().getNumber() << (*it).getCard().getSuit().getSuit() << (*it).getCard().getSuit().getColor();
+    		}
+    		else
+    		{
+    			cout << "Impossible situation." << endl;
+    		}
+		   /*cout << "Card -> number: " << (*it).getCard().getNumber() << ", suit: "
 				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
+					   << ", position: " << (*it).getUpOrDownTurned() << endl;*/
 		}
     }
-
-
-	// 2) Waste Pile
-    cout << "== WASTE PILE ==" << endl;
-	if (wastePile.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = wastePile.begin(); it != wastePile.end(); it++)
-		{
-		   cout << "Card in waste pile -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 3) Foundation Heart (Only Hearts and in order from Ace to King)
-	cout << "== FOUNDATION HEART ==" << endl;
-	if (foundationHeart.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = foundationHeart.begin(); it != foundationHeart.end(); it++)
-		{
-		   cout << "Card in foundation Heart -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 4) Foundation Spade (Only Spades and in order from Ace to King)
-	cout << "== FOUNDATION SPADE ==" << endl;
-	if (foundationSpade.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = foundationSpade.begin(); it != foundationSpade.end(); it++)
-		{
-		   cout << "Card in foundation Spade -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 5) Foundation Club (Only Clubs and in order from Ace to King)
-	cout << "== FOUNDATION CLUB ==" << endl;
-	if (foundationClub.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = foundationClub.begin(); it != foundationClub.end(); it++)
-		{
-		   cout << "Card in foundation Club -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 6) Foundation Diamond (Only Diamonds and in order from Ace to King)
-	cout << "== FOUNDATION DIAMOND ==" << endl;
-	if (foundationDiamond.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = foundationDiamond.begin(); it != foundationDiamond.end(); it++)
-		{
-		   cout << "Card in foundation Diamond -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 7) Pile 1 (maximum 13 Cards, no downturned)
-	cout << "== PILE 1 ==" << endl;
-	if (pile1.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile1.begin(); it != pile1.end(); it++)
-		{
-		   cout << "Card in Pile 1 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 8) Pile 2 (maximum 14 Cards, 1 possible downturned)
-	cout << "== PILE 2 ==" << endl;
-	if (pile2.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile2.begin(); it != pile2.end(); it++)
-		{
-		   cout << "Card in Pile 2 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 9) Pile 3 (maximum 15 Cards, 2 possible downturned)
-	cout << "== PILE 3 ==" << endl;
-	if (pile3.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile3.begin(); it != pile3.end(); it++)
-		{
-		   cout << "Card in Pile 3 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 10) Pile 4 (maximum 16 Cards, 3 possible downturned)
-	cout << "== PILE 4 ==" << endl;
-	if (pile4.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile4.begin(); it != pile4.end(); it++)
-		{
-		   cout << "Card in Pile 4 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 11) Pile 5 (maximum 17 Cards, 4 possible downturned)
-	cout << "== PILE 5 ==" << endl;
-	if (pile5.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile5.begin(); it != pile5.end(); it++)
-		{
-		   cout << "Card in Pile 5 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 12) Pile 6 (maximum 18 Cards, 5 possible downturned)
-	cout << "== PILE 6 ==" << endl;
-	if (pile6.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile6.begin(); it != pile6.end(); it++)
-		{
-		   cout << "Card in Pile 6 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	// 13) Pile 7 (maximum 19 Cards, 6 possible downturned)
-	cout << "== PILE 7 ==" << endl;
-	if (pile7.empty())
-	{
-		cout << "== EMPTY ==" << endl;
-	}
-	else
-	{
-		for(vector<CardInBoard>::iterator it = pile7.begin(); it != pile7.end(); it++)
-		{
-		   cout << "Card in Pile 7 -> number: " << (*it).getCard().getNumber() << ", suit: "
-				   << (*it).getCard().getSuit().getSuit() << ", color: " << (*it).getCard().getSuit().getColor()
-					   << ", position: " << (*it).getUpOrDownTurned() << endl;
-		}
-	}
-
-	cout << "== END BOARD ==" << endl;
+    cout << endl;
 }
 

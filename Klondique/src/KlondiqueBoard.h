@@ -44,7 +44,8 @@ public:
 		     	 	 	  vector<CardInBoard>& thePileDestination,
 						  int theCardOriginNumber);
 	bool moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
-	  	  	  	  	 	 	 	 	  vector<CardInBoard>& theFoundationDestination);
+	  	  	  	  	 	 	 	 	  vector<CardInBoard>& theFoundationDestination,
+									  int theFoundationNumber);
 
 	//TODO: Similar movement as moveBetweenPiles (refactoring)
 	bool moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOrigin,
@@ -52,7 +53,8 @@ public:
 
 	//TODO: Similar movement as moveBetweenPileAndFoundation (refactoring)
 	bool moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
-									  vector<CardInBoard>& theFoundationDestination);
+									  vector<CardInBoard>& theFoundationDestination,
+									  int theFoundationNumber);
 
 	vector<CardInBoard>& getWastePile();
 	vector<CardInBoard>& getStock();
@@ -71,6 +73,7 @@ public:
 	vector<CardInBoard>& getFoundationDiamond();
 
 	void showBoard();
+	void showElement(vector<CardInBoard>& theElement);
 
 	bool upturnCardInPile(vector<CardInBoard>& thePile);
 
