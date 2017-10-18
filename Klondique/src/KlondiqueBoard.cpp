@@ -494,6 +494,93 @@ KlondiqueBoard::moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOri
 }
 
 bool
+moveBetweenWastePileAndPile(int thePileDestinationNumber)
+{
+	//return 0 -> no movement (not possible, same color or not the next number)
+	bool movementCorrect = false;
+
+	vector<CardInBoard> pileDestination = giveMeThePile(thePileDestinationNumber);
+	if (!.empty())
+	{
+		//Move a king to a empty Pile (other card is not allowed)
+		if (thePileDestination.empty())
+		{
+			cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
+			if (theWastePileOrigin.back().getCard().getNumber()==13)
+			{
+				// Movement
+				thePileDestination.push_back(theWastePileOrigin.back());
+				theWastePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
+			}
+			else
+			{
+				cout << "Not possible movement" << endl;
+			}
+		}
+		else
+		{
+			if ((theWastePileOrigin.back().getCard().getNumber() ==
+							(thePileDestination.back().getCard().getNumber() - 1)) &&
+								(theWastePileOrigin.back().getCard().getSuit().getColor() !=
+									(thePileDestination.back().getCard().getSuit().getColor())))
+			{
+				// Movement
+				thePileDestination.push_back(theWastePileOrigin.back());
+				theWastePileOrigin.pop_back();
+				movementCorrect = true;
+				cout << "MOVE A CARD FROM WASTE PILE TO PILE" << endl;
+			}
+			else
+			{
+				cout << "Not possible movement" << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "Not possible movement - Waste Pile Empty" << endl;
+	}
+	return movementCorrect;
+}
+
+vector<CardInBoard>
+KlondiqueBoard::giveMeThePile(int thePileDestinationNumber)
+{
+	vector<CardInBoard> pileDestination;
+	switch (thePileDestinationNumber)
+	{
+	   case 1:
+		   pileDestination = getPile1();
+		   break;
+	   case 2:
+		   pileDestination = getPile2();
+		   break;
+	   case 3:
+		   pileDestination = getPile3();
+		   break;
+	   case 4:
+		   pileDestination = getPile4();
+		   break;
+	   case 5:
+		   pileDestination = getPile5();
+		   break;
+	   case 6:
+		   pileDestination = getPile6();
+		   break;
+	   case 7:
+		   pileDestination = getPile7();
+		   break;
+	   default:
+		   cout << "Not a Valid Pile Number.\n";
+		   break;
+	}
+	return pileDestination;
+}
+//TODO: Cards to Foundations directly (no mean to say the suit)
+
+bool
 KlondiqueBoard::moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
 									              vector<CardInBoard>& theFoundationDestination,
 												  int theFoundationNumber)
