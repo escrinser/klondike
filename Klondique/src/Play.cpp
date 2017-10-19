@@ -181,7 +181,16 @@ Play::startPlay()
 			   cout << "\nPile Destination: ";
 			   cin >> pileNumber; //TODO: Number between 1-7
 			   cout << "Movement from Waste Pile to Pile: " << pileNumber  << endl;
-			   switch (pileNumber)
+			   if (pileNumber == 1 || pileNumber == 2 || pileNumber == 3 || pileNumber == 4 || pileNumber == 5 || pileNumber == 6 || pileNumber == 7)
+			   {
+				   board.moveBetweenWastePileAndPile(pileNumber);
+			   }
+			   else
+			   {
+				   cout << "Number of Pile must be between 1-7."<<endl;
+			   }
+
+			   /*switch (pileNumber)
 			   {
 				   case 1:
 					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile1());
@@ -207,7 +216,7 @@ Play::startPlay()
 				   default:
 					   cout << "Not a Valid Pile Number.\n";
 					   break;
-			   }
+			   }*/
 			   break;
 
 		   case 3:
@@ -535,7 +544,9 @@ Play::startPlay()
 			   cout << "Move a card between Pile and Foundation"<<endl;
 			   cout << "\nPile Origin: ";
 			   cin >> pileNumber;
-			   cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
+			   board.moveBetweenPileAndFoundation(pileNumber);
+
+			  /* cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
 			   cout << "\nFoundation Destination: ";
 			   cin >> foundationNumber;
 			   cout << "Pile: " << pileNumber << " Foundation: " << foundationNumber  << endl;
@@ -639,18 +650,28 @@ Play::startPlay()
 				   default:
 					   cout << "Not a Valid Foundation Number.\n";
 					   break;
-			   }
+			   }*/
 			   break;
 		   }
 		   case 5:
 		   {
-			   do
-			   {
+			   //do
+			   //{
 				   cout << "Move a card between Waste Pile and Foundation"<<endl;
-				   cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
+				   board.moveBetweenWastePileAndFoundation();
+				   /*cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
 				   cout << "\nFoundation Number: ";
 			       cin >> foundationNumber; //TODO: Heart= 1, Spade=2, Club=3, Diamond=4
 				   cout << "Foundation: " << foundationNumber  << endl;
+				   if (foundationNumber == 1 || foundationNumber == 2 || foundationNumber == 3 || foundationNumber == 4 )
+				   {
+					   board.moveBetweenWastePileAndFoundation(foundationNumber);
+				   }
+				   else
+				   {
+					   cout << "Number of Foundation must be between 1-4."<<endl;
+				   }
+
 
 				   switch (foundationNumber)
 				   {
@@ -670,8 +691,8 @@ Play::startPlay()
 					   default:
 						   cout << "Not a Valid Foundation Number. Choose again\n";
 						   break;
-				   }
-			   } while (foundationNumber != 1 && foundationNumber != 2 && foundationNumber != 3 && foundationNumber != 1);
+				   }*/
+			   //} while (foundationNumber != 1 && foundationNumber != 2 && foundationNumber != 3 && foundationNumber != 1);
 			   break;
 		   }
 		   case 22:

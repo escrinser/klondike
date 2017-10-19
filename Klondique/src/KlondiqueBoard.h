@@ -51,9 +51,15 @@ public:
 	bool moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOrigin,
 			   	   	   	   	    vector<CardInBoard>& thePileDestination);
 
+
 	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
 
-	vector<CardInBoard> giveMeThePile(int thePileDestinationNumber);
+	vector<CardInBoard>& giveMeThePile(int thePileDestinationNumber);
+	vector<CardInBoard>& giveMeTheFoundation(int theFoundationDestinationNumber);
+	vector<CardInBoard>& giveMeTheFoundationFromCard(vector<CardInBoard> theOrigin);
+
+	bool moveBetweenWastePileAndFoundation();
+	bool moveBetweenPileAndFoundation(int thePileOriginNumber);
 
 	//TODO: Similar movement as moveBetweenPileAndFoundation (refactoring)
 	bool moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
