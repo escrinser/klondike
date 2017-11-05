@@ -19,38 +19,31 @@
 		moveBetweenPileAndFoundation
 		moveBetweenDealAndPile*/
 
-#ifndef KLONDIQUEBOARD_H_
-#define KLONDIQUEBOARD_H_
+#ifndef BOARD_H_
+#define BOARD_H_
 
 #include "Deck.h"
 #include "CardInBoard.h"
 #include "Pile.h"
 #include "Foundation.h"
 
-class KlondiqueBoard {
+class Board {
 public:
-	KlondiqueBoard();
-	virtual ~KlondiqueBoard();
+	Board();
+	virtual ~Board();
 
-	KlondiqueBoard(Deck);
-	KlondiqueBoard(Deck, vector<Pile>, vector<Foundation>);
+	Board(Deck);
+	Board(Deck, vector<Pile>, vector<Foundation>);
 
 	void initBoard();
 	void startPlayingBoard();
 	void startPlayingBoard2();
 
 	int deal();
-	bool moveBetweenPiles(vector<CardInBoard>& thePileOrigin,
-		     	 	 	  vector<CardInBoard>& thePileDestination,
+
+	bool moveBetweenPiles(int thePileOriginNumber,
+		     	 	 	  int thePileDestinationNumber,
 						  int theCardOriginNumber);
-	bool moveBetweenPileAndFoundation(vector<CardInBoard>& thePileOrigin,
-	  	  	  	  	 	 	 	 	  vector<CardInBoard>& theFoundationDestination,
-									  int theFoundationNumber);
-
-	//TODO: Similar movement as moveBetweenPiles (refactoring)
-	bool moveBetweenWastePileAndPile(vector<CardInBoard>& theWastePileOrigin,
-			   	   	   	   	    vector<CardInBoard>& thePileDestination);
-
 
 	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
 
@@ -60,11 +53,6 @@ public:
 
 	bool moveBetweenWastePileAndFoundation();
 	bool moveBetweenPileAndFoundation(int thePileOriginNumber);
-
-	//TODO: Similar movement as moveBetweenPileAndFoundation (refactoring)
-	bool moveBetweenWastePileAndFoundation(vector<CardInBoard>& theWastePileOrigin,
-									  vector<CardInBoard>& theFoundationDestination,
-									  int theFoundationNumber);
 
 	vector<CardInBoard>& getWastePile();
 	vector<CardInBoard>& getStock();
@@ -112,4 +100,4 @@ private:
 
 };
 
-#endif /* KLONDIQUEBOARD_H_ */
+#endif /* BOARD_H_ */

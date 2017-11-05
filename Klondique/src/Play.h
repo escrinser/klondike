@@ -8,7 +8,7 @@
 #ifndef PLAY_H_
 #define PLAY_H_
 
-#include "KlondiqueBoard.h"
+#include "Board.h"
 
 class Play {
 public:
@@ -17,7 +17,7 @@ public:
 
 	void startPlay();
 
-	bool hasWon(KlondiqueBoard theBoard);
+	bool hasWon(Board theBoard);
 };
 
 #endif /* PLAY_H_ */

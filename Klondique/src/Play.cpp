@@ -7,8 +7,9 @@
 
 #include "Play.h"
 
+#include "Board.h"
 #include "Deck.h"
-#include "KlondiqueBoard.h"
+#include "LimitedInDialog.h"
 
 Play::Play() {
 }
@@ -20,6 +21,10 @@ Play::~Play() {
 void
 Play::startPlay()
 {
+	LimitedInDialog cardDialog ("Card Number?", 1, 13);
+
+	LimitedInDialog pileDialog ("Pile Number?", 1, 7);
+
 	Deck deck;
 	deck.loadDeck();
 
@@ -137,17 +142,15 @@ Play::startPlay()
 	foundations.push_back(foundationClub);
 	foundations.push_back(foundationDiamond);
 
-	KlondiqueBoard boardSergio (deck, piles, foundations);
+	Board boardSergio (deck, piles, foundations);
 	//boardSergio.startPlayingBoard2();
 
-	KlondiqueBoard board (deck);
+	Board board (deck);
 	//board.initBoard();
 	board.startPlayingBoard();
 	//board.deal();
 
 	int movement;
-	int pileNumber;
-	int foundationNumber; //TODO: Enter String with the suit, not numbers.
 
 	int pileNumberOrigin;
 	int pileNumberDestination;
@@ -178,56 +181,31 @@ Play::startPlay()
 
 		   case 2:
 			   cout << "Move a card between Waste Pile to Pile"<<endl;
-			   cout << "\nPile Destination: ";
-			   cin >> pileNumber; //TODO: Number between 1-7
-			   cout << "Movement from Waste Pile to Pile: " << pileNumber  << endl;
-			   if (pileNumber == 1 || pileNumber == 2 || pileNumber == 3 || pileNumber == 4 || pileNumber == 5 || pileNumber == 6 || pileNumber == 7)
-			   {
-				   board.moveBetweenWastePileAndPile(pileNumber);
-			   }
-			   else
-			   {
-				   cout << "Number of Pile must be between 1-7."<<endl;
-			   }
-
-			   /*switch (pileNumber)
-			   {
-				   case 1:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile1());
-					   break;
-				   case 2:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile2());
-					   break;
-				   case 3:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile3());
-					   break;
-				   case 4:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile4());
-					   break;
-				   case 5:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile5());
-					   break;
-				   case 6:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile6());
-					   break;
-				   case 7:
-					   board.moveBetweenWastePileAndPile(board.getWastePile(), board.getPile7());
-					   break;
-				   default:
-					   cout << "Not a Valid Pile Number.\n";
-					   break;
-			   }*/
+			   board.moveBetweenWastePileAndPile(pileDialog.read());
 			   break;
 
 		   case 3:
 		   {
 			   cout << "Move card/cards between Piles"<<endl;
-			   cout << "\nPile Origin: ";
-			   cin >> pileNumberOrigin;
-			   cout << "\nPile Origin Card Number: ";
-			   cin >> pileNumberOriginNumber;
-			   cout << "\nPile Destination: ";
-			   cin >> pileNumberDestination;
+			   cout << "Origin Pile"<<endl;
+			   pileNumberOrigin = pileDialog.read();
+
+			   cout << "\nIs the last card? (yes/no)";
+			   string lastCard;
+
+			   cin >> lastCard;
+			   if (lastCard == "no") //TODO: LimitedInDialog to string in the ClosedStringInterval.
+			   {
+				   cout << "\nPile Origin Card Number: ";
+				   pileNumberOriginNumber = cardDialog.read();
+			   }
+			   else
+			   {
+				   pileNumberOriginNumber = 0;
+			   }
+
+			   cout << "Destination Pile"<<endl;
+			   pileNumberDestination = pileDialog.read();
 			   if (pileNumberOriginNumber != 0)
 			   {
 				   cout << "Pile Origin: " << pileNumberOrigin << " number: " << pileNumberOriginNumber <<" Pile Destination: " << pileNumberDestination  << endl;
@@ -243,456 +221,20 @@ Play::startPlay()
 				   break;
 			   }
 
-			   switch (pileNumberOrigin)
-				{
-					case 1:
-					{
-						switch (pileNumberDestination)
-						{
-							case 2:
-							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile2(), pileNumberOriginNumber);
-							   break;
-							}
-							case 3:
-							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile3(), pileNumberOriginNumber);
-							   break;
-							}
-							case 4:
-							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile4(), pileNumberOriginNumber);
-							   break;
-							}
-							case 5:
-							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile5(), pileNumberOriginNumber);
-							   break;
-							}
-							case 6:
-							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile6(), pileNumberOriginNumber);
-							   break;
-							}
-							case 7:
-							{
-							   board.moveBetweenPiles(board.getPile1(), board.getPile7(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-					case 2:
-					{
-						switch (pileNumberDestination)
-						{
-							case 1:
-							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile1(), pileNumberOriginNumber);
-							   break;
-							}
-							case 3:
-							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile3(), pileNumberOriginNumber);
-							   break;
-							}
-							case 4:
-							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile4(), pileNumberOriginNumber);
-							   break;
-							}
-							case 5:
-							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile5(), pileNumberOriginNumber);
-							   break;
-							}
-							case 6:
-							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile6(), pileNumberOriginNumber);
-							   break;
-							}
-							case 7:
-							{
-							   board.moveBetweenPiles(board.getPile2(), board.getPile7(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-					case 3:
-					{
-						switch (pileNumberDestination)
-						{
-							case 1:
-							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile1(), pileNumberOriginNumber);
-							   break;
-							}
-							case 2:
-							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile2(), pileNumberOriginNumber);
-							   break;
-							}
-							case 4:
-							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile4(), pileNumberOriginNumber);
-							   break;
-							}
-							case 5:
-							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile5(), pileNumberOriginNumber);
-							   break;
-							}
-							case 6:
-							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile6(), pileNumberOriginNumber);
-							   break;
-							}
-							case 7:
-							{
-							   board.moveBetweenPiles(board.getPile3(), board.getPile7(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-					case 4:
-					{
-						switch (pileNumberDestination)
-						{
-							case 1:
-							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile1(), pileNumberOriginNumber);
-							   break;
-							}
-							case 2:
-							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile2(), pileNumberOriginNumber);
-							   break;
-							}
-							case 3:
-							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile3(), pileNumberOriginNumber);
-							   break;
-							}
-							case 5:
-							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile5(), pileNumberOriginNumber);
-							   break;
-							}
-							case 6:
-							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile6(), pileNumberOriginNumber);
-							   break;
-							}
-							case 7:
-							{
-							   board.moveBetweenPiles(board.getPile4(), board.getPile7(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-					case 5:
-					{
-						switch (pileNumberDestination)
-						{
-							case 1:
-							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile1(), pileNumberOriginNumber);
-							   break;
-							}
-							case 2:
-							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile2(), pileNumberOriginNumber);
-							   break;
-							}
-							case 3:
-							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile3(), pileNumberOriginNumber);
-							   break;
-							}
-							case 4:
-							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile4(), pileNumberOriginNumber);
-							   break;
-							}
-							case 6:
-							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile6(), pileNumberOriginNumber);
-							   break;
-							}
-							case 7:
-							{
-							   board.moveBetweenPiles(board.getPile5(), board.getPile7(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-					case 6:
-					{
-						switch (pileNumberDestination)
-						{
-							case 1:
-							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile1(), pileNumberOriginNumber);
-							   break;
-							}
-							case 2:
-							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile2(), pileNumberOriginNumber);
-							   break;
-							}
-							case 3:
-							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile3(), pileNumberOriginNumber);
-							   break;
-							}
-							case 4:
-							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile4(), pileNumberOriginNumber);
-							   break;
-							}
-							case 5:
-							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile5(), pileNumberOriginNumber);
-							   break;
-							}
-							case 7:
-							{
-							   board.moveBetweenPiles(board.getPile6(), board.getPile7(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-					case 7:
-					{
-						switch (pileNumberDestination)
-						{
-							case 1:
-							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile1(), pileNumberOriginNumber);
-							   break;
-							}
-							case 2:
-							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile2(), pileNumberOriginNumber);
-							   break;
-							}
-							case 3:
-							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile3(), pileNumberOriginNumber);
-							   break;
-							}
-							case 4:
-							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile4(), pileNumberOriginNumber);
-							   break;
-							}
-							case 5:
-							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile5(), pileNumberOriginNumber);
-							   break;
-							}
-							case 6:
-							{
-							   board.moveBetweenPiles(board.getPile7(), board.getPile6(), pileNumberOriginNumber);
-							   break;
-							}
-
-							default:
-								cout << "Not a Valid Piles Number.\n";
-								break;
-						}
-						break;
-					}
-
-					default:
-						cout << "Not a Valid Origin Pile Number.\n";
-						break;
-				}
+		       board.moveBetweenPiles(pileNumberOrigin, pileNumberDestination, pileNumberOriginNumber);
 			   break;
 		   }
 		   case 4:
 		   {
 			   cout << "Move a card between Pile and Foundation"<<endl;
-			   cout << "\nPile Origin: ";
-			   cin >> pileNumber;
-			   board.moveBetweenPileAndFoundation(pileNumber);
+			   board.moveBetweenPileAndFoundation(pileDialog.read());
 
-			  /* cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
-			   cout << "\nFoundation Destination: ";
-			   cin >> foundationNumber;
-			   cout << "Pile: " << pileNumber << " Foundation: " << foundationNumber  << endl;
-
-			   //Foundation heart      x10 (11 from Pile 1 to Foundation Hearts)
-			   //Foundation spade      x20 (21 from Pile 1 to Foundation Spades)
-			   //Foundation club       x30 (31 from Pile 1 to Foundation Clubs)
-			   //Foundation diamond    x40 (41 from Pile 1 to Foundation Diamonds)
-			   int suma = (foundationNumber*10) + pileNumber;
-
-			   switch (suma)
-			   {
-				   case 11:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationHeart(), foundationNumber);
-					   break;
-				   case 12:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationHeart(), foundationNumber);
-					   break;
-				   case 13:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationHeart(), foundationNumber);
-					   break;
-				   case 14:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationHeart(), foundationNumber);
-					   break;
-				   case 15:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationHeart(), foundationNumber);
-					   break;
-				   case 16:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationHeart(), foundationNumber);
-					   break;
-				   case 17:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationHeart(), foundationNumber);
-					   break;
-
-				   case 21:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationSpade(), foundationNumber);
-					   break;
-				   case 22:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationSpade(), foundationNumber);
-					   break;
-				   case 23:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationSpade(), foundationNumber);
-					   break;
-				   case 24:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationSpade(), foundationNumber);
-					   break;
-				   case 25:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationSpade(), foundationNumber);
-					   break;
-				   case 26:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationSpade(), foundationNumber);
-					   break;
-				   case 27:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationSpade(), foundationNumber);
-					   break;
-
-				   case 31:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationClub(), foundationNumber);
-					   break;
-				   case 32:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationClub(), foundationNumber);
-					   break;
-				   case 33:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationClub(), foundationNumber);
-					   break;
-				   case 34:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationClub(), foundationNumber);
-					   break;
-				   case 35:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationClub(), foundationNumber);
-					   break;
-				   case 36:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationClub(), foundationNumber);
-					   break;
-				   case 37:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationClub(), foundationNumber);
-					   break;
-
-				   case 41:
-					   board.moveBetweenPileAndFoundation(board.getPile1(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-				   case 42:
-					   board.moveBetweenPileAndFoundation(board.getPile2(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-				   case 43:
-					   board.moveBetweenPileAndFoundation(board.getPile3(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-				   case 44:
-					   board.moveBetweenPileAndFoundation(board.getPile4(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-				   case 45:
-					   board.moveBetweenPileAndFoundation(board.getPile5(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-				   case 46:
-					   board.moveBetweenPileAndFoundation(board.getPile6(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-				   case 47:
-					   board.moveBetweenPileAndFoundation(board.getPile7(), board.getFoundationDiamond(), foundationNumber);
-					   break;
-
-				   default:
-					   cout << "Not a Valid Foundation Number.\n";
-					   break;
-			   }*/
 			   break;
 		   }
 		   case 5:
 		   {
-			   //do
-			   //{
-				   cout << "Move a card between Waste Pile and Foundation"<<endl;
-				   board.moveBetweenWastePileAndFoundation();
-				   /*cout << "Options: Heart= 1, Spade=2, Club=3, Diamond=4 "<<endl;
-				   cout << "\nFoundation Number: ";
-			       cin >> foundationNumber; //TODO: Heart= 1, Spade=2, Club=3, Diamond=4
-				   cout << "Foundation: " << foundationNumber  << endl;
-				   if (foundationNumber == 1 || foundationNumber == 2 || foundationNumber == 3 || foundationNumber == 4 )
-				   {
-					   board.moveBetweenWastePileAndFoundation(foundationNumber);
-				   }
-				   else
-				   {
-					   cout << "Number of Foundation must be between 1-4."<<endl;
-				   }
-
-
-				   switch (foundationNumber)
-				   {
-					   case 1:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationHeart(), foundationNumber);
-						   break;
-					   case 2:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationSpade(), foundationNumber);
-						   break;
-					   case 3:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationClub(), foundationNumber);
-						   break;
-					   case 4:
-						   board.moveBetweenWastePileAndFoundation(board.getWastePile(), board.getFoundationDiamond(), foundationNumber);
-						   break;
-
-					   default:
-						   cout << "Not a Valid Foundation Number. Choose again\n";
-						   break;
-				   }*/
-			   //} while (foundationNumber != 1 && foundationNumber != 2 && foundationNumber != 3 && foundationNumber != 1);
+			   cout << "Move a card between Waste Pile and Foundation"<<endl;
+			   board.moveBetweenWastePileAndFoundation();
 			   break;
 		   }
 		   case 22:
@@ -709,7 +251,7 @@ Play::startPlay()
 
 
 bool
-Play::hasWon(KlondiqueBoard theBoard)
+Play::hasWon(Board theBoard)
 {
 	if (!theBoard.getFoundationHeart().empty()
 			&& !theBoard.getFoundationSpade().empty()

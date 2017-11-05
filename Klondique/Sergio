@@ -22,6 +22,40 @@ Mover varias cartas
 
 Volver a poner las cartas cuando ya das una vuelta
 
+Card y Suit se relacionan con agregación (Card tiene una referencia al Suit, y lo paso por el constructor
+la referencia)
+
+Cuidado porque estoy pasando copias de objetos (más memoria), y además que una carta es única en todo el 
+juego. Solo manejar punteros y así puedo manejar mejor las Cartas en el tablero.
+
+- Arquitectura de Modelo Vista Controlador 
+
+- Lógica
+- Separar la vista de implementación (lo puedo dejar para el final)
+- Meter los controllers (StartController, MoveController, ContinueController)
+	Ver si hay una interfaz de controladores común
+- Modelos (cuales son en mi diseño actual y cuales quiero que se queden)
+
+Ojo con las leyes de Demeter que estoy llamando a métodos de de otras clases
+que no son dependientes directamente. Smell code.
+
+Usar la colaboración entre clases (Herencia vs colaboración/agregación o asociación)
+Ver las responsabilidades de cada clase porque tengo clase de datos...
+Vigilar la cohesión de métodos, clases, etc y el acoplamiento.
+Vigilar las métricas (longitud de métodos 10-15 lineas, número de métodos 5-10 y 
+clases largas 300-500 lineas)
+
+Versión 310 es la que puedo ver para empezar con esto...
+
+- Cambios en los requisitos (si lo tengo bien hecho no debería ser muy difícil hacerlos)
+	Otra baraja (el loadDeck() tiene que ser tal que genere a partir de un palo y un número de cartas
+	la baraja. A día de hoy esto está hardcode y no es reusable para este cambio de requisito)
+	Sacar cartas de tres en tres
+	Aplicar otras reglas
+	
+	
+	
+
 
 ------------
 
@@ -39,22 +73,38 @@ Class Deck
 		shuffle		
 	    
 
-Class Board (7 piles, 4 foundations, deck downside, card upturned beside deck (downturned))
+Class Board (7 piles, 4 foundations, stock, wastepile)
 	variables:
 		Deck (52 cards at the begining)
-		Deal (52- (1+2+3+4+5+6+7) = 52-28 = 24 cards maximum)
+		(Deal (52- (1+2+3+4+5+6+7) = 52-28 = 24 cards maximum))
 		7 piles (13, 14, 15, 16, 17, 18, 19 cards maximum) 
 		4 foundations (13 cards maximum)
-		Card from Deck (vector of Card and upturned o downturned)
+		
 		 
 	methods:
 		deal
 		moveBetweenPiles
 		moveBetweenPileAndFoundation
 		moveBetweenDealAndPile
+		...
 	
 Clase Pila ??
 Clase Foundation ??
 
+##################################################################################################
 
+There are two basic kinds of dependencies you need to be aware of:
+1) stuff that can be forward declared
+2) stuff that needs to be #included
+
+If, for example, class A uses class B, then class B is one of class A's dependencies. 
+Whether it can be forward declared or needs to be included depends on how B is used within A:
+
+- do nothing if: A makes no references at all to B
+- do nothing if: The only reference to B is in a friend declaration
+- forward declare B if: A contains a B pointer or reference: B* myb;
+- forward declare B if: one or more functions has a B object/pointer/reference
+as a parementer, or as a return type: B MyFunction(B myb);
+- #include "b.h" if: B is a parent class of A
+- #include "b.h" if: A contains a B object: B myb;
 
