@@ -15,13 +15,13 @@ public:
 	Card();
 	virtual ~Card();
 
-	Card(Suit, int);
+	Card(Suit*, int);
 
-	Suit getSuit();
+	Suit* getSuit();
 	int getNumber();
 
 private:
-	Suit suit;
+	Suit* suit;
 	int number;
 };
 

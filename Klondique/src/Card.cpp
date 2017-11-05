@@ -14,13 +14,13 @@ Card::Card() {
 Card::~Card() {
 }
 
-Card::Card(Suit theSuit, int theNumber)
+Card::Card(Suit* theSuit, int theNumber)
 {
 	suit = theSuit;
 	number = theNumber;
 }
 
-Suit
+Suit*
 Card::getSuit()
 {
 	return suit;

@@ -7,7 +7,9 @@
 
 #include "Board.h"
 
-#include "CardInBoard.h"
+/*#include "CardInBoard.h"
+#include "Deck.h"
+#include "Card.h"*/
 
 Board::Board() {
 }
@@ -15,28 +17,21 @@ Board::Board() {
 Board::~Board() {
 }
 
-Board::Board(Deck theDeck)
+Board::Board(Deck* theDeck)
 {
 	deck = theDeck;
-}
-
-Board::Board(Deck theDeck, vector<Pile> thePiles, vector<Foundation> theFoundations)
-{
-	deck = theDeck;
-	piles = thePiles;
-	foundations = theFoundations;
 }
 
 void
 Board::initBoard()
 {
 	// stock
-	vector<Card> initialDeck = deck.getDeck();
-	//vector<Card> initialDeck = deck.shuffle();
+	vector<Card*> initialDeck = deck->getDeck();
 
-	for(vector<Card>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+
+	for(vector<Card*>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(CardInBoard ((*it), "downturned"));
+	   stock.push_back(new CardInBoard((*it), "downturned"));
 	}
 
 	// upturnedDeck empty
@@ -62,7 +57,10 @@ Board::initBoard()
 void
 Board::startPlayingBoard()
 {
-	vector<Card> initialDeck = deck.shuffle();
+
+
+	vector<Card*> initialDeck = deck->shuffle();
+
 	// upturnedDeck empty
 
 	// Foundation Hearts empty
@@ -71,178 +69,73 @@ Board::startPlayingBoard()
 	// Foundation Diamonds empty
 
 	// Pile1
-	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile1.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	//cout << "Before Pile 1: " << initialDeck.size() << endl;
 	initialDeck.pop_back();
 	//cout << "After Pile 1: "<< initialDeck.size() << endl;
 
 	// Pile2
-	pile2.push_back(CardInBoard (initialDeck.back(), "downturned"));
+	pile2.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 	initialDeck.pop_back();
-	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile2.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 2: "<< initialDeck.size() << endl;
 
 	// Pile3
 	for (int x=0; x<2; x++)
 	{
-		pile3.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile3.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile3.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 3: "<< initialDeck.size() << endl;
 
 	// Pile4
 	for (int x=0; x<3; x++)
 	{
-		pile4.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile4.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile4.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 4: "<< initialDeck.size() << endl;
 
 	// Pile5
 	for (int x=0; x<4; x++)
 	{
-		pile5.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile5.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile5.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 5: "<< initialDeck.size() << endl;
 
 	// Pile6
 	for (int x=0; x<5; x++)
 	{
-		pile6.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile6.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile6.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 6: "<< initialDeck.size() << endl;
 
 	// Pile7
 	for (int x=0; x<6; x++)
 	{
-		pile7.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile7.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile7.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 7: "<< initialDeck.size() << endl;
 
 	// stock
 	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
-	for(vector<Card>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+	for(vector<Card*>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(CardInBoard ((*it), "downturned"));
-	}
-
-	cout << "INIT PLAYING BOARD" << endl;
-	showBoard();
-	cout << "END OF INIT PLAYING BOARD" << endl;
-}
-
-void
-Board::startPlayingBoard2()
-{
-	vector<Card> initialDeck = deck.shuffle();
-	// upturnedDeck empty
-
-	// Foundation Hearts empty
-	cout << "Foundations size: " << foundations.size() << endl;
-	//cout << foundations.back().getSuit() << endl;
-	// Foundation Spades empty
-	// Foundation Clubs empty
-	// Foundation Diamonds empty
-
-	// Pile1
-	cout << "Piles size: " << piles.size() << endl;
-	cout << piles.back().getNumber() << endl;
-
-	for (vector<Pile>::iterator it = piles.begin(); it != piles.end(); it++)
-	{
-		cout << "Pile number: " << (*it).number << endl;
-	}
-
-	cout << "Pile 2: " << piles.at(1).getNumber() << endl;
-
-	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	//cout << "Before Pile 1: " << initialDeck.size() << endl;
-	initialDeck.pop_back();
-	//cout << "After Pile 1: "<< initialDeck.size() << endl;
-	piles.at(0).addCards(pile1);
-
-	// Pile2
-	pile2.push_back(CardInBoard (initialDeck.back(), "downturned"));
-	initialDeck.pop_back();
-	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 2: "<< initialDeck.size() << endl;
-	piles.at(1).addCards(pile2);
-
-	// Pile3
-	for (int x=0; x<2; x++)
-	{
-		pile3.push_back(CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 3: "<< initialDeck.size() << endl;
-	piles.at(2).addCards(pile3);
-
-	// Pile4
-	for (int x=0; x<3; x++)
-	{
-		pile4.push_back(CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 4: "<< initialDeck.size() << endl;
-	piles.at(3).addCards(pile4);
-
-	// Pile5
-	for (int x=0; x<4; x++)
-	{
-		pile5.push_back(CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 5: "<< initialDeck.size() << endl;
-	piles.at(4).addCards(pile5);
-
-	// Pile6
-	for (int x=0; x<5; x++)
-	{
-		pile6.push_back(CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 6: "<< initialDeck.size() << endl;
-	piles.at(5).addCards(pile6);
-
-	// Pile7
-	for (int x=0; x<6; x++)
-	{
-		pile7.push_back(CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 7: "<< initialDeck.size() << endl;
-	piles.at(6).addCards(pile7);
-
-	// stock
-	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
-	for(vector<Card>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
-	{
-	   stock.push_back(CardInBoard ((*it), "downturned"));
+	   stock.push_back(new CardInBoard((*it), "downturned"));
 	}
 
 	cout << "INIT PLAYING BOARD" << endl;
@@ -256,7 +149,7 @@ Board::deal()
 	if (!stock.empty())
 	{
 		wastePile.push_back(stock.back());
-		wastePile.back().setUpOrDownTurned("upturned");
+		(wastePile.back())->setUpOrDownTurned("upturned");
 		stock.pop_back();
 		cout << "DEAL A CARD" << endl;
 	}
@@ -267,7 +160,7 @@ Board::deal()
 		while (!wastePile.empty())
 		{
 			stock.push_back(wastePile.back());
-			stock.back().setUpOrDownTurned("downturned");
+			(stock.back())->setUpOrDownTurned("downturned");
 			wastePile.pop_back();
 		}
 
@@ -285,8 +178,8 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 	//return 0 -> no movement (not possible, no same pile, same color or not the next number)
 	bool movementCorrect = false;
 
-	vector<CardInBoard>& pileOrigin = giveMeThePile(thePileOriginNumber);
-	vector<CardInBoard>& pileDestination = giveMeThePile(thePileDestinationNumber);
+	vector<CardInBoard*> pileOrigin = giveMeThePile(thePileOriginNumber);
+	vector<CardInBoard*> pileDestination = giveMeThePile(thePileDestinationNumber);
 
 	//Move a king to a empty Pile (other card is not allowed)
 	if (pileDestination.empty())
@@ -294,7 +187,7 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 		cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
 		if (theCardOriginNumber == 0) //TODO: Magic
 		{
-			if (pileOrigin.back().getCard().getNumber()==13)
+			if (pileOrigin.back()->getCard()->getNumber()==13)
 			{
 				// Movement
 				pileDestination.push_back(pileOrigin.back());
@@ -309,17 +202,17 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 		}
 		else // Movement of more than 1 card...
 		{
-			vector<CardInBoard> pileOrigin2 = pileOrigin;
-			vector<CardInBoard> pileOriginReverse;
+			vector<CardInBoard*> pileOrigin2 = pileOrigin;
+			vector<CardInBoard*> pileOriginReverse;
 			cout << "Pile Origin size: " << pileOrigin.size() << endl;
 			do
 			{
-				if (pileOrigin2.back().getUpOrDownTurned() == "upturned" &&
-								pileOrigin2.back().getCard().getNumber() == theCardOriginNumber)
+				if (pileOrigin2.back()->getUpOrDownTurned() == "upturned" &&
+								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
 				{
 					cout << "I found the King" << endl;
 					cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-					if (pileOrigin2.back().getCard().getNumber() == 13)
+					if (pileOrigin2.back()->getCard()->getNumber() == 13)
 					{
 						// Movement
 						// Put all the cards in the Pile Destination
@@ -359,10 +252,10 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 	{
 		if (theCardOriginNumber == 0) //TODO: Magic
 		{
-			if ((pileOrigin.back().getCard().getNumber() ==
-						(pileDestination.back().getCard().getNumber() - 1)) &&
-							(pileOrigin.back().getCard().getSuit().getColor() !=
-								(pileDestination.back().getCard().getSuit().getColor())))
+			if ((pileOrigin.back()->getCard()->getNumber() ==
+						(pileDestination.back()->getCard()->getNumber() - 1)) &&
+							(pileOrigin.back()->getCard()->getSuit()->getColor() !=
+								(pileDestination.back()->getCard()->getSuit()->getColor())))
 			{
 				// Movement
 				pileDestination.push_back(pileOrigin.back());
@@ -377,20 +270,20 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 		}
 		else // Movement of more than 1 card...
 		{
-			vector<CardInBoard> pileOrigin2 = pileOrigin;
-			vector<CardInBoard> pileOriginReverse;
+			vector<CardInBoard*> pileOrigin2 = pileOrigin;
+			vector<CardInBoard*> pileOriginReverse;
 			cout << "Pile Origin size: " << pileOrigin.size() << endl;
 			do
 			{
-				if (pileOrigin2.back().getUpOrDownTurned() == "upturned" &&
-								pileOrigin2.back().getCard().getNumber() == theCardOriginNumber)
+				if (pileOrigin2.back()->getUpOrDownTurned() == "upturned" &&
+								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
 				{
 					cout << "I found the card" << endl;
 					cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-					if ((pileOrigin2.back().getCard().getNumber() ==
-										(pileDestination.back().getCard().getNumber() - 1)) &&
-											(pileOrigin2.back().getCard().getSuit().getColor() !=
-												(pileDestination.back().getCard().getSuit().getColor())))
+					if ((pileOrigin2.back()->getCard()->getNumber() ==
+										(pileDestination.back()->getCard()->getNumber() - 1)) &&
+											(pileOrigin2.back()->getCard()->getSuit()->getColor() !=
+												(pileDestination.back()->getCard()->getSuit()->getColor())))
 					{
 						// Movement
 						// Put all the cards in the Pile Destination
@@ -440,12 +333,12 @@ Board::moveBetweenPileAndFoundation(int thePileOriginNumber)
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	vector<CardInBoard>& pileOrigin = giveMeThePile(thePileOriginNumber); //TODO: Preguntar a Jose que es esto que estoy haciendo (copias?)
-	vector<CardInBoard>& foundationDestination = giveMeTheFoundationFromCard(pileOrigin);
+	vector<CardInBoard*> pileOrigin = giveMeThePile(thePileOriginNumber); //TODO: Preguntar a Jose que es esto que estoy haciendo (copias?)
+	vector<CardInBoard*> foundationDestination = giveMeTheFoundationFromCard(pileOrigin);
 
 	if(foundationDestination.empty())
 	{
-		if (pileOrigin.back().getCard().getNumber() == 1)
+		if (pileOrigin.back()->getCard()->getNumber() == 1)
 		{
 			// Movement
 			foundationDestination.push_back(pileOrigin.back());
@@ -460,8 +353,8 @@ Board::moveBetweenPileAndFoundation(int thePileOriginNumber)
 	}
 	else
 	{
-		if (pileOrigin.back().getCard().getNumber() ==
-				(foundationDestination.back().getCard().getNumber() + 1))
+		if (pileOrigin.back()->getCard()->getNumber() ==
+				(foundationDestination.back()->getCard()->getNumber() + 1))
 		{
 			// Movement
 			foundationDestination.push_back(pileOrigin.back());
@@ -489,14 +382,14 @@ Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 	//return 0 -> no movement (not possible, same color or not the next number)
 	bool movementCorrect = false;
 
-	vector<CardInBoard>& pileDestination = giveMeThePile(thePileDestinationNumber);
+	vector<CardInBoard*> pileDestination = giveMeThePile(thePileDestinationNumber);
 	if (!wastePile.empty())
 	{
 		//Move a king to a empty Pile (other card is not allowed)
 		if (pileDestination.empty())
 		{
 			cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
-			if (wastePile.back().getCard().getNumber()==13)
+			if (wastePile.back()->getCard()->getNumber()==13)
 			{
 				// Movement
 				pileDestination.push_back(wastePile.back());
@@ -511,10 +404,10 @@ Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 		}
 		else
 		{
-			if ((wastePile.back().getCard().getNumber() ==
-							(pileDestination.back().getCard().getNumber() - 1)) &&
-								(wastePile.back().getCard().getSuit().getColor() !=
-									(pileDestination.back().getCard().getSuit().getColor())))
+			if ((wastePile.back()->getCard()->getNumber() ==
+							(pileDestination.back()->getCard()->getNumber() - 1)) &&
+								(wastePile.back()->getCard()->getSuit()->getColor() !=
+									(pileDestination.back()->getCard()->getSuit()->getColor())))
 			{
 				// Movement
 				pileDestination.push_back(wastePile.back());
@@ -541,11 +434,11 @@ Board::moveBetweenWastePileAndFoundation()
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	vector<CardInBoard>& foundationDestination = giveMeTheFoundationFromCard(wastePile);
+	vector<CardInBoard*> foundationDestination = giveMeTheFoundationFromCard(wastePile);
 
 	if(foundationDestination.empty())
 	{
-		if (wastePile.back().getCard().getNumber() == 1) // Check if it is an Ace
+		if (wastePile.back()->getCard()->getNumber() == 1) // Check if it is an Ace
 		{
 			// Movement
 			foundationDestination.push_back(wastePile.back());
@@ -560,8 +453,8 @@ Board::moveBetweenWastePileAndFoundation()
 	}
 	else
 	{
-		if (wastePile.back().getCard().getNumber() ==
-				(foundationDestination.back().getCard().getNumber() + 1))
+		if (wastePile.back()->getCard()->getNumber() ==
+				(foundationDestination.back()->getCard()->getNumber() + 1))
 		{
 			// Movement
 			foundationDestination.push_back(wastePile.back());
@@ -577,7 +470,7 @@ Board::moveBetweenWastePileAndFoundation()
 	return movementCorrect;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::giveMeThePile(int thePileDestinationNumber)
 {
 	switch (thePileDestinationNumber)
@@ -612,7 +505,7 @@ Board::giveMeThePile(int thePileDestinationNumber)
 }
 //TODO: Cards to Foundations directly (no mean to say the suit)
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::giveMeTheFoundation(int theFoundationDestinationNumber)
 {
 	switch (theFoundationDestinationNumber)
@@ -637,10 +530,10 @@ Board::giveMeTheFoundation(int theFoundationDestinationNumber)
 	return getFoundationHeart();
 }
 
-vector<CardInBoard>&
-Board::giveMeTheFoundationFromCard(vector<CardInBoard> theOrigin)
+vector<CardInBoard*>
+Board::giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin)
 {
-	string suit = theOrigin.back().getCard().getSuit().getSuit();
+	string suit = theOrigin.back()->getCard()->getSuit()->getSuit();
 	if (suit == "heart")
 	{
 		return getFoundationHeart();
@@ -665,15 +558,15 @@ Board::giveMeTheFoundationFromCard(vector<CardInBoard> theOrigin)
 }
 
 bool
-Board::upturnCardInPile(vector<CardInBoard>& thePile)
+Board::upturnCardInPile(vector<CardInBoard*> thePile)
 {
 	bool upturnedCorrect = false;
 
 	if(!thePile.empty())
 	{
-		if (thePile.back().getUpOrDownTurned() == "downturned")
+		if ((thePile.back())->getUpOrDownTurned() == "downturned")
 		{
-			thePile.back().setUpOrDownTurned("upturned");
+			thePile.back()->setUpOrDownTurned("upturned");
 			upturnedCorrect = true;
 			cout << "UPTURNED A CARD FROM PILE" << endl;
 		}
@@ -686,79 +579,79 @@ Board::upturnCardInPile(vector<CardInBoard>& thePile)
 	return upturnedCorrect;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getWastePile()
 {
 	return wastePile;
 }
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getStock()
 {
 	return stock;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile1()
 {
 	return pile1;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile2()
 {
 	return pile2;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile3()
 {
 	return pile3;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile4()
 {
 	return pile4;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile5()
 {
 	return pile5;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile6()
 {
 	return pile6;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getPile7()
 {
 	return pile7;
 }
 
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getFoundationHeart()
 {
 	return foundationHeart;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getFoundationSpade()
 {
 	return foundationSpade;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getFoundationClub()
 {
 	return foundationClub;
 }
 
-vector<CardInBoard>&
+vector<CardInBoard*>
 Board::getFoundationDiamond()
 {
 	return foundationDiamond;
@@ -826,7 +719,7 @@ Board::showBoard()
 }
 
 void
-Board::showElement(vector<CardInBoard>& theElement)
+Board::showElement(vector<CardInBoard*> theElement)
 {
     if (theElement.empty())
     {
@@ -835,17 +728,17 @@ Board::showElement(vector<CardInBoard>& theElement)
     else
     {
     	cout << "Cards:";
-    	for(vector<CardInBoard>::iterator it = theElement.begin(); it != theElement.end(); it++)
+    	for(vector<CardInBoard*>::iterator it = theElement.begin(); it != theElement.end(); it++)
 		{
     		//Only show cards upturned, X for downturned
     		cout << " ";
-    		if ((*it).getUpOrDownTurned() == "downturned")
+    		if ((*it)->getUpOrDownTurned() == "downturned")
     		{
     			cout << "X";
     		}
-    		else if ((*it).getUpOrDownTurned() == "upturned")
+    		else if ((*it)->getUpOrDownTurned() == "upturned")
     		{
-    			cout << (*it).getCard().getNumber() << (*it).getCard().getSuit().getSuit() << (*it).getCard().getSuit().getColor();
+    			cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->getSuit() << (*it)->getCard()->getSuit()->getColor();
     		}
     		else
     		{

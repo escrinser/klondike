@@ -9,6 +9,8 @@
 
 #include "Board.h"
 #include "Deck.h"
+#include "Card.h"
+#include "CardInBoard.h"
 #include "LimitedInDialog.h"
 
 Play::Play() {
@@ -25,125 +27,81 @@ Play::startPlay()
 
 	LimitedInDialog pileDialog ("Pile Number?", 1, 7);
 
-	Deck deck;
-	deck.loadDeck();
+	Deck* deck = new Deck();
+	deck->loadDeck();
 
-	vector<Card> initialDeck = deck.shuffle();
+	/*vector<Card*> initialDeck = deck->shuffle();
 
 	// Pile1
-	vector<CardInBoard> pile1;
-	pile1.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	vector<CardInBoard*> pile1;
+	pile1.push_back(new CardInBoard(initialDeck.back(), "upturned"));
 	//cout << "Before Pile 1: " << initialDeck.size() << endl;
 	initialDeck.pop_back();
 	//cout << "After Pile 1: "<< initialDeck.size() << endl;
 
 	// Pile2
-	vector<CardInBoard> pile2;
-	pile2.push_back(CardInBoard (initialDeck.back(), "downturned"));
+	vector<CardInBoard*> pile2;
+	pile2.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 	initialDeck.pop_back();
-	pile2.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile2.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 2: "<< initialDeck.size() << endl;
 
 	// Pile3
-	vector<CardInBoard> pile3;
+	vector<CardInBoard*> pile3;
 	for (int x=0; x<2; x++)
 	{
-		pile3.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile3.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile3.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile3.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 3: "<< initialDeck.size() << endl;
 
 	// Pile4
-	vector<CardInBoard> pile4;
+	vector<CardInBoard*> pile4;
 	for (int x=0; x<3; x++)
 	{
-		pile4.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile4.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile4.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile4.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 4: "<< initialDeck.size() << endl;
 
 	// Pile5
-	vector<CardInBoard> pile5;
+	vector<CardInBoard*> pile5;
 	for (int x=0; x<4; x++)
 	{
-		pile5.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile5.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile5.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile5.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 5: "<< initialDeck.size() << endl;
 
 	// Pile6
-	vector<CardInBoard> pile6;
+	vector<CardInBoard*> pile6;
 	for (int x=0; x<5; x++)
 	{
-		pile6.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile6.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile6.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile6.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
 	//cout << "After Pile 6: "<< initialDeck.size() << endl;
 
 	// Pile7
-	vector<CardInBoard> pile7;
+	vector<CardInBoard*> pile7;
 	for (int x=0; x<6; x++)
 	{
-		pile7.push_back(CardInBoard (initialDeck.back(), "downturned"));
+		pile7.push_back(new CardInBoard (initialDeck.back(), "downturned"));
 		initialDeck.pop_back();
 	}
-	pile7.push_back(CardInBoard (initialDeck.back(), "upturned"));
+	pile7.push_back(new CardInBoard (initialDeck.back(), "upturned"));
 	initialDeck.pop_back();
-	//cout << "After Pile 7: "<< initialDeck.size() << endl;
+	//cout << "After Pile 7: "<< initialDeck.size() << endl;*/
 
-	Pile pileOne (1, pile1);
-	Pile pileTwo (2, pile2);
-	Pile pileThree (3, pile3);
-	Pile pileFour (4, pile4);
-	Pile pileFive (5, pile5);
-	Pile pileSix (6, pile6);
-	Pile pileSeven (7, pile7);
-
-	vector<Pile> piles;
-	piles.push_back(pileOne);
-	piles.push_back(pileTwo);
-	piles.push_back(pileThree);
-	piles.push_back(pileFour);
-	piles.push_back(pileFive);
-	piles.push_back(pileSix);
-	piles.push_back(pileSeven);
-
-
-	//Foundations
-	Suit suitHeart("heart", "red");
-	Suit suitSpade("spade", "black");
-	Suit suitClub("club", "black");
-	Suit suitDiamond("diamond", "red");
-
-	vector<CardInBoard> foundationHearts;
-	Foundation foundationHeart (suitHeart, foundationHearts);
-
-	vector<CardInBoard> foundationSpades;
-	Foundation foundationSpade (suitSpade, foundationSpades);
-
-	vector<CardInBoard> foundationClubs;
-	Foundation foundationClub (suitClub, foundationClubs);
-
-	vector<CardInBoard> foundationDiamonds;
-	Foundation foundationDiamond (suitDiamond, foundationDiamonds);
-
-	vector<Foundation> foundations;
-	foundations.push_back(foundationHeart);
-	foundations.push_back(foundationSpade);
-	foundations.push_back(foundationClub);
-	foundations.push_back(foundationDiamond);
-
-	Board boardSergio (deck, piles, foundations);
-	//boardSergio.startPlayingBoard2();
 
 	Board board (deck);
 	//board.initBoard();
@@ -258,10 +216,10 @@ Play::hasWon(Board theBoard)
 				&& !theBoard.getFoundationClub().empty()
 					&& !theBoard.getFoundationDiamond().empty())
 	{
-		if ((theBoard.getFoundationHeart().back().getCard().getNumber() == 13)
-				&& (theBoard.getFoundationSpade().back().getCard().getNumber() == 13)
-					 && (theBoard.getFoundationClub().back().getCard().getNumber() == 13)
-						&& (theBoard.getFoundationDiamond().back().getCard().getNumber() == 13))
+		if (((theBoard.getFoundationHeart().back()->getCard())->getNumber() == 13)
+				&& (theBoard.getFoundationSpade().back()->getCard()->getNumber() == 13)
+					 && (theBoard.getFoundationClub().back()->getCard()->getNumber() == 13)
+						&& (theBoard.getFoundationDiamond().back()->getCard()->getNumber() == 13))
 		{
 			cout << "You win!!!" << endl;
 			return true;

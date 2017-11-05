@@ -11,12 +11,12 @@
 // C++ libraries
 #include <iostream>
 
-#include <set>
+//#include <set>
 #include <vector>
-#include <list>
-#include <memory>
+//#include <list>
+//#include <memory>
 
-#include "Card.h"
+class Card;
 
 using namespace std; //Import the standard library
 
@@ -27,14 +27,14 @@ public:
 
 	void loadDeck();
 
-    vector<Card> shuffle();
+    vector<Card*> shuffle();
 
-    vector<Card> getDeck();
+    vector<Card*> getDeck();
 
     int getNumberOfCards();
 
 private:
-    vector<Card> deck;
+    vector<Card*> deck;
 
 };
 

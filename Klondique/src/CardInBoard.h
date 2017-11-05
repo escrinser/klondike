@@ -8,6 +8,10 @@
 #ifndef CARDINBOARD_H_
 #define CARDINBOARD_H_
 
+#include <iostream>
+
+using namespace std;
+
 #include "Card.h"
 
 class CardInBoard {
@@ -15,14 +19,14 @@ public:
 	CardInBoard();
 	virtual ~CardInBoard();
 
-	CardInBoard(Card, string);
+	CardInBoard(Card*, string upOrDownTurned);
 
-	Card getCard();
+	Card* getCard();
 	string getUpOrDownTurned();
-	void setUpOrDownTurned(string);
+	void setUpOrDownTurned(string upOrDownTurned);
 
 private:
-	Card card;
+	Card* card;
 	string upOrDownTurned;
 };
 

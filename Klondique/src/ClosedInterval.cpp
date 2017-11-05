@@ -12,7 +12,7 @@
 ClosedInterval::ClosedInterval() {
 }
 ClosedInterval::ClosedInterval(int theMin, int theMax) {
-	assert (min <= max);
+	//assert (min <= max);
 	min = theMin;
 	max = theMax;
 }

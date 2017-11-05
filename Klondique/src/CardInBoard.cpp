@@ -13,13 +13,13 @@ CardInBoard::CardInBoard() {
 CardInBoard::~CardInBoard() {
 }
 
-CardInBoard::CardInBoard(Card theCard, string theUpOrDownTurned)
+CardInBoard::CardInBoard(Card* theCard, string theUpOrDownTurned)
 {
 	card = theCard;
 	upOrDownTurned = theUpOrDownTurned;
 }
 
-Card
+Card*
 CardInBoard::getCard()
 {
 	return card;

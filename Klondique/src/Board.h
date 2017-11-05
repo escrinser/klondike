@@ -22,22 +22,26 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 
+#include <iostream>
+#include <vector>
+
 #include "Deck.h"
+#include "Card.h"
 #include "CardInBoard.h"
-#include "Pile.h"
-#include "Foundation.h"
+//class Deck;
+//class CardInBoard;
+
+using namespace std;
 
 class Board {
 public:
 	Board();
 	virtual ~Board();
 
-	Board(Deck);
-	Board(Deck, vector<Pile>, vector<Foundation>);
+	Board(Deck*);
 
 	void initBoard();
 	void startPlayingBoard();
-	void startPlayingBoard2();
 
 	int deal();
 
@@ -47,56 +51,53 @@ public:
 
 	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
 
-	vector<CardInBoard>& giveMeThePile(int thePileDestinationNumber);
-	vector<CardInBoard>& giveMeTheFoundation(int theFoundationDestinationNumber);
-	vector<CardInBoard>& giveMeTheFoundationFromCard(vector<CardInBoard> theOrigin);
+	vector<CardInBoard*> giveMeThePile(int thePileDestinationNumber);
+	vector<CardInBoard*> giveMeTheFoundation(int theFoundationDestinationNumber);
+	vector<CardInBoard*> giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin);
 
 	bool moveBetweenWastePileAndFoundation();
 	bool moveBetweenPileAndFoundation(int thePileOriginNumber);
 
-	vector<CardInBoard>& getWastePile();
-	vector<CardInBoard>& getStock();
+	vector<CardInBoard*> getWastePile();
+	vector<CardInBoard*> getStock();
 
-	vector<CardInBoard>& getPile1();
-	vector<CardInBoard>& getPile2();
-	vector<CardInBoard>& getPile3();
-	vector<CardInBoard>& getPile4();
-	vector<CardInBoard>& getPile5();
-	vector<CardInBoard>& getPile6();
-	vector<CardInBoard>& getPile7();
+	vector<CardInBoard*> getPile1();
+	vector<CardInBoard*> getPile2();
+	vector<CardInBoard*> getPile3();
+	vector<CardInBoard*> getPile4();
+	vector<CardInBoard*> getPile5();
+	vector<CardInBoard*> getPile6();
+	vector<CardInBoard*> getPile7();
 
-	vector<CardInBoard>& getFoundationHeart();
-	vector<CardInBoard>& getFoundationSpade();
-	vector<CardInBoard>& getFoundationClub();
-	vector<CardInBoard>& getFoundationDiamond();
+	vector<CardInBoard*> getFoundationHeart();
+	vector<CardInBoard*> getFoundationSpade();
+	vector<CardInBoard*> getFoundationClub();
+	vector<CardInBoard*> getFoundationDiamond();
 
 	void showBoard();
-	void showElement(vector<CardInBoard>& theElement);
+	void showElement(vector<CardInBoard*> theElement);
 
-	bool upturnCardInPile(vector<CardInBoard>& thePile);
+	bool upturnCardInPile(vector<CardInBoard*> thePile);
 
 private:
-	Deck deck;
+	Deck* deck;
 
-	vector<Pile> piles;
-	vector<Foundation> foundations;
-
-	vector<CardInBoard> stock;
-	vector<CardInBoard> wastePile;
+	vector<CardInBoard*> stock;
+	vector<CardInBoard*> wastePile;
 
 
-	vector<CardInBoard> pile1;
-	vector<CardInBoard> pile2;
-	vector<CardInBoard> pile3;
-	vector<CardInBoard> pile4;
-	vector<CardInBoard> pile5;
-	vector<CardInBoard> pile6;
-	vector<CardInBoard> pile7;
+	vector<CardInBoard*> pile1;
+	vector<CardInBoard*> pile2;
+	vector<CardInBoard*> pile3;
+	vector<CardInBoard*> pile4;
+	vector<CardInBoard*> pile5;
+	vector<CardInBoard*> pile6;
+	vector<CardInBoard*> pile7;
 
-	vector<CardInBoard> foundationHeart;
-	vector<CardInBoard> foundationSpade;
-	vector<CardInBoard> foundationClub;
-	vector<CardInBoard> foundationDiamond;
+	vector<CardInBoard*> foundationHeart;
+	vector<CardInBoard*> foundationSpade;
+	vector<CardInBoard*> foundationClub;
+	vector<CardInBoard*> foundationDiamond;
 
 };
 
