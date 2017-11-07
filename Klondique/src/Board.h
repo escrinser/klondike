@@ -51,9 +51,7 @@ public:
 
 	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
 
-	vector<CardInBoard*> giveMeThePile(int thePileDestinationNumber);
-	vector<CardInBoard*> giveMeTheFoundation(int theFoundationDestinationNumber);
-	vector<CardInBoard*> giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin);
+	int giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin);
 
 	bool moveBetweenWastePileAndFoundation();
 	bool moveBetweenPileAndFoundation(int thePileOriginNumber);
@@ -61,18 +59,11 @@ public:
 	vector<CardInBoard*> getWastePile();
 	vector<CardInBoard*> getStock();
 
-	vector<CardInBoard*> getPile1();
-	vector<CardInBoard*> getPile2();
-	vector<CardInBoard*> getPile3();
-	vector<CardInBoard*> getPile4();
-	vector<CardInBoard*> getPile5();
-	vector<CardInBoard*> getPile6();
-	vector<CardInBoard*> getPile7();
-
-	vector<CardInBoard*> getFoundationHeart();
+	/*vector<CardInBoard*> getFoundationHeart();
 	vector<CardInBoard*> getFoundationSpade();
 	vector<CardInBoard*> getFoundationClub();
-	vector<CardInBoard*> getFoundationDiamond();
+	vector<CardInBoard*> getFoundationDiamond();*/
+	vector<vector<CardInBoard*>> getFoundations();
 
 	void showBoard();
 	void showElement(vector<CardInBoard*> theElement);
@@ -85,19 +76,14 @@ private:
 	vector<CardInBoard*> stock;
 	vector<CardInBoard*> wastePile;
 
-
-	vector<CardInBoard*> pile1;
-	vector<CardInBoard*> pile2;
-	vector<CardInBoard*> pile3;
-	vector<CardInBoard*> pile4;
-	vector<CardInBoard*> pile5;
-	vector<CardInBoard*> pile6;
-	vector<CardInBoard*> pile7;
+	vector<vector<CardInBoard*>> piles;
 
 	vector<CardInBoard*> foundationHeart;
 	vector<CardInBoard*> foundationSpade;
 	vector<CardInBoard*> foundationClub;
 	vector<CardInBoard*> foundationDiamond;
+
+	vector<vector<CardInBoard*>> foundations;
 
 };
 

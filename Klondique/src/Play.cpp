@@ -30,83 +30,9 @@ Play::startPlay()
 	Deck* deck = new Deck();
 	deck->loadDeck();
 
-	/*vector<Card*> initialDeck = deck->shuffle();
-
-	// Pile1
-	vector<CardInBoard*> pile1;
-	pile1.push_back(new CardInBoard(initialDeck.back(), "upturned"));
-	//cout << "Before Pile 1: " << initialDeck.size() << endl;
-	initialDeck.pop_back();
-	//cout << "After Pile 1: "<< initialDeck.size() << endl;
-
-	// Pile2
-	vector<CardInBoard*> pile2;
-	pile2.push_back(new CardInBoard (initialDeck.back(), "downturned"));
-	initialDeck.pop_back();
-	pile2.push_back(new CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 2: "<< initialDeck.size() << endl;
-
-	// Pile3
-	vector<CardInBoard*> pile3;
-	for (int x=0; x<2; x++)
-	{
-		pile3.push_back(new CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile3.push_back(new CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 3: "<< initialDeck.size() << endl;
-
-	// Pile4
-	vector<CardInBoard*> pile4;
-	for (int x=0; x<3; x++)
-	{
-		pile4.push_back(new CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile4.push_back(new CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 4: "<< initialDeck.size() << endl;
-
-	// Pile5
-	vector<CardInBoard*> pile5;
-	for (int x=0; x<4; x++)
-	{
-		pile5.push_back(new CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile5.push_back(new CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 5: "<< initialDeck.size() << endl;
-
-	// Pile6
-	vector<CardInBoard*> pile6;
-	for (int x=0; x<5; x++)
-	{
-		pile6.push_back(new CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile6.push_back(new CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 6: "<< initialDeck.size() << endl;
-
-	// Pile7
-	vector<CardInBoard*> pile7;
-	for (int x=0; x<6; x++)
-	{
-		pile7.push_back(new CardInBoard (initialDeck.back(), "downturned"));
-		initialDeck.pop_back();
-	}
-	pile7.push_back(new CardInBoard (initialDeck.back(), "upturned"));
-	initialDeck.pop_back();
-	//cout << "After Pile 7: "<< initialDeck.size() << endl;*/
-
-
 	Board board (deck);
 	//board.initBoard();
 	board.startPlayingBoard();
-	//board.deal();
 
 	int movement;
 
@@ -211,15 +137,15 @@ Play::startPlay()
 bool
 Play::hasWon(Board theBoard)
 {
-	if (!theBoard.getFoundationHeart().empty()
-			&& !theBoard.getFoundationSpade().empty()
-				&& !theBoard.getFoundationClub().empty()
-					&& !theBoard.getFoundationDiamond().empty())
+	if (!theBoard.getFoundations()[0].empty()
+			&& !theBoard.getFoundations()[1].empty()
+				&& !theBoard.getFoundations()[2].empty()
+					&& !theBoard.getFoundations()[3].empty())
 	{
-		if (((theBoard.getFoundationHeart().back()->getCard())->getNumber() == 13)
-				&& (theBoard.getFoundationSpade().back()->getCard()->getNumber() == 13)
-					 && (theBoard.getFoundationClub().back()->getCard()->getNumber() == 13)
-						&& (theBoard.getFoundationDiamond().back()->getCard()->getNumber() == 13))
+		if (((theBoard.getFoundations()[0].back()->getCard())->getNumber() == 13)
+				&& (theBoard.getFoundations()[1].back()->getCard()->getNumber() == 13)
+					 && (theBoard.getFoundations()[2].back()->getCard()->getNumber() == 13)
+						&& (theBoard.getFoundations()[3].back()->getCard()->getNumber() == 13))
 		{
 			cout << "You win!!!" << endl;
 			return true;
