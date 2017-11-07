@@ -13,13 +13,13 @@ CardInBoard::CardInBoard() {
 CardInBoard::~CardInBoard() {
 }
 
-CardInBoard::CardInBoard(Card* theCard, string theUpOrDownTurned)
+CardInBoard::CardInBoard(shared_ptr<Card> theCard, string theUpOrDownTurned)
 {
 	card = theCard;
 	upOrDownTurned = theUpOrDownTurned;
 }
 
-Card*
+shared_ptr<Card>
 CardInBoard::getCard()
 {
 	return card;

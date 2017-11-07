@@ -14,13 +14,13 @@ Card::Card() {
 Card::~Card() {
 }
 
-Card::Card(Suit* theSuit, int theNumber)
+Card::Card(shared_ptr<Suit> theSuit, int theNumber)
 {
 	suit = theSuit;
 	number = theNumber;
 }
 
-Suit*
+shared_ptr<Suit>
 Card::getSuit()
 {
 	return suit;

@@ -38,7 +38,7 @@ public:
 	Board();
 	virtual ~Board();
 
-	Board(Deck*);
+	Board(shared_ptr<Deck>);
 
 	void initBoard();
 	void startPlayingBoard();
@@ -51,39 +51,39 @@ public:
 
 	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
 
-	int giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin);
+	int giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin);
 
 	bool moveBetweenWastePileAndFoundation();
 	bool moveBetweenPileAndFoundation(int thePileOriginNumber);
 
-	vector<CardInBoard*> getWastePile();
-	vector<CardInBoard*> getStock();
+	vector<shared_ptr<CardInBoard>> getWastePile();
+	vector<shared_ptr<CardInBoard>> getStock();
 
 	/*vector<CardInBoard*> getFoundationHeart();
 	vector<CardInBoard*> getFoundationSpade();
 	vector<CardInBoard*> getFoundationClub();
 	vector<CardInBoard*> getFoundationDiamond();*/
-	vector<vector<CardInBoard*>> getFoundations();
+	vector<vector<shared_ptr<CardInBoard>>> getFoundations();
 
 	void showBoard();
-	void showElement(vector<CardInBoard*> theElement);
+	void showElement(vector<shared_ptr<CardInBoard>> theElement);
 
-	bool upturnCardInPile(vector<CardInBoard*> thePile);
+	bool upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
 
 private:
-	Deck* deck;
+	shared_ptr<Deck> deck;
 
-	vector<CardInBoard*> stock;
-	vector<CardInBoard*> wastePile;
+	vector<shared_ptr<CardInBoard>> stock;
+	vector<shared_ptr<CardInBoard>> wastePile;
 
-	vector<vector<CardInBoard*>> piles;
+	vector<vector<shared_ptr<CardInBoard>>> piles;
 
-	vector<CardInBoard*> foundationHeart;
-	vector<CardInBoard*> foundationSpade;
-	vector<CardInBoard*> foundationClub;
-	vector<CardInBoard*> foundationDiamond;
+	vector<shared_ptr<CardInBoard>> foundationHeart;
+	vector<shared_ptr<CardInBoard>> foundationSpade;
+	vector<shared_ptr<CardInBoard>> foundationClub;
+	vector<shared_ptr<CardInBoard>> foundationDiamond;
 
-	vector<vector<CardInBoard*>> foundations;
+	vector<vector<shared_ptr<CardInBoard>>> foundations;
 
 };
 

@@ -13,7 +13,7 @@ Board::Board() {
 Board::~Board() {
 }
 
-Board::Board(Deck* theDeck)
+Board::Board(shared_ptr<Deck> theDeck)
 {
 	deck = theDeck;
 }
@@ -22,12 +22,12 @@ void
 Board::initBoard()
 {
 	// stock
-	vector<Card*> initialDeck = deck->getDeck();
+	vector<shared_ptr<Card>> initialDeck = deck->getDeck();
 
 
-	for(vector<Card*>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(new CardInBoard((*it), "downturned"));
+	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), "downturned")));
 	}
 
 	// upturnedDeck empty
@@ -53,7 +53,7 @@ Board::initBoard()
 void
 Board::startPlayingBoard()
 {
-	vector<Card*> initialDeck = deck->shuffle();
+	vector<shared_ptr<Card>> initialDeck = deck->shuffle();
 
 	// upturnedDeck empty
 
@@ -69,19 +69,19 @@ Board::startPlayingBoard()
 	// Colocate cards
 	for (int i = 1; i < 8; i++) //TODO: Seven piles
 	{
-		vector<CardInBoard*> temp; // create an array, don't work directly on buff yet.
+		vector<shared_ptr<CardInBoard>> temp; // create an array, don't work directly on buff yet.
 		for(int j = 1; j < 8; j++)
 		{
 			if (j!=i)
 			{
-				temp.push_back(new CardInBoard (initialDeck.back(), "downturned"));
+				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "downturned")));
 				//cout << "Before Downturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
 				//cout << "After Downturned. Pile = " << i <<": "<< initialDeck.size() << endl;
 			}
 			else if (j==i)
 			{
-				temp.push_back(new CardInBoard (initialDeck.back(), "upturned"));
+				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "upturned")));
 				//cout << "Before Upturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
 				//cout << "After Upturned. Pile = " << i <<": "<< initialDeck.size() << endl;
@@ -93,9 +93,9 @@ Board::startPlayingBoard()
 
 	// stock
 	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
-	for(vector<Card*>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(new CardInBoard((*it), "downturned"));
+	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), "downturned")));
 	}
 
 	cout << "INIT PLAYING BOARD" << endl;
@@ -159,8 +159,8 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 		}
 		else // Movement of more than 1 card...
 		{
-			vector<CardInBoard*> pileOrigin2 = piles[thePileOriginNumber - 1];
-			vector<CardInBoard*> pileOriginReverse;
+			vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
+			vector<shared_ptr<CardInBoard>> pileOriginReverse;
 			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
 			do
 			{
@@ -227,8 +227,8 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 		}
 		else // Movement of more than 1 card...
 		{
-			vector<CardInBoard*> pileOrigin2 = piles[thePileOriginNumber - 1];
-			vector<CardInBoard*> pileOriginReverse;
+			vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
+			vector<shared_ptr<CardInBoard>> pileOriginReverse;
 			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
 			do
 			{
@@ -426,7 +426,7 @@ Board::moveBetweenWastePileAndFoundation()
 }
 
 int
-Board::giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin)
+Board::giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin)
 {
 	string suit = theOrigin.back()->getCard()->getSuit()->getSuit();
 	if (suit == "heart")
@@ -453,7 +453,7 @@ Board::giveMeTheFoundationFromCard(vector<CardInBoard*> theOrigin)
 }
 
 bool
-Board::upturnCardInPile(vector<CardInBoard*> thePile)
+Board::upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile)
 {
 	bool upturnedCorrect = false;
 
@@ -521,7 +521,7 @@ Board::showBoard()
 }
 
 void
-Board::showElement(vector<CardInBoard*> theElement)
+Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
 {
     if (theElement.empty())
     {
@@ -530,7 +530,7 @@ Board::showElement(vector<CardInBoard*> theElement)
     else
     {
     	cout << "Cards:";
-    	for(vector<CardInBoard*>::iterator it = theElement.begin(); it != theElement.end(); it++)
+    	for(vector<shared_ptr<CardInBoard>>::iterator it = theElement.begin(); it != theElement.end(); it++)
 		{
     		//Only show cards upturned, X for downturned
     		cout << " ";
@@ -551,7 +551,7 @@ Board::showElement(vector<CardInBoard*> theElement)
     cout << endl;
 }
 
-vector<vector<CardInBoard*>>
+vector<vector<shared_ptr<CardInBoard>>>
 Board::getFoundations()
 {
 	return foundations;

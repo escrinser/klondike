@@ -19,14 +19,14 @@ public:
 	CardInBoard();
 	virtual ~CardInBoard();
 
-	CardInBoard(Card*, string upOrDownTurned);
+	CardInBoard(shared_ptr<Card> card, string upOrDownTurned);
 
-	Card* getCard();
+	shared_ptr<Card> getCard();
 	string getUpOrDownTurned();
 	void setUpOrDownTurned(string upOrDownTurned);
 
 private:
-	Card* card;
+	shared_ptr<Card> card;
 	string upOrDownTurned;
 };
 

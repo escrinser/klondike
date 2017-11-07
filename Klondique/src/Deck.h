@@ -14,7 +14,7 @@
 //#include <set>
 #include <vector>
 //#include <list>
-//#include <memory>
+#include <memory>
 
 class Card;
 
@@ -27,14 +27,14 @@ public:
 
 	void loadDeck();
 
-    vector<Card*> shuffle();
+    vector<shared_ptr<Card>> shuffle();
 
-    vector<Card*> getDeck();
+    vector<shared_ptr<Card>> getDeck();
 
     int getNumberOfCards();
 
 private:
-    vector<Card*> deck;
+    vector<shared_ptr<Card>> deck;
 
 };
 

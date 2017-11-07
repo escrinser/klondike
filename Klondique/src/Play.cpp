@@ -27,7 +27,7 @@ Play::startPlay()
 
 	LimitedInDialog pileDialog ("Pile Number?", 1, 7);
 
-	Deck* deck = new Deck();
+	shared_ptr<Deck> deck (new Deck());
 	deck->loadDeck();
 
 	Board board (deck);

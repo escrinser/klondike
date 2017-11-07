@@ -9,19 +9,20 @@
 #define CARD_H_
 
 #include "Suit.h"
+#include <memory>
 
 class Card {
 public:
 	Card();
 	virtual ~Card();
 
-	Card(Suit*, int);
+	Card(shared_ptr<Suit>, int);
 
-	Suit* getSuit();
+	shared_ptr<Suit> getSuit();
 	int getNumber();
 
 private:
-	Suit* suit;
+	shared_ptr<Suit> suit;
 	int number;
 };
 
