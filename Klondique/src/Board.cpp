@@ -7,6 +7,11 @@
 
 #include "Board.h"
 
+#include "Suit.h"
+#include "Card.h"
+#include "Deck.h"
+#include "CardInBoard.h"
+
 Board::Board() {
 }
 
@@ -27,7 +32,7 @@ Board::initBoard()
 
 	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), "downturned")));
+	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
 	}
 
 	// upturnedDeck empty
@@ -58,13 +63,15 @@ Board::startPlayingBoard()
 	// upturnedDeck empty
 
 	// Foundation Hearts empty
-	foundations.push_back(foundationHeart);
 	// Foundation Spades empty
-	foundations.push_back(foundationSpade);
 	// Foundation Clubs empty
-	foundations.push_back(foundationClub);
 	// Foundation Diamonds empty
-	foundations.push_back(foundationDiamond);
+	for (int i = 0; i < 4; i++)
+	{
+		vector<shared_ptr<CardInBoard>> temp;
+
+		foundations.push_back(temp);
+	}
 
 	// Colocate cards
 	for (int i = 1; i < 8; i++) //TODO: Seven piles
@@ -74,14 +81,16 @@ Board::startPlayingBoard()
 		{
 			if (j!=i)
 			{
-				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "downturned")));
+				//temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "downturned")));
+				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::DOWN)));
 				//cout << "Before Downturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
 				//cout << "After Downturned. Pile = " << i <<": "<< initialDeck.size() << endl;
 			}
 			else if (j==i)
 			{
-				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "upturned")));
+				//temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "upturned")));
+				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::UP)));
 				//cout << "Before Upturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
 				//cout << "After Upturned. Pile = " << i <<": "<< initialDeck.size() << endl;
@@ -95,7 +104,7 @@ Board::startPlayingBoard()
 	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
 	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), "downturned")));
+	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
 	}
 
 	cout << "INIT PLAYING BOARD" << endl;
@@ -109,7 +118,7 @@ Board::deal()
 	if (!stock.empty())
 	{
 		wastePile.push_back(stock.back());
-		(wastePile.back())->setUpOrDownTurned("upturned");
+		(wastePile.back())->setUpOrDownTurned(TurnedEnum::UP);
 		stock.pop_back();
 		cout << "DEAL A CARD" << endl;
 	}
@@ -120,7 +129,7 @@ Board::deal()
 		while (!wastePile.empty())
 		{
 			stock.push_back(wastePile.back());
-			(stock.back())->setUpOrDownTurned("downturned");
+			(stock.back())->setUpOrDownTurned(TurnedEnum::DOWN);
 			wastePile.pop_back();
 		}
 
@@ -164,7 +173,7 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
 			do
 			{
-				if (pileOrigin2.back()->getUpOrDownTurned() == "upturned" &&
+				if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
 								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
 				{
 					cout << "I found the King" << endl;
@@ -232,7 +241,7 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
 			do
 			{
-				if (pileOrigin2.back()->getUpOrDownTurned() == "upturned" &&
+				if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
 								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
 				{
 					cout << "I found the card" << endl;
@@ -425,11 +434,28 @@ Board::moveBetweenWastePileAndFoundation()
 	return movementCorrect;
 }
 
+//TODO: Try to return SuitType
 int
 Board::giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin)
 {
-	string suit = theOrigin.back()->getCard()->getSuit()->getSuit();
-	if (suit == "heart")
+	SuitType suit = theOrigin.back()->getCard()->getSuit()->getSuit();
+	switch(suit)
+	{
+	    case SuitType::HEARTS  :
+	    	return 0;
+	    	break;
+	    case SuitType::CLUB  :
+	    	return 1;
+	    	break;
+	    case SuitType::SPADE  :
+	    	return 2;
+	    	break;
+	    case SuitType::DIAMOND  :
+	    	return 3;
+	    	break;
+	}
+	return 0;
+	/*if (suit == "heart")
 	{
 		return 0;
 	}
@@ -449,7 +475,7 @@ Board::giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin)
 	{
 		//TODO: not possible situation but bad code...
 		return 0;
-	}
+	}*/
 }
 
 bool
@@ -459,9 +485,9 @@ Board::upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile)
 
 	if(!thePile.empty())
 	{
-		if ((thePile.back())->getUpOrDownTurned() == "downturned")
+		if ((thePile.back())->getUpOrDownTurned() == TurnedEnum::DOWN)
 		{
-			thePile.back()->setUpOrDownTurned("upturned");
+			thePile.back()->setUpOrDownTurned(TurnedEnum::UP);
 			upturnedCorrect = true;
 			cout << "UPTURNED A CARD FROM PILE" << endl;
 		}
@@ -534,13 +560,15 @@ Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
 		{
     		//Only show cards upturned, X for downturned
     		cout << " ";
-    		if ((*it)->getUpOrDownTurned() == "downturned")
+    		if ((*it)->getUpOrDownTurned() == TurnedEnum::DOWN)
     		{
     			cout << "X";
     		}
-    		else if ((*it)->getUpOrDownTurned() == "upturned")
+    		else if ((*it)->getUpOrDownTurned() == TurnedEnum::UP)
     		{
-    			cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->getSuit() << (*it)->getCard()->getSuit()->getColor();
+    			//cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->getSuit() << (*it)->getCard()->getSuit()->getColor();
+
+    			cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->toString((*it)->getCard()->getSuit()->getSuit());
     		}
     		else
     		{
@@ -557,3 +585,28 @@ Board::getFoundations()
 	return foundations;
 }
 
+bool
+Board::hasWon()
+{
+	if (!foundations[0].empty()
+			&& !foundations[1].empty()
+				&& !foundations[2].empty()
+					&& !foundations[3].empty())
+	{
+		if (((foundations[0].back()->getCard())->getNumber() == 13)
+				&& (foundations[1].back()->getCard()->getNumber() == 13)
+					 && (foundations[2].back()->getCard()->getNumber() == 13)
+						&& (foundations[3].back()->getCard()->getNumber() == 13))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}

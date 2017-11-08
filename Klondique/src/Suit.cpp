@@ -13,20 +13,48 @@ Suit::Suit() {
 Suit::~Suit() {
 }
 
-Suit::Suit(string theSuit, string theColor)
+Suit::Suit(SuitType theSuit, SuitColor theColour, int theNumberOfCards)
 {
 	suit = theSuit;
-	color = theColor;
+	color = theColour;
+	numberOfCards = theNumberOfCards;
 }
 
-string
+SuitType
 Suit::getSuit()
 {
 	return suit;
 }
 
 string
+Suit::toString(SuitType suitType)
+{
+	switch(suitType)
+	{
+	    case SuitType::HEARTS  :
+	    	return "heart_R";
+	    	break;
+	    case SuitType::CLUB  :
+	    	return "club_B";
+	    	break;
+	    case SuitType::SPADE  :
+	    	return "spade_B";
+	    	break;
+	    case SuitType::DIAMOND  :
+	    	return "diamond_R";
+	    	break;
+	}
+	return "";
+}
+
+SuitColor
 Suit::getColor()
 {
 	return color;
+}
+
+int
+Suit::getNumberOfCards()
+{
+	return numberOfCards;
 }

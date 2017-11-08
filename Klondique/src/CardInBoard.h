@@ -14,20 +14,26 @@ using namespace std;
 
 #include "Card.h"
 
+enum TurnedEnum {
+	UP=0,
+	DOWN
+};
+
 class CardInBoard {
 public:
 	CardInBoard();
 	virtual ~CardInBoard();
 
-	CardInBoard(shared_ptr<Card> card, string upOrDownTurned);
+	CardInBoard(shared_ptr<Card> card, TurnedEnum upOrDownTurn);
 
 	shared_ptr<Card> getCard();
-	string getUpOrDownTurned();
-	void setUpOrDownTurned(string upOrDownTurned);
+
+	TurnedEnum getUpOrDownTurned();
+	void setUpOrDownTurned(TurnedEnum upOrDownTurn);
 
 private:
 	shared_ptr<Card> card;
-	string upOrDownTurned;
+	TurnedEnum upOrDownTurned;
 };
 
 #endif /* CARDINBOARD_H_ */

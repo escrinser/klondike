@@ -8,7 +8,7 @@
 #ifndef PLAY_H_
 #define PLAY_H_
 
-#include "Board.h"
+class Board;
 
 class Play {
 public:

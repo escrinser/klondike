@@ -24,12 +24,10 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 
-#include "Deck.h"
-#include "Card.h"
-#include "CardInBoard.h"
-//class Deck;
-//class CardInBoard;
+class Deck;
+class CardInBoard;
 
 using namespace std;
 
@@ -59,10 +57,6 @@ public:
 	vector<shared_ptr<CardInBoard>> getWastePile();
 	vector<shared_ptr<CardInBoard>> getStock();
 
-	/*vector<CardInBoard*> getFoundationHeart();
-	vector<CardInBoard*> getFoundationSpade();
-	vector<CardInBoard*> getFoundationClub();
-	vector<CardInBoard*> getFoundationDiamond();*/
 	vector<vector<shared_ptr<CardInBoard>>> getFoundations();
 
 	void showBoard();
@@ -70,19 +64,14 @@ public:
 
 	bool upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
 
+	bool hasWon();
+
 private:
 	shared_ptr<Deck> deck;
 
 	vector<shared_ptr<CardInBoard>> stock;
 	vector<shared_ptr<CardInBoard>> wastePile;
-
 	vector<vector<shared_ptr<CardInBoard>>> piles;
-
-	vector<shared_ptr<CardInBoard>> foundationHeart;
-	vector<shared_ptr<CardInBoard>> foundationSpade;
-	vector<shared_ptr<CardInBoard>> foundationClub;
-	vector<shared_ptr<CardInBoard>> foundationDiamond;
-
 	vector<vector<shared_ptr<CardInBoard>>> foundations;
 
 };

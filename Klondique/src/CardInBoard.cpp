@@ -13,10 +13,10 @@ CardInBoard::CardInBoard() {
 CardInBoard::~CardInBoard() {
 }
 
-CardInBoard::CardInBoard(shared_ptr<Card> theCard, string theUpOrDownTurned)
+CardInBoard::CardInBoard(shared_ptr<Card> theCard, TurnedEnum theUpOrDownTurn)
 {
 	card = theCard;
-	upOrDownTurned = theUpOrDownTurned;
+	upOrDownTurned = theUpOrDownTurn;
 }
 
 shared_ptr<Card>
@@ -25,14 +25,14 @@ CardInBoard::getCard()
 	return card;
 }
 
-string
+TurnedEnum
 CardInBoard::getUpOrDownTurned()
 {
 	return upOrDownTurned;
 }
 
 void
-CardInBoard::setUpOrDownTurned(string theUpOrDownTurned)
+CardInBoard::setUpOrDownTurned(TurnedEnum theUpOrDownTurned)
 {
 	upOrDownTurned = theUpOrDownTurned;
 }

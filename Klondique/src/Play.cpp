@@ -13,6 +13,11 @@
 #include "CardInBoard.h"
 #include "LimitedInDialog.h"
 
+
+#define NUMBER_OF_CARDS 13
+#define NUMBER_OF_PILES 7
+#define NUMBER_OF_FOUNDATIONS 4
+
 Play::Play() {
 }
 
@@ -23,12 +28,24 @@ Play::~Play() {
 void
 Play::startPlay()
 {
-	LimitedInDialog cardDialog ("Card Number?", 1, 13);
+	LimitedInDialog cardDialog ("Card Number?", 1, NUMBER_OF_CARDS);
 
-	LimitedInDialog pileDialog ("Pile Number?", 1, 7);
+	LimitedInDialog pileDialog ("Pile Number?", 1, NUMBER_OF_PILES);
 
 	shared_ptr<Deck> deck (new Deck());
-	deck->loadDeck();
+
+	vector<shared_ptr<Suit>> allSuites;
+	/*allSuites.push_back(shared_ptr<Suit>(new Suit("heart", "red", NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit("spade", "black", NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit("club", "black", NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit("diamond", "red", NUMBER_OF_CARDS)));*/
+
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::HEARTS, SuitColor::RED, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::SPADE, SuitColor::BLACK, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::CLUB, SuitColor::BLACK, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::DIAMOND, SuitColor::RED, NUMBER_OF_CARDS)));
+
+	deck->loadDeck(allSuites);
 
 	Board board (deck);
 	//board.initBoard();

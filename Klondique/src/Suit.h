@@ -12,18 +12,33 @@
 
 using namespace std;
 
+enum SuitType {
+	HEARTS=0,
+	SPADE,
+	CLUB,
+	DIAMOND
+};
+
+enum SuitColor{
+	RED=0,
+	BLACK
+};
+
 class Suit {
 public:
 	Suit();
 	virtual ~Suit();
 
-	Suit(string, string);
+	Suit(SuitType, SuitColor, int);
 
-	string getSuit();
-	string getColor();
+	SuitColor getColor();
+	int getNumberOfCards();
+	SuitType getSuit();
+	string toString(SuitType suitType);
 private:
-	string suit;
-	string color;
+	SuitType suit;
+	SuitColor color;
+	int numberOfCards;
 };
 
 #endif /* SUIT_H_ */

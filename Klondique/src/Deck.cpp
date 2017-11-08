@@ -26,22 +26,18 @@ Deck::~Deck() {
 }
 
 void
-Deck::loadDeck()
+Deck::loadDeck(vector<shared_ptr<Suit>> theAllSuites)
 {
-	vector<shared_ptr<Suit>> allSuites;
-	allSuites.push_back(shared_ptr<Suit>(new Suit("heart", "red")));
-	allSuites.push_back(shared_ptr<Suit>(new Suit("spade", "black")));
-	allSuites.push_back(shared_ptr<Suit>(new Suit("club", "black")));
-	allSuites.push_back(shared_ptr<Suit>(new Suit("diamond", "red")));
-
 	vector<shared_ptr<Suit>>::iterator it;
 
-	for (it = allSuites.begin(); it != allSuites.end(); it++)
+	for (it = theAllSuites.begin(); it != theAllSuites.end(); it++)
 	{
+		//int n = static_cast<int>(CardType::ACE); // OK, n = 1
 		//cout << "Suit: " << (*it)->getSuit() << endl;
-		for (int i=1; i < 14 ; i++) //TODO: Magic number 14.
+		for (int i=0; i < (*it)->getNumberOfCards() ; i++)
 		{
-			deck.push_back(shared_ptr<Card>(new Card((*it), i)));
+			deck.push_back(shared_ptr<Card>(new Card((*it), i+1)));
+			//deck.push_back(shared_ptr<Card>(new Card((*it), CardType[i])));
 		}
 	}
 

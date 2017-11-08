@@ -17,6 +17,7 @@
 #include <memory>
 
 class Card;
+class Suit;
 
 using namespace std; //Import the standard library
 
@@ -25,7 +26,7 @@ public:
 	Deck();
 	virtual ~Deck();
 
-	void loadDeck();
+	void loadDeck(vector<shared_ptr<Suit>>);
 
     vector<shared_ptr<Card>> shuffle();
 
