@@ -22,7 +22,7 @@ public:
 	virtual ~Controller();
 
 protected:
-	State getState();
+	State getState(); //TODO: Is it necessary this Controller ?
 	void setState(State state);
 	void clear();
 	bool hasWon();

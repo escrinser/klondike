@@ -8,10 +8,7 @@
 #include "StartController.h"
 
 #include "Game.h"
-
-/*StartController::StartController(shared_ptr<Game> theGame) {
-
-}*/
+#include "LimitedInDialog.h"
 
 StartController::~StartController() {
 	// TODO Auto-generated destructor stub
@@ -20,11 +17,34 @@ StartController::~StartController() {
 void
 StartController::control()
 {
-	//assert this.getState() == State.INITIAL;
-	//int users = new LimitedIntDialog("Cuántos usuarios?", 0, this.getGame().getNumPlayers()).read();
-	//colocateControllerBuilder.build(users);
-	//this.write();
 	cout << "StartController control" << endl;
-	game->setState(State::IN_GAME);
+	game->startPlayingBoard();
+
+	LimitedInDialog startDialog ("Chose one option:\n\n"
+			"1  Play\n"
+			"2  Exit\n"
+			"Enter your choice and press return:", 1, 2);
+	int choice;
+	do
+	{
+	   choice = startDialog.read();
+	   switch (choice)
+	   {
+		   case 1:
+			   cout << "Start playing"<<endl;
+			   game->setState(State::IN_GAME);
+			   break;
+
+		   case 2:
+			   cout << "Exit."<<endl;
+			   game->setState(State::FINAL);
+			   break;
+
+		   default:
+			   cout << "Not a Valid Choice. Choose again.\n";
+			   break;
+	   }
+	}
+	while (choice != 1 && choice != 2);
 }
 

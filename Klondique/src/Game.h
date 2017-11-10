@@ -43,6 +43,23 @@ public:
 		this->state = state;
 	}
 
+	void initBoard();
+
+	void startPlayingBoard();
+
+	void showBoard();
+
+	void deal();
+
+	void moveBetweenPiles(int thePileOriginNumber,
+		     	 	 	  int thePileDestinationNumber,
+						  int theCardOriginNumber);
+
+	void moveBetweenWastePileAndPile(int thePileDestinationNumber);
+
+	void moveBetweenWastePileAndFoundation();
+	void moveBetweenPileAndFoundation(int thePileOriginNumber);
+
 	bool hasWon();
 
 	void clear();

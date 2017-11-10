@@ -9,12 +9,11 @@
 
 #include <iostream>
 
-#include "Play.h"
 #include "Game.h"
 #include "OperationController.h"
 #include "StartController.h"
-#include "MoveController.h"
 #include "ContinueController.h"
+#include "GameController.h"
 #include "LimitedInDialog.h"
 
 
@@ -23,7 +22,7 @@ using namespace std;
 Logic::Logic() {
 	game = shared_ptr<Game>(new Game());
 	startController = shared_ptr<StartController>(new StartController(game));
-    moveController = shared_ptr<MoveController>(new MoveController(game));
+    gameController = shared_ptr<GameController>(new GameController(game));
     continueController = shared_ptr<ContinueController>(new ContinueController(game));
 }
 
@@ -34,30 +33,6 @@ Logic::~Logic() {
 void
 Logic::play()
 {
-	/*LimitedInDialog mainMenuDialog ("Chose one option:\n\n1  Play\n2  End\nEnter your choice and press return:", 1, 2);
-	int choice;
-	do
-	{
-	   choice = mainMenuDialog.read();
-	   Play start;
-	   switch (choice)
-	   {
-		   case 1:
-			   cout << "Start playing"<<endl;
-			   start.startPlay();
-			   break;
-
-		   case 2:
-			   cout << "End of the game."<<endl;
-			   break;
-
-		   default:
-			   cout << "Not a Valid Choice. Choose again.\n";
-			   break;
-	   }
-	}
-	while (choice != 1 && choice != 2);*/
-
 	shared_ptr<OperationController> controller;
 	do {
 		controller = getController();
@@ -76,7 +51,7 @@ Logic::getController()
 			case INITIAL:
 				return startController;
 			case IN_GAME:
-				return moveController; //TODO: PlayController?
+				return gameController;
 			case FINAL:
 				return continueController;
 			case EXIT:

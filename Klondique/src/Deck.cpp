@@ -18,8 +18,18 @@
 #include <cstdlib>      // std::rand, std::srand
 #include <memory>
 
+//#define NUMBER_OF_CARDS 13
 
-Deck::Deck() {
+Deck::Deck()
+{
+	/*vector<shared_ptr<Suit>> allSuites;
+
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::HEARTS, SuitColor::RED, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::SPADE, SuitColor::BLACK, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::CLUB, SuitColor::BLACK, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::DIAMOND, SuitColor::RED, NUMBER_OF_CARDS)));
+
+	loadDeck(allSuites);*/
 }
 
 Deck::~Deck() {
@@ -68,7 +78,6 @@ Deck::shuffle()
 	// random generator function:
 	//int myrandom (int i) { return std::rand()%i;}
 	//std::random_shuffle ( theShuffleDeck.begin(), theShuffleDeck.end(), myrandom);
-
 	return deck;
 }
 

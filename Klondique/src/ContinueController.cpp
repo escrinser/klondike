@@ -17,23 +17,29 @@ ContinueController::~ContinueController() {
 void
 ContinueController::control()
 {
-	//assert this.getState() == State.FINAL;
 	cout << "ContinueController control" << endl;
 	LimitedInDialog continueMenuDialog ("Chose one option:\n\n"
-			"1  Continue\n"
-			"2  Exit\n"
-			"Enter your choice and press return:", 1, 2);
+			"1  Play again\n"
+			"2  Continue\n"
+			"3  Exit\n"
+			"Enter your choice and press return:", 1, 3);
 	int answer;
 	do
 	{
 		answer = continueMenuDialog.read();
 	}
-	while (answer != 1 && answer != 2);
+	while (answer != 1 && answer != 2 && answer != 3);
 
 	if (answer == 1)
 	{
-		//this.clear(); //TODO: Reiniciar el juego...
+		game->clear();
+		game->showBoard();
 		game->setState(State::INITIAL);
+	}
+	else if (answer == 2)
+	{
+		//TODO: Continue with the last game...
+		game->setState(State::IN_GAME);
 	}
 	else
 	{

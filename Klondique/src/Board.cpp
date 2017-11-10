@@ -27,10 +27,11 @@ void
 Board::initBoard()
 {
 	// stock
-	vector<shared_ptr<Card>> initialDeck = deck->getDeck();
+	//vector<shared_ptr<Card>> initialDeck = deck->getDeck();
 
 
-	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+	//for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
+	for(vector<shared_ptr<Card>>::iterator it = deck->getDeck().begin(); it != deck->getDeck().end(); it++)
 	{
 	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
 	}
@@ -59,7 +60,6 @@ void
 Board::startPlayingBoard()
 {
 	vector<shared_ptr<Card>> initialDeck = deck->shuffle();
-
 	// upturnedDeck empty
 
 	// Foundation Hearts empty
@@ -81,7 +81,6 @@ Board::startPlayingBoard()
 		{
 			if (j!=i)
 			{
-				//temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "downturned")));
 				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::DOWN)));
 				//cout << "Before Downturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
@@ -89,7 +88,6 @@ Board::startPlayingBoard()
 			}
 			else if (j==i)
 			{
-				//temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), "upturned")));
 				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::UP)));
 				//cout << "Before Upturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
@@ -100,7 +98,6 @@ Board::startPlayingBoard()
 		piles.push_back(temp); // Store the array in the buffer
 	}
 
-	// stock
 	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
 	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
@@ -108,8 +105,8 @@ Board::startPlayingBoard()
 	}
 
 	cout << "INIT PLAYING BOARD" << endl;
-	showBoard();
-	cout << "END OF INIT PLAYING BOARD" << endl;
+	//showBoard();
+	//cout << "END OF INIT PLAYING BOARD" << endl;
 }
 
 int
@@ -455,27 +452,6 @@ Board::giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin)
 	    	break;
 	}
 	return 0;
-	/*if (suit == "heart")
-	{
-		return 0;
-	}
-	else if (suit == "spade")
-	{
-		return 1;
-	}
-	else if (suit == "club")
-	{
-		return 2;
-	}
-	else if (suit == "diamond")
-	{
-		return 3;
-	}
-	else
-	{
-		//TODO: not possible situation but bad code...
-		return 0;
-	}*/
 }
 
 bool
@@ -618,5 +594,4 @@ Board::clear()
 	wastePile.clear();
 	foundations.clear();
 	piles.clear();
-	//deck->
 }

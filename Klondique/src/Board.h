@@ -26,6 +26,7 @@
 #include <vector>
 #include <memory>
 
+class Card;
 class Deck;
 class CardInBoard;
 
@@ -36,7 +37,7 @@ public:
 	Board();
 	virtual ~Board();
 
-	Board(shared_ptr<Deck>);
+	Board(shared_ptr<Deck> theDeck);
 
 	void initBoard();
 	void startPlayingBoard();
@@ -70,6 +71,7 @@ public:
 
 private:
 	shared_ptr<Deck> deck;
+	//vector<shared_ptr<Card>> deck;
 
 	vector<shared_ptr<CardInBoard>> stock;
 	vector<shared_ptr<CardInBoard>> wastePile;

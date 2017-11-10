@@ -28,7 +28,7 @@ public:
 
 	void loadDeck(vector<shared_ptr<Suit>>);
 
-    vector<shared_ptr<Card>> shuffle();
+	vector<shared_ptr<Card>> shuffle();
 
     vector<shared_ptr<Card>> getDeck();
 

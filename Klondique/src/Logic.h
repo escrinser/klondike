@@ -13,7 +13,7 @@
 
 class Game;
 class StartController;
-class MoveController;
+class GameController;
 class ContinueController;
 class OperationController;
 
@@ -29,7 +29,7 @@ public:
 private:
 	shared_ptr<Game> game;
 	shared_ptr<StartController> startController;
-	shared_ptr<MoveController> moveController;
+	shared_ptr<GameController> gameController;
 	shared_ptr<ContinueController> continueController;
 };
 
