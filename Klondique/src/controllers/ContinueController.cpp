@@ -7,8 +7,8 @@
 
 #include "ContinueController.h"
 
-#include "Game.h"
-#include "LimitedInDialog.h"
+#include "../models/Game.h"
+#include "../utils/LimitedInDialog.h"
 
 ContinueController::~ContinueController() {
 	// TODO Auto-generated destructor stub

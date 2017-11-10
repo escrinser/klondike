@@ -6,7 +6,7 @@
  */
 #include <iostream>
 
-#include "Logic.h"
+#include "controllers/Logic.h"
 
 using namespace std;
 

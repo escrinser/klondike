@@ -50,7 +50,7 @@ public:
 
 	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
 
-	int giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin);
+	int giveMeTheFoundationNumber(vector<shared_ptr<CardInBoard>> theOrigin);
 
 	bool moveBetweenWastePileAndFoundation();
 	bool moveBetweenPileAndFoundation(int thePileOriginNumber);

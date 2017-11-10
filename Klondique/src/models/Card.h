@@ -8,14 +8,14 @@
 #ifndef CARD_H_
 #define CARD_H_
 
-#include "Suit.h"
 #include <memory>
+
+#include "Suit.h"
 
 class Suit;
 
 enum CardType {
-	ACE=0,
-	ONE,
+	ACE=1,
 	TWO,
 	THREE,
 	FOUR,

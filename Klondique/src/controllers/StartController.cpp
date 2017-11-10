@@ -7,8 +7,8 @@
 
 #include "StartController.h"
 
-#include "Game.h"
-#include "LimitedInDialog.h"
+#include "../models/Game.h"
+#include "../utils/LimitedInDialog.h"
 
 StartController::~StartController() {
 	// TODO Auto-generated destructor stub

@@ -4,10 +4,10 @@
  *  Created on: 8 nov. 2017
  *      Author: eseogaz
  */
-
-#include "Game.h"
 #include "GameController.h"
-#include "LimitedInDialog.h"
+
+#include "../models/Game.h"
+#include "../utils/LimitedInDialog.h"
 
 
 #define NUMBER_OF_CARDS 13

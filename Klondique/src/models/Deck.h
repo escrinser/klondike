@@ -8,18 +8,15 @@
 #ifndef DECK_H_
 #define DECK_H_
 
-// C++ libraries
 #include <iostream>
 
-//#include <set>
 #include <vector>
-//#include <list>
 #include <memory>
 
 class Card;
 class Suit;
 
-using namespace std; //Import the standard library
+using namespace std;
 
 class Deck {
 public:

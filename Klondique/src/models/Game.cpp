@@ -6,7 +6,6 @@
  */
 
 #include "Game.h"
-#include "LimitedInDialog.h"
 #include "Board.h"
 
 #define NUMBER_OF_PILES 7

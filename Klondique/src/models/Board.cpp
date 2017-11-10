@@ -296,7 +296,7 @@ Board::moveBetweenPileAndFoundation(int thePileOriginNumber)
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	int foundationNumber = giveMeTheFoundationFromCard(piles[thePileOriginNumber - 1]);
+	int foundationNumber = giveMeTheFoundationNumber(piles[thePileOriginNumber - 1]);
 
 	if(foundations[foundationNumber].empty())
 	{
@@ -395,7 +395,7 @@ Board::moveBetweenWastePileAndFoundation()
 	//return 0 -> no movement (not possible, different suit or not the next number)
 	bool movementCorrect = false;
 
-	int foundationNumber = giveMeTheFoundationFromCard(wastePile);
+	int foundationNumber = giveMeTheFoundationNumber(wastePile);
 
 	if(foundations[foundationNumber].empty())
 	{
@@ -433,7 +433,7 @@ Board::moveBetweenWastePileAndFoundation()
 
 //TODO: Try to return SuitType
 int
-Board::giveMeTheFoundationFromCard(vector<shared_ptr<CardInBoard>> theOrigin)
+Board::giveMeTheFoundationNumber(vector<shared_ptr<CardInBoard>> theOrigin)
 {
 	SuitType suit = theOrigin.back()->getCard()->getSuit()->getSuit();
 	switch(suit)
@@ -542,8 +542,6 @@ Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
     		}
     		else if ((*it)->getUpOrDownTurned() == TurnedEnum::UP)
     		{
-    			//cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->getSuit() << (*it)->getCard()->getSuit()->getColor();
-
     			cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->toString((*it)->getCard()->getSuit()->getSuit());
     		}
     		else

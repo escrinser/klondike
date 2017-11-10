@@ -7,11 +7,6 @@
 
 #include "OperationController.h"
 
-/*OperationController::OperationController(shared_ptr<Game> theGame) {
-
-	game = theGame;
-}*/
-
 OperationController::~OperationController() {
 	// TODO Auto-generated destructor stub
 }

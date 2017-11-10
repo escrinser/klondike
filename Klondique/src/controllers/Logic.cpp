@@ -9,12 +9,12 @@
 
 #include <iostream>
 
-#include "Game.h"
+#include "../models/Game.h"
 #include "OperationController.h"
 #include "StartController.h"
 #include "ContinueController.h"
 #include "GameController.h"
-#include "LimitedInDialog.h"
+#include "../utils/LimitedInDialog.h"
 
 
 using namespace std;

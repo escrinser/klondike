@@ -1,3 +1,5 @@
+https://github.com/ebaratte/cpp-klondike/blob/master/src/Card.cpp
+
 Modelar:
 
 Tablero (donde pongo las cartas y la que se ve, los 4 ases y los 7 montones)
@@ -32,7 +34,7 @@ juego. Solo manejar punteros y así puedo manejar mejor las Cartas en el tablero.
 
 - Lógica
 - Separar la vista de implementación (lo puedo dejar para el final)
-- Meter los controllers (StartController, MoveController, ContinueController)
+- Meter los controllers (StartController, GameController, ContinueController)
 	Ver si hay una interfaz de controladores común
 - Modelos (cuales son en mi diseño actual y cuales quiero que se queden)
 

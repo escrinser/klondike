@@ -9,6 +9,7 @@
 #define OPERATIONCONTROLLER_H_
 
 #include <memory>
+
 #include "Controller.h"
 
 class Game;

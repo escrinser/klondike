@@ -16,7 +16,8 @@ enum SuitType {
 	HEARTS=0,
 	SPADE,
 	CLUB,
-	DIAMOND
+	DIAMOND,
+	INVALID_SUIT
 };
 
 enum SuitColor{

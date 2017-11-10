@@ -6,9 +6,9 @@
  */
 
 #include "Controller.h"
-#include "State.h"
-#include "Game.h"
 
+#include "../models/State.h"
+#include "../models/Game.h"
 
 Controller::Controller(shared_ptr<Game> theGame) {
 	game = theGame;
@@ -18,34 +18,23 @@ Controller::~Controller() {
 	// TODO Auto-generated destructor stub
 }
 
-
-State
-Controller::getState()
-{
+State Controller::getState() {
 	return game->getState();
 }
 
-void
-Controller::setState(State state)
-{
+void Controller::setState(State state) {
 	game->setState(state);
 }
 
 //TODO: clear game
-void
-Controller::clear()
-{
+void Controller::clear() {
 	game->clear();
 }
 
-bool
-Controller::hasWon()
-{
+bool Controller::hasWon() {
 	return game->hasWon();
 }
 
-shared_ptr<Game>
-Controller::getGame()
-{
+shared_ptr<Game> Controller::getGame() {
 	return game;
 }

@@ -9,10 +9,9 @@
 #define CONTROLLER_H_
 
 #include <memory>
-#include "State.h"
+#include "../models/State.h"
 
 class Game;
-
 
 using namespace std;
 
