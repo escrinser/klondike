@@ -7,15 +7,11 @@
 
 #include "MoveController.h"
 
-//#include <memory>
 #include "Game.h"
+#include "LimitedInDialog.h"
 
-//using namespace std;
+#include "Play.h"
 
-MoveController::MoveController(shared_ptr<Game> thegame) {
-
-
-}
 
 MoveController::~MoveController() {
 	// TODO Auto-generated destructor stub
@@ -24,9 +20,38 @@ MoveController::~MoveController() {
 void
 MoveController::control()
 {
-	//assert this.getState() == State.INITIAL;
-	//int users = new LimitedIntDialog("Cuántos usuarios?", 0, this.getGame().getNumPlayers()).read();
-	//colocateControllerBuilder.build(users);
-	//this.write();
-	//game->setState(State::IN_GAME);
+	/*this.colocate();
+	this.write();
+	if (this.existTicTacToe()) {
+		io.writeln("Victoria!!!! " + this.take() + "! " + this.take()
+				+ "! " + this.take() + "! Victoria!!!!");
+		this.setState(State.FINAL);
+	} else {
+		this.change();
+	}*/
+	cout << "MoveController control" << endl;
+	LimitedInDialog mainMenuDialog ("Chose one option:\n\n1  Play\n2  End\nEnter your choice and press return:", 1, 2);
+	int choice;
+	do
+	{
+	   choice = mainMenuDialog.read();
+	   Play start;
+	   switch (choice)
+	   {
+		   case 1:
+			   cout << "Start playing"<<endl;
+			   start.startPlay();
+			   break;
+
+		   case 2:
+			   cout << "End of the game."<<endl;
+			   game->setState(State::FINAL);
+			   break;
+
+		   default:
+			   cout << "Not a Valid Choice. Choose again.\n";
+			   break;
+	   }
+	}
+	while (choice != 1 && choice != 2);
 }

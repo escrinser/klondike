@@ -33,3 +33,9 @@ Game::hasWon()
 	}
 }
 
+void
+Game::clear()
+{
+	board->clear();
+}
+

@@ -14,6 +14,8 @@
 class Game;
 class StartController;
 class MoveController;
+class ContinueController;
+class OperationController;
 
 using namespace std;
 
@@ -22,11 +24,13 @@ public:
 	Logic();
 	virtual ~Logic();
 	void play();
+	shared_ptr<OperationController> getController();
 
 private:
 	shared_ptr<Game> game;
 	shared_ptr<StartController> startController;
 	shared_ptr<MoveController> moveController;
+	shared_ptr<ContinueController> continueController;
 };
 
 #endif /* LOGIC_H_ */

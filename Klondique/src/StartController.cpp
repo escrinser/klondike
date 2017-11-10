@@ -9,9 +9,9 @@
 
 #include "Game.h"
 
-StartController::StartController(shared_ptr<Game> theGame) {
-	game = theGame;
-}
+/*StartController::StartController(shared_ptr<Game> theGame) {
+
+}*/
 
 StartController::~StartController() {
 	// TODO Auto-generated destructor stub
@@ -24,6 +24,7 @@ StartController::control()
 	//int users = new LimitedIntDialog("Cuántos usuarios?", 0, this.getGame().getNumPlayers()).read();
 	//colocateControllerBuilder.build(users);
 	//this.write();
+	cout << "StartController control" << endl;
 	game->setState(State::IN_GAME);
 }
 

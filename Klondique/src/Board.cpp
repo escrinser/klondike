@@ -610,3 +610,13 @@ Board::hasWon()
 		return false;
 	}
 }
+
+void
+Board::clear()
+{
+	stock.clear();
+	wastePile.clear();
+	foundations.clear();
+	piles.clear();
+	//deck->
+}

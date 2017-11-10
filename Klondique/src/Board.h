@@ -66,6 +66,8 @@ public:
 
 	bool hasWon();
 
+	void clear();
+
 private:
 	shared_ptr<Deck> deck;
 

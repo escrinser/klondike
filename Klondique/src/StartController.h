@@ -9,14 +9,15 @@
 #define STARTCONTROLLER_H_
 
 #include <memory>
+#include "OperationController.h"
 
 class Game;
 
 using namespace std;
 
-class StartController {
+class StartController : public OperationController {
 public:
-	StartController(shared_ptr<Game>);
+	StartController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
 	virtual ~StartController();
 	void control();
 private:

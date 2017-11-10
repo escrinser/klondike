@@ -9,14 +9,15 @@
 #define MOVECONTROLLER_H_
 
 #include <memory>
+#include "OperationController.h"
 
 class Game;
 
 using namespace std;
 
-class MoveController {
+class MoveController : public OperationController{
 public:
-	MoveController(shared_ptr<Game>);
+	MoveController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
 	virtual ~MoveController();
 	void control();
 private:

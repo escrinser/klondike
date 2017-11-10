@@ -11,8 +11,12 @@
 
 #include "Play.h"
 #include "Game.h"
+#include "OperationController.h"
 #include "StartController.h"
 #include "MoveController.h"
+#include "ContinueController.h"
+#include "LimitedInDialog.h"
+
 
 using namespace std;
 
@@ -20,6 +24,7 @@ Logic::Logic() {
 	game = shared_ptr<Game>(new Game());
 	startController = shared_ptr<StartController>(new StartController(game));
     moveController = shared_ptr<MoveController>(new MoveController(game));
+    continueController = shared_ptr<ContinueController>(new ContinueController(game));
 }
 
 Logic::~Logic() {
@@ -29,15 +34,11 @@ Logic::~Logic() {
 void
 Logic::play()
 {
+	/*LimitedInDialog mainMenuDialog ("Chose one option:\n\n1  Play\n2  End\nEnter your choice and press return:", 1, 2);
 	int choice;
 	do
 	{
-	   cout << "Chose one option:\n\n";
-
-	   cout << "1  Play\n";
-	   cout << "2  End\n";
-	   cout << "Enter your choice and press return: ";
-	   cin >> choice;
+	   choice = mainMenuDialog.read();
 	   Play start;
 	   switch (choice)
 	   {
@@ -55,27 +56,32 @@ Logic::play()
 			   break;
 	   }
 	}
-	while (choice != 1 && choice != 2);
-	/*OperationController controller;
+	while (choice != 1 && choice != 2);*/
+
+	shared_ptr<OperationController> controller;
 	do {
-		controller = logic.getController();
-		if (controller != null){
-			controller.control();
+		controller = getController();
+		if (controller != nullptr)
+		{
+			controller->control();
 		}
-	} while (controller != null);*/
+	} while (controller != nullptr);
 }
 
-/*OperationController getController() {
-		switch (game.getState()){
-		case INITIAL:
-			return startController;
-		case IN_GAME:
-			return colocateControllerBuilder.getColocateController();
-		case FINAL:
-			return continueController;
-		case EXIT:
-		default:
-			return null;
+shared_ptr<OperationController>
+Logic::getController()
+{
+		switch (game->getState())
+		{
+			case INITIAL:
+				return startController;
+			case IN_GAME:
+				return moveController; //TODO: PlayController?
+			case FINAL:
+				return continueController;
+			case EXIT:
+			default:
+				return nullptr;
 		}
-}*/
+}
 

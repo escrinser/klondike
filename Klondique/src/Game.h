@@ -45,7 +45,9 @@ public:
 
 	bool hasWon();
 
-	//Other methods wit Board like move....
+	void clear();
+
+	//Other methods with Board like move....
 
 private:
 	State state;

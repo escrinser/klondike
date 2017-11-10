@@ -14,7 +14,7 @@ using namespace std;
 int main()
 {
    cout << "The First Version of Klondique." << endl;
-   Logic logic;
+   Logic logic; //TODO: metodo play aqui y la lógica directamente la de los controladores.
    logic.play();
 
    return 0;

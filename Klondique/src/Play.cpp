@@ -57,21 +57,30 @@ Play::startPlay()
 	int pileNumberDestination;
 	int pileNumberOriginNumber = 0;
 
+	LimitedInDialog mainMenuDialog ("Chose one option:\n\n"
+			"1  Deal\n"
+			"2  Move a card between Waste Pile to Pile\n"
+			"3  Move a card between Piles\n"
+			"4  Move a card between Pile to Foundation\n"
+			"5  Move a card between Waste Pile to Foundation\n"
+			"6  Exit\n"
+			"Enter your choice and press return:", 1, 6);
+
 	do
 	{
 		board.showBoard();
 
-		cout << "Chose one option:\n\n";
+		/*cout << "Chose one option:\n\n";
 
 		cout << "1  Deal\n";
 		cout << "2  Move a card between Waste Pile to Pile\n";
 		cout << "3  Move a card between Piles\n";
 		cout << "4  Move a card between Pile to Foundation\n";
 		cout << "5  Move a card between Waste Pile to Foundation\n";
-		cout << "22 Exit\n";
+		cout << "6 Exit\n";
 		cout << "Enter your choice and press return: ";
-		cin >> movement;
-
+		cin >> movement;*/
+		movement = mainMenuDialog.read();
 		switch (movement)
 		{
 		   case 1:
@@ -138,7 +147,7 @@ Play::startPlay()
 			   board.moveBetweenWastePileAndFoundation();
 			   break;
 		   }
-		   case 22:
+		   case 6:
 			   cout << "No more movements. Exit"<<endl;
 			   break;
 
@@ -147,7 +156,7 @@ Play::startPlay()
 			   break;
 		}
 	}
-	while ((movement != 22) && (!hasWon(board)));
+	while ((movement != 6) && (!hasWon(board)));
 }
 
 
