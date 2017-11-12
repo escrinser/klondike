@@ -18,7 +18,7 @@ Game::Game() {
 	shared_ptr<Deck> deck (new Deck()); //TODO: Load Deck inside Deck constructor
 	vector<shared_ptr<Suit>> allSuites;
 
-	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::HEARTS, SuitColor::RED, NUMBER_OF_CARDS)));
+	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::HEART, SuitColor::RED, NUMBER_OF_CARDS)));
 	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::SPADE, SuitColor::BLACK, NUMBER_OF_CARDS)));
 	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::CLUB, SuitColor::BLACK, NUMBER_OF_CARDS)));
 	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::DIAMOND, SuitColor::RED, NUMBER_OF_CARDS)));
@@ -86,12 +86,10 @@ Game::hasWon()
 {
 	if (board->hasWon())
 	{
-		cout << "You win of Game!!!" << endl;
 		return true;
 	}
 	else
 	{
-		cout << "You are on the way to win of Game, keep trying..." << endl;
 		return false;
 	}
 }
@@ -99,7 +97,6 @@ Game::hasWon()
 void
 Game::clear()
 {
-	//board->initBoard(); //TODO: Think about it
 	board->clear();
 }
 

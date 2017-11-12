@@ -26,6 +26,8 @@
 #include <vector>
 #include <memory>
 
+#include "Suit.h"
+
 class Card;
 class Deck;
 class CardInBoard;
@@ -44,26 +46,23 @@ public:
 
 	int deal();
 
-	bool moveBetweenPiles(int thePileOriginNumber,
+	void moveBetweenPiles(int thePileOriginNumber,
 		     	 	 	  int thePileDestinationNumber,
 						  int theCardOriginNumber);
 
-	bool moveBetweenWastePileAndPile(int thePileDestinationNumber);
+	void moveBetweenWastePileAndPile(int thePileDestinationNumber);
+	void moveBetweenWastePileAndFoundation();
+	void moveBetweenPileAndFoundation(int thePileOriginNumber);
 
-	int giveMeTheFoundationNumber(vector<shared_ptr<CardInBoard>> theOrigin);
+	bool canMoveBetweenWastePileAndPile(int thePileDestinationNumber);
+	bool canMoveToPile(shared_ptr<Card> theCard, int thePileDestionationNumber);
+	bool canMoveToFoundation(int theCardNumber, int foundationNumber);
 
-	bool moveBetweenWastePileAndFoundation();
-	bool moveBetweenPileAndFoundation(int thePileOriginNumber);
-
-	vector<shared_ptr<CardInBoard>> getWastePile();
-	vector<shared_ptr<CardInBoard>> getStock();
-
-	vector<vector<shared_ptr<CardInBoard>>> getFoundations();
+	int giveMeTheFoundationNumber(SuitType theSuit);
+	bool upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
 
 	void showBoard();
 	void showElement(vector<shared_ptr<CardInBoard>> theElement);
-
-	bool upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
 
 	bool hasWon();
 
@@ -71,7 +70,6 @@ public:
 
 private:
 	shared_ptr<Deck> deck;
-	//vector<shared_ptr<Card>> deck;
 
 	vector<shared_ptr<CardInBoard>> stock;
 	vector<shared_ptr<CardInBoard>> wastePile;

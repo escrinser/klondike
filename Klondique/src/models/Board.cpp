@@ -27,10 +27,6 @@ void
 Board::initBoard()
 {
 	// stock
-	//vector<shared_ptr<Card>> initialDeck = deck->getDeck();
-
-
-	//for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	for(vector<shared_ptr<Card>>::iterator it = deck->getDeck().begin(); it != deck->getDeck().end(); it++)
 	{
 	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
@@ -50,10 +46,6 @@ Board::initBoard()
 	// Pile5 empty
 	// Pile6 empty
 	// Pile7 empty
-    cout << "INIT BOARD" << endl;
-	showBoard();
-	cout << "END OF INIT BOARD" << endl;
-
 }
 
 void
@@ -82,31 +74,22 @@ Board::startPlayingBoard()
 			if (j!=i)
 			{
 				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::DOWN)));
-				//cout << "Before Downturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
-				//cout << "After Downturned. Pile = " << i <<": "<< initialDeck.size() << endl;
 			}
 			else if (j==i)
 			{
 				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::UP)));
-				//cout << "Before Upturned: " << initialDeck.size() << endl;
 				initialDeck.pop_back();
-				//cout << "After Upturned. Pile = " << i <<": "<< initialDeck.size() << endl;
 				break;
 			}
 		}
 		piles.push_back(temp); // Store the array in the buffer
 	}
 
-	//cout << "Stock number of cards: "<< initialDeck.size() << endl;
 	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
 	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
 	}
-
-	cout << "INIT PLAYING BOARD" << endl;
-	//showBoard();
-	//cout << "END OF INIT PLAYING BOARD" << endl;
 }
 
 int
@@ -122,7 +105,11 @@ Board::deal()
 	else
 	{
 		cout << "There is no cards in stock - Put them in Stock again" << endl;
-
+		if (wastePile.empty())
+		{
+			cout << "There is no cards in stock - Not even in the waste..." << endl;
+			return 0;
+		}
 		while (!wastePile.empty())
 		{
 			stock.push_back(wastePile.back());
@@ -136,210 +123,220 @@ Board::deal()
 	return 0;
 }
 
-bool
+void
 Board::moveBetweenPiles(int thePileOriginNumber,
 	     	 	 	    int thePileDestinationNumber,
 					    int theCardOriginNumber)
 {
-	//return 0 -> no movement (not possible, no same pile, same color or not the next number)
 	bool movementCorrect = false;
 
-	//Move a king to a empty Pile (other card is not allowed)
-	if (piles[thePileDestinationNumber - 1].empty())
+	if (theCardOriginNumber == 0)
 	{
-		cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
-		if (theCardOriginNumber == 0) //TODO: Magic
+		if (!piles[thePileDestinationNumber - 1].empty())
 		{
-			if (piles[thePileOriginNumber - 1].back()->getCard()->getNumber()==13)
+			if (canMoveToPile(piles[thePileOriginNumber - 1].back()->getCard(), thePileDestinationNumber))
 			{
-				// Movement
 				piles[thePileDestinationNumber - 1].push_back(piles[thePileOriginNumber - 1].back());
 				piles[thePileOriginNumber - 1].pop_back();
-				movementCorrect = true;
-				cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
-			}
-			else
-			{
-				cout << "Not possible movement" << endl;
+				upturnCardInPile(piles[thePileOriginNumber - 1]);
 			}
 		}
-		else // Movement of more than 1 card...
+	}
+	else // Move more than one card from pile to pile
+	{
+		//Move a king to a empty Pile (other card is not allowed)
+		if (piles[thePileDestinationNumber - 1].empty())
 		{
-			vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
-			vector<shared_ptr<CardInBoard>> pileOriginReverse;
-			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
-			do
+			if (theCardOriginNumber != 0)
 			{
-				if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
-								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
+				vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
+				vector<shared_ptr<CardInBoard>> pileOriginReverse;
+				cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
+				do
 				{
-					cout << "I found the King" << endl;
-					cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-					if (pileOrigin2.back()->getCard()->getNumber() == 13)
+					if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
+									pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
 					{
-						// Movement
-						// Put all the cards in the Pile Destination
-						pileOriginReverse.push_back(pileOrigin2.back());
-						pileOrigin2.pop_back();
-
-						// Delete from the Pile Origin all the cards
-						do
+						cout << "I found the King" << endl;
+						cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
+						if (pileOrigin2.back()->getCard()->getNumber() == 13)
 						{
-							// Put in the destination all the cards
-							piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
-							pileOriginReverse.pop_back();
-							piles[thePileOriginNumber - 1].pop_back();
-						} while (pileOriginReverse.size() != 0);
+							// Movement
+							// Put all the cards in the Pile Destination
+							pileOriginReverse.push_back(pileOrigin2.back());
+							pileOrigin2.pop_back();
 
-						movementCorrect = true;
-						cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+							// Delete from the Pile Origin all the cards
+							do
+							{
+								// Put in the destination all the cards
+								piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
+								pileOriginReverse.pop_back();
+								piles[thePileOriginNumber - 1].pop_back();
+							} while (pileOriginReverse.size() != 0);
+
+							movementCorrect = true;
+							cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+						}
+						else
+						{
+							cout << "Not possible movement" << endl;
+						}
+						break;
 					}
 					else
 					{
-						cout << "Not possible movement" << endl;
-					}
-					break;
-				}
-				else
-				{
-					cout << "This is not the card" << endl;
-					pileOriginReverse.push_back(pileOrigin2.back());
-					pileOrigin2.pop_back();
-				}
-			}
-			while  (pileOrigin2.size() != 0);
-		}
-
-	}
-	else
-	{
-		if (theCardOriginNumber == 0) //TODO: Magic
-		{
-			if ((piles[thePileOriginNumber - 1].back()->getCard()->getNumber() ==
-						(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
-							(piles[thePileOriginNumber - 1].back()->getCard()->getSuit()->getColor() !=
-								(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor())))
-			{
-				// Movement
-				piles[thePileDestinationNumber - 1].push_back(piles[thePileOriginNumber - 1].back());
-				piles[thePileOriginNumber - 1].pop_back();
-				movementCorrect = true;
-				cout << "MOVE A CARD FROM PILE TO PILE" << endl;
-			}
-			else
-			{
-				cout << "Not possible movement" << endl;
-			}
-		}
-		else // Movement of more than 1 card...
-		{
-			vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
-			vector<shared_ptr<CardInBoard>> pileOriginReverse;
-			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
-			do
-			{
-				if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
-								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
-				{
-					cout << "I found the card" << endl;
-					cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-					if ((pileOrigin2.back()->getCard()->getNumber() ==
-										(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
-											(pileOrigin2.back()->getCard()->getSuit()->getColor() !=
-												(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor())))
-					{
-						// Movement
-						// Put all the cards in the Pile Destination
+						cout << "This is not the card" << endl;
 						pileOriginReverse.push_back(pileOrigin2.back());
 						pileOrigin2.pop_back();
+					}
+				}
+				while  (pileOrigin2.size() != 0);
+			}
 
-						// Delete from the Pile Origin all the cards
-						do
+		}
+		else
+		{
+			if (theCardOriginNumber != 0)
+			{
+				vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
+				vector<shared_ptr<CardInBoard>> pileOriginReverse;
+				cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
+				do
+				{
+					if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
+									pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
+					{
+						cout << "I found the card" << endl;
+						cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
+						if ((pileOrigin2.back()->getCard()->getNumber() ==
+											(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
+												(pileOrigin2.back()->getCard()->getSuit()->getColor() !=
+													(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor())))
 						{
-							// Put in the destination all the cards
-							piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
-							pileOriginReverse.pop_back();
-							piles[thePileOriginNumber - 1].pop_back();
-						} while (pileOriginReverse.size() != 0);
+							// Movement
+							// Put all the cards in the Pile Destination
+							pileOriginReverse.push_back(pileOrigin2.back());
+							pileOrigin2.pop_back();
 
-						movementCorrect = true;
-						cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+							// Delete from the Pile Origin all the cards
+							do
+							{
+								// Put in the destination all the cards
+								piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
+								pileOriginReverse.pop_back();
+								piles[thePileOriginNumber - 1].pop_back();
+							} while (pileOriginReverse.size() != 0);
+
+							movementCorrect = true;
+							cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
+						}
+						else
+						{
+							cout << "Not possible movement" << endl;
+						}
+						break;
 					}
 					else
 					{
-						cout << "Not possible movement" << endl;
+						cout << "This is not the card" << endl;
+						pileOriginReverse.push_back(pileOrigin2.back());
+						pileOrigin2.pop_back();
 					}
-					break;
 				}
-				else
-				{
-					cout << "This is not the card" << endl;
-					pileOriginReverse.push_back(pileOrigin2.back());
-					pileOrigin2.pop_back();
-				}
+				while  (pileOrigin2.size() != 0);
 			}
-			while  (pileOrigin2.size() != 0);
+		}
+
+		if (movementCorrect)
+		{
+			upturnCardInPile(piles[thePileOriginNumber - 1]);
 		}
 	}
-
-	bool upturnCard = false;
-	if (movementCorrect)
-	{
-		upturnCard = upturnCardInPile(piles[thePileOriginNumber - 1]);
-	}
-	return movementCorrect && upturnCard;
 }
 
-bool
+void
 Board::moveBetweenPileAndFoundation(int thePileOriginNumber)
 {
-	//return 0 -> no movement (not possible, different suit or not the next number)
-	bool movementCorrect = false;
+	int foundationNumber;
 
-	int foundationNumber = giveMeTheFoundationNumber(piles[thePileOriginNumber - 1]);
-
-	if(foundations[foundationNumber].empty())
+	if (!piles[thePileOriginNumber - 1].empty())
 	{
-		if (piles[thePileOriginNumber - 1].back()->getCard()->getNumber() == 1)
+		foundationNumber = giveMeTheFoundationNumber(piles[thePileOriginNumber - 1].back()->getCard()->getSuit()->getSuit());
+
+		if (canMoveToFoundation(piles[thePileOriginNumber - 1].back()->getCard()->getNumber(), foundationNumber))
 		{
-			// Movement
 			foundations[foundationNumber].push_back(piles[thePileOriginNumber - 1].back());
 			piles[thePileOriginNumber - 1].pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-		}
-		else
-		{
-			cout << "Not possible movement, it is not an Ace" << endl;
+			upturnCardInPile(piles[thePileOriginNumber - 1]);
 		}
 	}
-	else
-	{
-		if (piles[thePileOriginNumber - 1].back()->getCard()->getNumber() ==
-				(foundations[foundationNumber].back()->getCard()->getNumber() + 1))
-		{
-			// Movement
-			foundations[foundationNumber].push_back(piles[thePileOriginNumber - 1].back());
-			piles[thePileOriginNumber - 1].pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-		}
-		else
-		{
-			cout << "Not possible movement" << endl;
-		}
-	}
+}
 
-	bool upturnCard = false;
-	if (movementCorrect)
+void
+Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
+{
+	if (!wastePile.empty())
 	{
-		upturnCard = upturnCardInPile(piles[thePileOriginNumber - 1]);
+		if (canMoveToPile(wastePile.back()->getCard(), thePileDestinationNumber))
+		{
+			piles[thePileDestinationNumber - 1].push_back(wastePile.back());
+			wastePile.pop_back();
+		}
 	}
-	return movementCorrect && upturnCard;
+}
+
+void
+Board::moveBetweenWastePileAndFoundation()
+{
+	int foundationNumber;
+
+	if (!wastePile.empty())
+	{
+		foundationNumber = giveMeTheFoundationNumber(wastePile.back()->getCard()->getSuit()->getSuit());
+
+		if (canMoveToFoundation(wastePile.back()->getCard()->getNumber(), foundationNumber))
+		{
+			foundations[foundationNumber].push_back(wastePile.back());
+			wastePile.pop_back();
+		}
+	}
 }
 
 bool
-Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
+Board::canMoveToPile(shared_ptr<Card> theCard, int thePileDestinationNumber)
+{
+	if((piles[thePileDestinationNumber-1].empty() && (theCard->getNumber() == 13))
+			|| (((theCard->getNumber()) ==
+					(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
+						(theCard->getSuit()->getColor() !=
+							(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor()))))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool
+Board::canMoveToFoundation(int theCardNumber, int theFoundationNumber)
+{
+	if((foundations[theFoundationNumber].empty() && (theCardNumber == 1))
+			|| (theCardNumber ==
+					(foundations[theFoundationNumber].back()->getCard()->getNumber() + 1)))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool
+Board::canMoveBetweenWastePileAndPile(int thePileDestinationNumber)
 {
 	//return 0 -> no movement (not possible, same color or not the next number)
 	bool movementCorrect = false;
@@ -352,9 +349,6 @@ Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 			cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
 			if (wastePile.back()->getCard()->getNumber()==13)
 			{
-				// Movement
-				piles[thePileDestinationNumber - 1].push_back(wastePile.back());
-				wastePile.pop_back();
 				movementCorrect = true;
 				cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
 			}
@@ -370,9 +364,6 @@ Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 								(wastePile.back()->getCard()->getSuit()->getColor() !=
 									(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor())))
 			{
-				// Movement
-				piles[thePileDestinationNumber - 1].push_back(wastePile.back());
-				wastePile.pop_back();
 				movementCorrect = true;
 				cout << "MOVE A CARD FROM WASTE PILE TO PILE" << endl;
 			}
@@ -389,62 +380,18 @@ Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 	return movementCorrect;
 }
 
-bool
-Board::moveBetweenWastePileAndFoundation()
-{
-	//return 0 -> no movement (not possible, different suit or not the next number)
-	bool movementCorrect = false;
-
-	int foundationNumber = giveMeTheFoundationNumber(wastePile);
-
-	if(foundations[foundationNumber].empty())
-	{
-		if (wastePile.back()->getCard()->getNumber() == 1) // Check if it is an Ace
-		{
-			// Movement
-			foundations[foundationNumber].push_back(wastePile.back());
-			wastePile.pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM WASTE PILE TO FOUNDATION" << endl;
-		}
-		else
-		{
-			cout << "Not possible movement, the card is not an Ace" << endl;
-		}
-	}
-	else
-	{
-		if (wastePile.back()->getCard()->getNumber() ==
-				(foundations[foundationNumber].back()->getCard()->getNumber() + 1))
-		{
-			// Movement
-			foundations[foundationNumber].push_back(wastePile.back());
-			wastePile.pop_back();
-			movementCorrect = true;
-			cout << "MOVE A CARD FROM PILE TO FOUNDATION" << endl;
-		}
-		else
-		{
-			cout << "Not possible movement" << endl;
-		}
-	}
-	return movementCorrect;
-}
-
-//TODO: Try to return SuitType
 int
-Board::giveMeTheFoundationNumber(vector<shared_ptr<CardInBoard>> theOrigin)
+Board::giveMeTheFoundationNumber(SuitType theSuit)
 {
-	SuitType suit = theOrigin.back()->getCard()->getSuit()->getSuit();
-	switch(suit)
+	switch(theSuit)
 	{
-	    case SuitType::HEARTS  :
+	    case SuitType::HEART  :
 	    	return 0;
 	    	break;
-	    case SuitType::CLUB  :
+	    case SuitType::SPADE  :
 	    	return 1;
 	    	break;
-	    case SuitType::SPADE  :
+	    case SuitType::CLUB  :
 	    	return 2;
 	    	break;
 	    case SuitType::DIAMOND  :
@@ -551,12 +498,6 @@ Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
 		}
     }
     cout << endl;
-}
-
-vector<vector<shared_ptr<CardInBoard>>>
-Board::getFoundations()
-{
-	return foundations;
 }
 
 bool

@@ -13,11 +13,10 @@
 using namespace std;
 
 enum SuitType {
-	HEARTS=0,
+	HEART=0,
 	SPADE,
 	CLUB,
-	DIAMOND,
-	INVALID_SUIT
+	DIAMOND
 };
 
 enum SuitColor{
