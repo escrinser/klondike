@@ -10,6 +10,8 @@
 #include "../models/Game.h"
 #include "../utils/LimitedInDialog.h"
 
+#include "../views/KlondiqueView.h"
+
 ContinueController::~ContinueController() {
 	// TODO Auto-generated destructor stub
 }
@@ -38,13 +40,18 @@ ContinueController::control()
 	}
 	else if (answer == 2)
 	{
-		//TODO: Continue with the last game...
 		game->setState(State::IN_GAME);
 	}
 	else
 	{
 		game->setState(State::EXIT);
 	}
+}
+
+void
+ContinueController::accept(KlondiqueView* klondiqueView)
+{
+	klondiqueView->visit(this);
 }
 
 

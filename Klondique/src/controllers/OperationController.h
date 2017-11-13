@@ -13,6 +13,7 @@
 #include "Controller.h"
 
 class Game;
+class KlondiqueView;
 
 using namespace std;
 
@@ -20,7 +21,8 @@ class OperationController : public Controller {
 public:
 	OperationController(shared_ptr<Game> theGame): Controller(theGame), game(theGame){};
 	virtual ~OperationController();
-	virtual void control()=0;
+	virtual void control() = 0;
+	virtual void accept(KlondiqueView* klondiqueView) = 0;
 private:
 	shared_ptr<Game> game;
 };

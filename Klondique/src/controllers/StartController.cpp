@@ -10,6 +10,8 @@
 #include "../models/Game.h"
 #include "../utils/LimitedInDialog.h"
 
+#include "../views/KlondiqueView.h"
+
 StartController::~StartController() {
 	// TODO Auto-generated destructor stub
 }
@@ -46,5 +48,11 @@ StartController::control()
 	   }
 	}
 	while (choice != 1 && choice != 2);
+}
+
+void
+StartController::accept(KlondiqueView* klondiqueView)
+{
+	klondiqueView->visit(this);
 }
 

@@ -20,6 +20,8 @@
 
 //#define NUMBER_OF_CARDS 13
 
+using namespace std;
+
 Deck::Deck()
 {
 	/*vector<shared_ptr<Suit>> allSuites;

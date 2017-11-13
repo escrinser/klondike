@@ -11,6 +11,7 @@
 #include <memory>
 #include "OperationController.h"
 
+
 class Game;
 
 using namespace std;
@@ -20,6 +21,7 @@ public:
 	ContinueController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
 	virtual ~ContinueController();
 	void control();
+	void accept(KlondiqueView* klondiqueView);
 private:
 	shared_ptr<Game> game;
 };

@@ -20,6 +20,7 @@ public:
 	GameController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
 	virtual ~GameController();
 	void control();
+	void accept(KlondiqueView* klondiqueView);
 private:
 	shared_ptr<Game> game;
 };

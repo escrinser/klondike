@@ -10,7 +10,7 @@
 #include <assert.h>
 
 LimitedInDialog::LimitedInDialog(string theTitle, int theMin, int theMax) {
-	assert (!theTitle.empty());
+	//assert (!theTitle.empty());
 	ClosedInterval closedInterval (theMin, theMax);
 	limits = closedInterval;
 	title = theTitle;

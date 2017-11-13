@@ -9,6 +9,8 @@
 #include "../models/Game.h"
 #include "../utils/LimitedInDialog.h"
 
+#include "../views/KlondiqueView.h"
+
 
 #define NUMBER_OF_CARDS 13
 #define NUMBER_OF_PILES 7
@@ -127,4 +129,10 @@ GameController::control()
 		cout << "You win!!" << endl;
 	}
 	game->setState(State::FINAL);
+}
+
+void
+GameController::accept(KlondiqueView* klondiqueView)
+{
+	klondiqueView->visit(this);
 }
