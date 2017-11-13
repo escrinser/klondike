@@ -8,7 +8,7 @@
 #ifndef KLONDIKE_H_
 #define KLONDIKE_H_
 
-#include "controllers/Logic.h"
+#include "controllers/local/Logic.h"
 #include "controllers/OperationController.h"
 
 #include "views/KlondiqueView.h"

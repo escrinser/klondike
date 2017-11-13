@@ -1,6 +1,9 @@
-#include "OperationController.h"
+/*
+ * OperationController.cpp
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-OperationController::~OperationController() {
-	// TODO Auto-generated destructor stub
-}
+#include <OperationController.h>
 

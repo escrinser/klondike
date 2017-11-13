@@ -7,7 +7,7 @@
 
 #include <BoardView.h>
 
-#include "OperationController.h"
+#include <../controllers/OperationController.h>
 
 BoardView::BoardView(OperationController* theController)
 {

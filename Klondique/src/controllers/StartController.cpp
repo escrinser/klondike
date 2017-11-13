@@ -1,21 +1,9 @@
-#include "StartController.h"
+/*
+ * StartController.cpp
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-#include "../models/Game.h"
-
-StartController::~StartController() {
-	// TODO Auto-generated destructor stub
-}
-
-void
-StartController::setStart(State theState)
-{
-	game->startPlayingBoard();
-	game->setState(theState);
-}
-
-void
-StartController::accept(OperationControllerVisitor* operationControllerVisitor)
-{
-	operationControllerVisitor->visit(this);
-}
+#include <StartController.h>
 

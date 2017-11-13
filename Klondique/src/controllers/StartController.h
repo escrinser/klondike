@@ -1,21 +1,22 @@
-#ifndef STARTCONTROLLER_H_
-#define STARTCONTROLLER_H_
+/*
+ * StartController.h
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-#include <memory>
+#ifndef CONTROLLERS_STARTCONTROLLER_H_
+#define CONTROLLERS_STARTCONTROLLER_H_
+
 #include "OperationController.h"
 
-class Game;
+#include "State.h"
 
-using namespace std;
-
-class StartController : public OperationController {
+class StartController : public OperationController{
 public:
-	StartController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
+	StartController();
 	virtual ~StartController();
-	void setStart(State theState);
-	void accept(OperationControllerVisitor* operationControllerVisitor);
-private:
-	shared_ptr<Game> game;
+	virtual void setStart(State theState) = 0;
 };
 
-#endif /* STARTCONTROLLER_H_ */
+#endif /* CONTROLLERS_STARTCONTROLLER_H_ */

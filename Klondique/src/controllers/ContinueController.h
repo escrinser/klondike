@@ -1,23 +1,20 @@
-#ifndef CONTINUECONTROLLER_H_
-#define CONTINUECONTROLLER_H_
+/*
+ * ContinueController.h
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-#include <memory>
+#ifndef CONTROLLERS_CONTINUECONTROLLER_H_
+#define CONTROLLERS_CONTINUECONTROLLER_H_
+
 #include "OperationController.h"
-#include "OperationControllerVisitor.h"
-
-
-class Game;
-
-using namespace std;
 
 class ContinueController : public OperationController{
 public:
-	ContinueController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
+	ContinueController();
 	virtual ~ContinueController();
-	void setContinue(int theOption);
-	void accept(OperationControllerVisitor* operationControllerVisitor);
-private:
-	shared_ptr<Game> game;
+	virtual void setContinue(int theOption) = 0;
 };
 
-#endif /* CONTINUECONTROLLER_H_ */
+#endif /* CONTROLLERS_CONTINUECONTROLLER_H_ */

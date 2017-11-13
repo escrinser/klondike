@@ -1,23 +1,22 @@
-#ifndef OPERATIONCONTROLLER_H_
-#define OPERATIONCONTROLLER_H_
+/*
+ * OperationController.h
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-#include <memory>
+#ifndef CONTROLLERS_OPERATIONCONTROLLER_H_
+#define CONTROLLERS_OPERATIONCONTROLLER_H_
 
 #include "Controller.h"
-#include "OperationControllerVisitor.h"
 
-class Game;
-class KlondiqueView;
+class OperationControllerVisitor;
 
-using namespace std;
-
-class OperationController : public Controller {
+class OperationController : public Controller{
 public:
-	OperationController(shared_ptr<Game> theGame): Controller(theGame), game(theGame){};
+	OperationController();
 	virtual ~OperationController();
 	virtual void accept(OperationControllerVisitor* operationControllerVisitor) = 0;
-private:
-	shared_ptr<Game> game;
 };
 
-#endif /* OPERATIONCONTROLLER_H_ */
+#endif /* CONTROLLERS_OPERATIONCONTROLLER_H_ */

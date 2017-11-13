@@ -1,32 +1,30 @@
-#ifndef GAMECONTROLLER_H_
-#define GAMECONTROLLER_H_
+/*
+ * GameController.h
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-#include <memory>
+#ifndef CONTROLLERS_GAMECONTROLLER_H_
+#define CONTROLLERS_GAMECONTROLLER_H_
+
 #include "OperationController.h"
-
-class Game;
-
-using namespace std;
 
 class GameController : public OperationController{
 public:
-	GameController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
+	GameController();
 	virtual ~GameController();
-	void showBoard(); //TODO: Colaborate with BoardView
-	void deal();
+	virtual void showBoard() = 0; //TODO: Colaborate with BoardView
+	virtual void deal() = 0;
 
-	void moveBetweenPiles(int thePileOriginNumber,
+	virtual void moveBetweenPiles(int thePileOriginNumber,
 		     	 	 	  int thePileDestinationNumber,
-						  int theCardOriginNumber);
+						  int theCardOriginNumber) = 0;
 
-	void moveBetweenWastePileAndPile(int thePileDestinationNumber);
+	virtual void moveBetweenWastePileAndPile(int thePileDestinationNumber) = 0;
 
-	void moveBetweenWastePileAndFoundation();
-	void moveBetweenPileAndFoundation(int thePileOriginNumber);
-
-	void accept(OperationControllerVisitor* operationControllerVisitor);
-private:
-	shared_ptr<Game> game;
+	virtual void moveBetweenWastePileAndFoundation() = 0;
+	virtual void moveBetweenPileAndFoundation(int thePileOriginNumber) = 0;
 };
 
-#endif /* GAMECONTROLLER_H_ */
+#endif /* CONTROLLERS_GAMECONTROLLER_H_ */

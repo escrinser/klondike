@@ -8,9 +8,9 @@
 #ifndef VIEWS_KLONDIQUEVIEW_H_
 #define VIEWS_KLONDIQUEVIEW_H_
 
+#include "OperationControllerVisitor.h"
 #include <memory>
 
-#include "OperationControllerVisitor.h"
 
 class OperationController;
 class StartController;

@@ -7,12 +7,3 @@
 
 #include <OperationControllerVisitor.h>
 
-OperationControllerVisitor::OperationControllerVisitor() {
-	// TODO Auto-generated constructor stub
-
-}
-
-OperationControllerVisitor::~OperationControllerVisitor() {
-	// TODO Auto-generated destructor stub
-}
-

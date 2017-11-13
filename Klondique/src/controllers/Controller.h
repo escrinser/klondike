@@ -1,27 +1,22 @@
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
+/*
+ * Controller.h
+ *
+ *  Created on: 13 nov. 2017
+ *      Author: Ana
+ */
 
-#include <memory>
+#ifndef CONTROLLERS_CONTROLLER_H_
+#define CONTROLLERS_CONTROLLER_H_
+
 #include "../models/State.h"
-
-class Game;
-
-using namespace std;
 
 class Controller {
 public:
-	Controller(shared_ptr<Game> theGame);
+	Controller();
 	virtual ~Controller();
-	void setState(State state);
-	void printBoard();
-	bool hasWon();
-protected:
-	State getState();
-	void clear();
-	shared_ptr<Game> getGame();
-
-private:
-	shared_ptr<Game> game;
+	virtual void setState(State state) = 0;
+	virtual void printBoard() = 0;
+	virtual bool hasWon() = 0;
 };
 
-#endif /* CONTROLLER_H_ */
+#endif /* CONTROLLERS_CONTROLLER_H_ */
