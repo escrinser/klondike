@@ -34,6 +34,7 @@ KlondiqueView::visit(StartController* startController)
 	/*int users = new LimitedIntDialog("Cuántos usuarios?", 0, 2).read();
 	startController.setUsers(users);
 	new BoardView(startController).write();*/
+	startController->control();
 }
 
 void
@@ -66,12 +67,12 @@ KlondiqueView::visit(GameController* gameController)
 	if (moveController.existTicTacToe()) {
 		colorView.writeWinner();
 	}*/
+	gameController->control();
 }
 
 void
 KlondiqueView::visit(ContinueController* continueController)
 {
-	/*continueController.setContinue(new YesNoDialog("Desea continuar")
-			.read());*/
+	continueController->control();
 }
 

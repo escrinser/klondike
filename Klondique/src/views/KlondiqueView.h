@@ -13,8 +13,7 @@
 class OperationController;
 class StartController;
 class GameController;
-//class ContinueController;
-#include "ContinueController.h"
+class ContinueController;
 
 using namespace std;
 
