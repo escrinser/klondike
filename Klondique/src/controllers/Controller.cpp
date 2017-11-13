@@ -1,10 +1,3 @@
-/*
- * Controller.cpp
- *
- *  Created on: 10 nov. 2017
- *      Author: eseogaz
- */
-
 #include "Controller.h"
 
 #include "../models/State.h"
@@ -26,7 +19,6 @@ void Controller::setState(State state) {
 	game->setState(state);
 }
 
-//TODO: clear game
 void Controller::clear() {
 	game->clear();
 }
@@ -37,4 +29,10 @@ bool Controller::hasWon() {
 
 shared_ptr<Game> Controller::getGame() {
 	return game;
+}
+
+void
+Controller::printBoard()
+{
+	game->showBoard();
 }

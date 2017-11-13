@@ -1,10 +1,3 @@
-/*
- * Controller.h
- *
- *  Created on: 10 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
@@ -19,12 +12,12 @@ class Controller {
 public:
 	Controller(shared_ptr<Game> theGame);
 	virtual ~Controller();
-
-protected:
-	State getState(); //TODO: Is it necessary this Controller ?
 	void setState(State state);
-	void clear();
+	void printBoard();
 	bool hasWon();
+protected:
+	State getState();
+	void clear();
 	shared_ptr<Game> getGame();
 
 private:

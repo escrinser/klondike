@@ -10,6 +10,8 @@
 
 #include <memory>
 
+#include "OperationControllerVisitor.h"
+
 class OperationController;
 class StartController;
 class GameController;
@@ -17,7 +19,7 @@ class ContinueController;
 
 using namespace std;
 
-class KlondiqueView {
+class KlondiqueView : public OperationControllerVisitor{
 public:
 	KlondiqueView();
 	virtual ~KlondiqueView();

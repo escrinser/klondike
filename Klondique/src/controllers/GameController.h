@@ -1,10 +1,3 @@
-/*
- * GameController.h
- *
- *  Created on: 8 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef GAMECONTROLLER_H_
 #define GAMECONTROLLER_H_
 
@@ -19,8 +12,19 @@ class GameController : public OperationController{
 public:
 	GameController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
 	virtual ~GameController();
-	void control();
-	void accept(KlondiqueView* klondiqueView);
+	void showBoard(); //TODO: Colaborate with BoardView
+	void deal();
+
+	void moveBetweenPiles(int thePileOriginNumber,
+		     	 	 	  int thePileDestinationNumber,
+						  int theCardOriginNumber);
+
+	void moveBetweenWastePileAndPile(int thePileDestinationNumber);
+
+	void moveBetweenWastePileAndFoundation();
+	void moveBetweenPileAndFoundation(int thePileOriginNumber);
+
+	void accept(OperationControllerVisitor* operationControllerVisitor);
 private:
 	shared_ptr<Game> game;
 };

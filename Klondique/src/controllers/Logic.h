@@ -23,7 +23,6 @@ class Logic {
 public:
 	Logic();
 	virtual ~Logic();
-	void play();
 	shared_ptr<OperationController> getController();
 
 private:

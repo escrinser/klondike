@@ -30,19 +30,6 @@ Logic::~Logic() {
 	// TODO Auto-generated destructor stub
 }
 
-void
-Logic::play()
-{
-	shared_ptr<OperationController> controller;
-	do {
-		controller = getController();
-		if (controller != nullptr)
-		{
-			controller->control();
-		}
-	} while (controller != nullptr);
-}
-
 shared_ptr<OperationController>
 Logic::getController()
 {

@@ -7,12 +7,22 @@
 
 #include <BoardView.h>
 
-BoardView::BoardView() {
-	// TODO Auto-generated constructor stub
+#include "OperationController.h"
 
+BoardView::BoardView(OperationController* theController)
+{
+	//assert theController != nullptr;
+
+	controller = theController;
 }
 
 BoardView::~BoardView() {
 	// TODO Auto-generated destructor stub
 }
 
+void
+BoardView::showBoard()
+{
+	controller->printBoard();
+
+}

@@ -7,9 +7,6 @@
 
 #include "Suit.h"
 
-Suit::Suit() {
-}
-
 Suit::~Suit() {
 }
 
@@ -31,7 +28,7 @@ Suit::toString(SuitType suitType)
 {
 	switch(suitType)
 	{
-	    case SuitType::HEARTS  :
+	    case SuitType::HEART  :
 	    	return "heart_R";
 	    	break;
 	    case SuitType::CLUB  :

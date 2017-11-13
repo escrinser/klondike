@@ -1,10 +1,3 @@
-/*
- * StartController.h
- *
- *  Created on: 8 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef STARTCONTROLLER_H_
 #define STARTCONTROLLER_H_
 
@@ -19,8 +12,8 @@ class StartController : public OperationController {
 public:
 	StartController(shared_ptr<Game> theGame): OperationController(theGame), game(theGame){};
 	virtual ~StartController();
-	void control();
-	void accept(KlondiqueView* klondiqueView);
+	void setStart(State theState);
+	void accept(OperationControllerVisitor* operationControllerVisitor);
 private:
 	shared_ptr<Game> game;
 };
