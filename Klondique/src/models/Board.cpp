@@ -129,10 +129,9 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 					    int theCardOriginNumber)
 {
 	bool movementCorrect = false;
-
-	if (theCardOriginNumber == 0)
+	if (!piles[thePileOriginNumber - 1].empty())
 	{
-		if (!piles[thePileDestinationNumber - 1].empty())
+		if (theCardOriginNumber == 0)
 		{
 			if (canMoveToPile(piles[thePileOriginNumber - 1].back()->getCard(), thePileDestinationNumber))
 			{
@@ -141,116 +140,54 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 				upturnCardInPile(piles[thePileOriginNumber - 1]);
 			}
 		}
-	}
-	else // Move more than one card from pile to pile
-	{
-		//Move a king to a empty Pile (other card is not allowed)
-		if (piles[thePileDestinationNumber - 1].empty())
+		else // Move more than one card from pile to pile
 		{
-			if (theCardOriginNumber != 0)
+			vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
+			vector<shared_ptr<CardInBoard>> pileOriginReverse;
+			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
+			do
 			{
-				vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
-				vector<shared_ptr<CardInBoard>> pileOriginReverse;
-				cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
-				do
+				if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
+								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
 				{
-					if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
-									pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
+					if (canMoveToPile(pileOrigin2.back()->getCard(), thePileDestinationNumber))
 					{
-						cout << "I found the King" << endl;
-						cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-						if (pileOrigin2.back()->getCard()->getNumber() == 13)
-						{
-							// Movement
-							// Put all the cards in the Pile Destination
-							pileOriginReverse.push_back(pileOrigin2.back());
-							pileOrigin2.pop_back();
+						// Movement
+						// Put all the cards in the Pile Destination
+						pileOriginReverse.push_back(pileOrigin2.back());
+						pileOrigin2.pop_back();
 
-							// Delete from the Pile Origin all the cards
-							do
-							{
-								// Put in the destination all the cards
-								piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
-								pileOriginReverse.pop_back();
-								piles[thePileOriginNumber - 1].pop_back();
-							} while (pileOriginReverse.size() != 0);
-
-							movementCorrect = true;
-							cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
-						}
-						else
+						// Delete from the Pile Origin all the cards
+						do
 						{
-							cout << "Not possible movement" << endl;
-						}
-						break;
+							// Put in the destination all the cards
+							piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
+							pileOriginReverse.pop_back();
+							piles[thePileOriginNumber - 1].pop_back();
+						} while (pileOriginReverse.size() != 0);
+
+						movementCorrect = true;
+						cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
 					}
 					else
 					{
-						cout << "This is not the card" << endl;
-						pileOriginReverse.push_back(pileOrigin2.back());
-						pileOrigin2.pop_back();
+						cout << "Not possible movement" << endl;
 					}
+					break;
 				}
-				while  (pileOrigin2.size() != 0);
-			}
-
-		}
-		else
-		{
-			if (theCardOriginNumber != 0)
-			{
-				vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
-				vector<shared_ptr<CardInBoard>> pileOriginReverse;
-				cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
-				do
+				else
 				{
-					if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
-									pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
-					{
-						cout << "I found the card" << endl;
-						cout << "Pile Origin size after found the card: " << pileOrigin2.size() << endl;
-						if ((pileOrigin2.back()->getCard()->getNumber() ==
-											(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
-												(pileOrigin2.back()->getCard()->getSuit()->getColor() !=
-													(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor())))
-						{
-							// Movement
-							// Put all the cards in the Pile Destination
-							pileOriginReverse.push_back(pileOrigin2.back());
-							pileOrigin2.pop_back();
-
-							// Delete from the Pile Origin all the cards
-							do
-							{
-								// Put in the destination all the cards
-								piles[thePileDestinationNumber - 1].push_back(pileOriginReverse.back());
-								pileOriginReverse.pop_back();
-								piles[thePileOriginNumber - 1].pop_back();
-							} while (pileOriginReverse.size() != 0);
-
-							movementCorrect = true;
-							cout << "MOVE SEVERAL CARDS FROM PILE TO PILE" << endl;
-						}
-						else
-						{
-							cout << "Not possible movement" << endl;
-						}
-						break;
-					}
-					else
-					{
-						cout << "This is not the card" << endl;
-						pileOriginReverse.push_back(pileOrigin2.back());
-						pileOrigin2.pop_back();
-					}
+					cout << "This is not the card" << endl;
+					pileOriginReverse.push_back(pileOrigin2.back());
+					pileOrigin2.pop_back();
 				}
-				while  (pileOrigin2.size() != 0);
 			}
-		}
+			while  (pileOrigin2.size() != 0);
 
-		if (movementCorrect)
-		{
-			upturnCardInPile(piles[thePileOriginNumber - 1]);
+			if (movementCorrect)
+			{
+				upturnCardInPile(piles[thePileOriginNumber - 1]);
+			}
 		}
 	}
 }
