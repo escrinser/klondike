@@ -1,4 +1,5 @@
 #include <LocalController.h>
+
 #include "../../models/State.h"
 #include "../../models/Game.h"
 
@@ -20,10 +21,6 @@ void LocalController::setState(State state) {
 
 void LocalController::clear() {
 	game->clear();
-}
-
-bool LocalController::hasWon() {
-	return game->hasWon();
 }
 
 shared_ptr<Game> LocalController::getGame() {

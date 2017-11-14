@@ -1,4 +1,4 @@
-#include <local/LocalOperationController.h>
+#include <LocalOperationController.h>
 
 LocalOperationController::~LocalOperationController() {
 	// TODO Auto-generated destructor stub

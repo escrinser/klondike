@@ -6,6 +6,8 @@
  */
 
 #include "Klondike.h"
+#include "controllers/local/LocalOperationController.h"
+//#include "controllers/OperationController.h"
 
 #include <iostream>
 
@@ -23,7 +25,8 @@ Klondike::~Klondike() {
 void
 Klondike::play()
 {
-	shared_ptr<OperationController> controller;
+	shared_ptr<LocalOperationController> controller;
+	//shared_ptr<OperationController> controller;
 	do {
 		controller = logic.getController();
 		if (controller != nullptr){

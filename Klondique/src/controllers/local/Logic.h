@@ -12,10 +12,10 @@
 #include <memory>
 
 class Game;
+class LocalOperationController;
 class LocalStartController;
 class LocalGameController;
 class LocalContinueController;
-class LocalOperationController;
 
 using namespace std;
 

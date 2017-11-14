@@ -1,4 +1,7 @@
 #include <LocalContinueController.h>
+
+#include "OperationControllerVisitor.h"
+
 #include "../../models/Game.h"
 
 LocalContinueController::~LocalContinueController() {
@@ -30,9 +33,20 @@ LocalContinueController::setContinue(int theOption)
 }
 
 void
-LocalContinueController::accept(LocalOperationControllerVisitor* operationControllerVisitor)
+LocalContinueController::accept(OperationControllerVisitor* operationControllerVisitor)
 {
 	operationControllerVisitor->visit(this);
 }
 
+void
+LocalContinueController::setState(State state)
+{
+
+}
+
+void
+LocalContinueController::printBoard()
+{
+
+}
 

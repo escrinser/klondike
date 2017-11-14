@@ -1,4 +1,7 @@
 #include <LocalGameController.h>
+
+#include "OperationControllerVisitor.h"
+
 #include "../../models/Game.h"
 
 
@@ -44,10 +47,28 @@ LocalGameController::moveBetweenPileAndFoundation(int thePileOriginNumber)
 	game->moveBetweenPileAndFoundation(thePileOriginNumber);
 }
 
+bool
+LocalGameController::hasWon()
+{
+	return game->hasWon();
+}
+
 void
-LocalGameController::accept(LocalOperationControllerVisitor* operationControllerVisitor)
+LocalGameController::accept(OperationControllerVisitor* operationControllerVisitor)
 {
 	operationControllerVisitor->visit(this);
+}
+
+void
+LocalGameController::setState(State state)
+{
+
+}
+
+void
+LocalGameController::printBoard()
+{
+
 }
 
 

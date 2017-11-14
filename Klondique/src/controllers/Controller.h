@@ -1,8 +1,8 @@
 /*
  * Controller.h
  *
- *  Created on: 13 nov. 2017
- *      Author: Ana
+ *  Created on: 14 nov. 2017
+ *      Author: eseogaz
  */
 
 #ifndef CONTROLLERS_CONTROLLER_H_
@@ -16,7 +16,6 @@ public:
 	virtual ~Controller();
 	virtual void setState(State state) = 0;
 	virtual void printBoard() = 0;
-	virtual bool hasWon() = 0;
 };
 
 #endif /* CONTROLLERS_CONTROLLER_H_ */

@@ -8,7 +8,7 @@
 #ifndef VIEWS_KLONDIQUEVIEW_H_
 #define VIEWS_KLONDIQUEVIEW_H_
 
-#include "OperationControllerVisitor.h"
+#include "../controllers/OperationControllerVisitor.h"
 #include <memory>
 
 

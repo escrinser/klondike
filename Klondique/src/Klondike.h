@@ -9,7 +9,6 @@
 #define KLONDIKE_H_
 
 #include "controllers/local/Logic.h"
-#include "controllers/OperationController.h"
 
 #include "views/KlondiqueView.h"
 

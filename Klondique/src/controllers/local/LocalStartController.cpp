@@ -1,4 +1,7 @@
 #include <LocalStartController.h>
+
+#include "OperationControllerVisitor.h"
+
 #include "../../models/Game.h"
 
 LocalStartController::~LocalStartController() {
@@ -13,8 +16,20 @@ LocalStartController::setStart(State theState)
 }
 
 void
-LocalStartController::accept(LocalOperationControllerVisitor* operationControllerVisitor)
+LocalStartController::accept(OperationControllerVisitor* operationControllerVisitor)
 {
 	operationControllerVisitor->visit(this);
+}
+
+void
+LocalStartController::setState(State state)
+{
+
+}
+
+void
+LocalStartController::printBoard()
+{
+
 }
 

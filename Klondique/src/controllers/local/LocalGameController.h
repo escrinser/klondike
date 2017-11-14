@@ -1,14 +1,17 @@
 #ifndef LOCALGAMECONTROLLER_H_
 #define LOCALGAMECONTROLLER_H_
 
-#include <local/LocalOperationController.h>
 #include <memory>
+
+#include "GameController.h"
+#include "LocalOperationController.h"
+//#include "LocalController.h"
 
 class Game;
 
 using namespace std;
 
-class LocalGameController : public LocalOperationController{
+class LocalGameController : public GameController, LocalOperationController{
 public:
 	LocalGameController(shared_ptr<Game> theGame): LocalOperationController(theGame), game(theGame){};
 	virtual ~LocalGameController();
@@ -24,7 +27,12 @@ public:
 	void moveBetweenWastePileAndFoundation();
 	void moveBetweenPileAndFoundation(int thePileOriginNumber);
 
-	void accept(LocalOperationControllerVisitor* operationControllerVisitor);
+	void accept(OperationControllerVisitor* operationControllerVisitor);
+
+	bool hasWon();
+
+	void setState(State state);
+	void printBoard();
 private:
 	shared_ptr<Game> game;
 };

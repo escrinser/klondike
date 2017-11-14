@@ -25,6 +25,7 @@ public:
 
 	virtual void moveBetweenWastePileAndFoundation() = 0;
 	virtual void moveBetweenPileAndFoundation(int thePileOriginNumber) = 0;
+	virtual bool hasWon() = 0;
 };
 
 #endif /* CONTROLLERS_GAMECONTROLLER_H_ */

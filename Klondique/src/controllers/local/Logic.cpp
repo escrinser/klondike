@@ -7,12 +7,12 @@
 
 #include "Logic.h"
 
-#include <LocalContinueController.h>
-#include <LocalGameController.h>
-#include <LocalOperationController.h>
-#include <LocalStartController.h>
-
 #include <iostream>
+
+#include "LocalOperationController.h"
+#include "LocalContinueController.h"
+#include "LocalGameController.h"
+#include "LocalStartController.h"
 
 #include "../../models/Game.h"
 #include "../../utils/LimitedInDialog.h"

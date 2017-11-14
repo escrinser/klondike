@@ -2,6 +2,7 @@
 #define LOCALCONTROLLER_H_
 
 #include <memory>
+
 #include "../../models/State.h"
 
 class Game;
@@ -14,7 +15,7 @@ public:
 	virtual ~LocalController();
 	void setState(State state);
 	void printBoard();
-	bool hasWon();
+
 protected:
 	State getState();
 	void clear();

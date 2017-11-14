@@ -1,21 +1,21 @@
 #ifndef LOCALOPERATIONCONTROLLER_H_
 #define LOCALOPERATIONCONTROLLER_H_
 
-#include <LocalOperationControllerVisitor.h>
-#include <LocalController.h>
 #include <memory>
 
+//#include "OperationControllerVisitor.h"
+//#include "LocalController.h"
+#include "OperationController.h"
 
 class Game;
-class KlondiqueView;
 
 using namespace std;
 
-class LocalOperationController : public LocalController {
+class LocalOperationController : public OperationController {
 public:
-	LocalOperationController(shared_ptr<Game> theGame): LocalController(theGame), game(theGame){};
+	LocalOperationController(shared_ptr<Game> theGame): game(theGame){};
 	virtual ~LocalOperationController();
-	virtual void accept(LocalOperationControllerVisitor* operationControllerVisitor) = 0;
+	//virtual void accept(OperationControllerVisitor* operationControllerVisitor) = 0;
 private:
 	shared_ptr<Game> game;
 };
