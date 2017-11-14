@@ -59,17 +59,5 @@ LocalGameController::accept(OperationControllerVisitor* operationControllerVisit
 	operationControllerVisitor->visit(this);
 }
 
-void
-LocalGameController::setState(State state)
-{
-
-}
-
-void
-LocalGameController::printBoard()
-{
-
-}
-
 
 

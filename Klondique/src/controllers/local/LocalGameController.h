@@ -5,7 +5,6 @@
 
 #include "GameController.h"
 #include "LocalOperationController.h"
-//#include "LocalController.h"
 
 class Game;
 
@@ -30,9 +29,6 @@ public:
 	void accept(OperationControllerVisitor* operationControllerVisitor);
 
 	bool hasWon();
-
-	void setState(State state);
-	void printBoard();
 private:
 	shared_ptr<Game> game;
 };

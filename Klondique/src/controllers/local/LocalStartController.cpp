@@ -21,15 +21,3 @@ LocalStartController::accept(OperationControllerVisitor* operationControllerVisi
 	operationControllerVisitor->visit(this);
 }
 
-void
-LocalStartController::setState(State state)
-{
-
-}
-
-void
-LocalStartController::printBoard()
-{
-
-}
-

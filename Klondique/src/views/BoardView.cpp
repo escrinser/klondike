@@ -23,6 +23,5 @@ BoardView::~BoardView() {
 void
 BoardView::showBoard()
 {
-	controller->printBoard();
-
+	//controller->printBoard(); //TODO: Create abstract class Controller with this method.
 }

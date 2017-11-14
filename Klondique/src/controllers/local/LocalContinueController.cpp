@@ -38,15 +38,4 @@ LocalContinueController::accept(OperationControllerVisitor* operationControllerV
 	operationControllerVisitor->visit(this);
 }
 
-void
-LocalContinueController::setState(State state)
-{
-
-}
-
-void
-LocalContinueController::printBoard()
-{
-
-}
 
