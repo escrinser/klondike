@@ -1,12 +1,4 @@
-/*
- * Klondike.cpp
- *
- *  Created on: 13 nov. 2017
- *      Author: eseogaz
- */
-
 #include "Klondike.h"
-#include "controllers/local/LocalOperationController.h"
 
 #include <iostream>
 
@@ -17,7 +9,6 @@ Klondike::Klondike()
 }
 
 Klondike::~Klondike() {
-	// TODO Auto-generated destructor stub
 }
 
 
@@ -25,7 +16,6 @@ void
 Klondike::play()
 {
 	shared_ptr<OperationController> controller;
-	//shared_ptr<LocalOperationController> controller;
 	do {
 		controller = logic.getController();
 		if (controller != nullptr){

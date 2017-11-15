@@ -1,10 +1,3 @@
-/*
- * Klondike.h
- *
- *  Created on: 13 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef KLONDIKE_H_
 #define KLONDIKE_H_
 

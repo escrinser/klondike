@@ -20,18 +20,16 @@
 #define NUMBER_OF_PILES 7
 
 KlondiqueView::KlondiqueView() {
-	// TODO Auto-generated constructor stub
 
 }
 
 KlondiqueView::~KlondiqueView() {
-	// TODO Auto-generated destructor stub
 }
 
 void
 KlondiqueView::interact(OperationController* controller)
 {
-		//assert controller != null;
+		//assert controller != nullptr;
 		controller->accept(this);
 }
 
@@ -42,24 +40,22 @@ KlondiqueView::visit(StartController* startController)
 			"1  Play\n"
 			"2  Exit\n"
 			"Enter your choice and press return:", 1, 2);
-	int choice = startDialog.read();
-	switch (choice)
+
+	switch (startDialog.read())
 	{
 	   case 1:
-		   cout << "Start playing"<<endl;
-		   startController->setStart(State::IN_GAME);
+		   startController->setStart();
+		   startController->setState(State::IN_GAME);
+		   BoardView(startController).showBoard();
 		   break;
 
 	   case 2:
-		   cout << "Exit."<<endl;
-		   startController->setStart(State::FINAL);
+		   startController->setState(State::EXIT);
 		   break;
 
 	   default:
-		   cout << "Not a Valid Choice. Choose again.\n";
 		   break;
 	}
-	BoardView(startController).showBoard();
 }
 
 void
@@ -81,7 +77,7 @@ KlondiqueView::visit(GameController* gameController)
 			"3  Move a card between Piles\n"
 			"4  Move a card between Pile to Foundation\n"
 			"5  Move a card between Waste Pile to Foundation\n"
-			"6  Exit\n"
+			"6  Menu\n"
 			"Enter your choice and press return:", 1, 6);
 
 	do
@@ -92,7 +88,6 @@ KlondiqueView::visit(GameController* gameController)
 		{
 		   case 1:
 			   cout << "Deal a card"<<endl;
-			   //Deal a card
 			   gameController->deal();
 			   break;
 
@@ -155,11 +150,9 @@ KlondiqueView::visit(GameController* gameController)
 			   break;
 		   }
 		   case 6:
-			   cout << "No more movements. Exit"<<endl;
 			   break;
 
 		   default:
-			   cout << "Not a Valid Movement. Choose again.\n";
 			   break;
 		}
 	}
@@ -169,6 +162,7 @@ KlondiqueView::visit(GameController* gameController)
 	{
 		cout << "You win!!" << endl;
 	}
+
 	gameController->setState(State::FINAL);
 }
 

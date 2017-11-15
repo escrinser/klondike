@@ -1,10 +1,3 @@
-/*
- * Suit.cpp
- *
- *  Created on: 3 oct. 2017
- *      Author: Ana
- */
-
 #include "Suit.h"
 
 Suit::~Suit() {

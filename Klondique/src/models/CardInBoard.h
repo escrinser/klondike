@@ -1,10 +1,3 @@
-/*
- * CardInBoard.h
- *
- *  Created on: 4 oct. 2017
- *      Author: Ana
- */
-
 #ifndef CARDINBOARD_H_
 #define CARDINBOARD_H_
 

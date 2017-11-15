@@ -1,10 +1,3 @@
-/*
- * OperationController.h
- *
- *  Created on: 13 nov. 2017
- *      Author: Ana
- */
-
 #ifndef CONTROLLERS_OPERATIONCONTROLLER_H_
 #define CONTROLLERS_OPERATIONCONTROLLER_H_
 

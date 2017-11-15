@@ -1,10 +1,3 @@
-/*
- * CardInBoard.cpp
- *
- *  Created on: 4 oct. 2017
- *      Author: Ana
- */
-
 #include "CardInBoard.h"
 
 CardInBoard::CardInBoard() {

@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "../GameController.h"
-//#include "LocalOperationController.h"
 
 class Game;
 
@@ -12,10 +11,9 @@ using namespace std;
 
 class LocalGameController : public GameController{
 public:
-	//LocalGameController(shared_ptr<Game> theGame): LocalOperationController(theGame), game(theGame){};
 	LocalGameController(shared_ptr<Game> theGame): GameController(), game(theGame){};
 	virtual ~LocalGameController();
-	void showBoard(); //TODO: Colaborate with BoardView
+
 	void deal();
 
 	void moveBetweenPiles(int thePileOriginNumber,

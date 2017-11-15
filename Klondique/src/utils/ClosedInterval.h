@@ -1,10 +1,3 @@
-/*
- * ClosedInterval.h
- *
- *  Created on: 5 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef CLOSEDINTERVAL_H_
 #define CLOSEDINTERVAL_H_
 

@@ -1,10 +1,3 @@
-/*
- * KlondiqueBoard.cpp
- *
- *  Created on: 3 oct. 2017
- *      Author: Ana
- */
-
 #include "Board.h"
 
 #include "Suit.h"
@@ -21,31 +14,6 @@ Board::~Board() {
 Board::Board(shared_ptr<Deck> theDeck)
 {
 	deck = theDeck;
-}
-
-void
-Board::initBoard()
-{
-	// stock
-	for(vector<shared_ptr<Card>>::iterator it = deck->getDeck().begin(); it != deck->getDeck().end(); it++)
-	{
-	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
-	}
-
-	// upturnedDeck empty
-
-	// Foundation Hearts empty
-	// Foundation Spades empty
-	// Foundation Clubs empty
-	// Foundation Diamonds empty
-
-	// Pile1 empty
-	// Pile2 empty
-	// Pile3 empty
-	// Pile4 empty
-	// Pile5 empty
-	// Pile6 empty
-	// Pile7 empty
 }
 
 void
@@ -272,51 +240,6 @@ Board::canMoveToFoundation(int theCardNumber, int theFoundationNumber)
 	}
 }
 
-bool
-Board::canMoveBetweenWastePileAndPile(int thePileDestinationNumber)
-{
-	//return 0 -> no movement (not possible, same color or not the next number)
-	bool movementCorrect = false;
-
-	if (!wastePile.empty())
-	{
-		//Move a king to a empty Pile (other card is not allowed)
-		if (piles[thePileDestinationNumber - 1].empty())
-		{
-			cout << "ONLY A KING IS ALLOW FROM PILE TO EMPTY PILE" << endl;
-			if (wastePile.back()->getCard()->getNumber()==13)
-			{
-				movementCorrect = true;
-				cout << "MOVE A KING FROM PILE TO EMPTY PILE" << endl;
-			}
-			else
-			{
-				cout << "Not possible movement" << endl;
-			}
-		}
-		else
-		{
-			if ((wastePile.back()->getCard()->getNumber() ==
-							(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
-								(wastePile.back()->getCard()->getSuit()->getColor() !=
-									(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor())))
-			{
-				movementCorrect = true;
-				cout << "MOVE A CARD FROM WASTE PILE TO PILE" << endl;
-			}
-			else
-			{
-				cout << "Not possible movement" << endl;
-			}
-		}
-	}
-	else
-	{
-		cout << "Not possible movement - Waste Pile Empty" << endl;
-	}
-	return movementCorrect;
-}
-
 int
 Board::giveMeTheFoundationNumber(SuitType theSuit)
 {
@@ -349,12 +272,10 @@ Board::upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile)
 		{
 			thePile.back()->setUpOrDownTurned(TurnedEnum::UP);
 			upturnedCorrect = true;
-			cout << "UPTURNED A CARD FROM PILE" << endl;
 		}
 	}
 	else
 	{
-		cout << "END OF UPTURNED A CARD FROM PILE - NO MORE CARDS" << endl;
 		upturnedCorrect = true;
 	}
 	return upturnedCorrect;

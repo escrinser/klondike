@@ -1,10 +1,3 @@
-/*
- * Controller.h
- *
- *  Created on: 15 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef CONTROLLERS_CONTROLLER_H_
 #define CONTROLLERS_CONTROLLER_H_
 

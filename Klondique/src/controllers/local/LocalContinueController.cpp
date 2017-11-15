@@ -5,7 +5,6 @@
 #include "../../models/Game.h"
 
 LocalContinueController::~LocalContinueController() {
-	// TODO Auto-generated destructor stub
 }
 
 void

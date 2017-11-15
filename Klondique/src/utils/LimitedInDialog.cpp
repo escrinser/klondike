@@ -1,10 +1,3 @@
-/*
- * LimitedInDialog.cpp
- *
- *  Created on: 5 nov. 2017
- *      Author: eseogaz
- */
-
 #include "LimitedInDialog.h"
 
 #include <assert.h>
@@ -18,7 +11,6 @@ LimitedInDialog::LimitedInDialog(string theTitle, int theMin, int theMax) {
 }
 
 LimitedInDialog::~LimitedInDialog() {
-	// TODO Auto-generated destructor stub
 }
 
 int

@@ -1,10 +1,3 @@
-/*
- * Game.h
- *
- *  Created on: 8 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef GAME_H_
 #define GAME_H_
 
@@ -43,8 +36,6 @@ public:
 		this->state = state;
 	}
 
-	void initBoard();
-
 	void startPlayingBoard();
 
 	void showBoard();
@@ -63,8 +54,6 @@ public:
 	bool hasWon();
 
 	void clear();
-
-	//Other methods with Board like move....
 
 private:
 	State state;

@@ -1,10 +1,3 @@
-/*
- * GameController.h
- *
- *  Created on: 13 nov. 2017
- *      Author: Ana
- */
-
 #ifndef CONTROLLERS_GAMECONTROLLER_H_
 #define CONTROLLERS_GAMECONTROLLER_H_
 
@@ -14,7 +7,6 @@ class GameController : public OperationController{
 public:
 	GameController() {};
 	virtual ~GameController() {};
-	//virtual void showBoard() = 0; //TODO: Colaborate with BoardView
 	virtual void deal() = 0;
 
 	virtual void moveBetweenPiles(int thePileOriginNumber,

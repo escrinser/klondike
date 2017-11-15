@@ -13,7 +13,6 @@
 
 class Game;
 class OperationController;
-//class LocalOperationController;
 class LocalStartController;
 class LocalGameController;
 class LocalContinueController;
@@ -25,7 +24,6 @@ public:
 	Logic();
 	virtual ~Logic();
 	shared_ptr<OperationController> getController();
-	//shared_ptr<LocalOperationController> getController();
 
 private:
 	shared_ptr<Game> game;

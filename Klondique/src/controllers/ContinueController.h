@@ -1,10 +1,3 @@
-/*
- * ContinueController.h
- *
- *  Created on: 13 nov. 2017
- *      Author: Ana
- */
-
 #ifndef CONTROLLERS_CONTINUECONTROLLER_H_
 #define CONTROLLERS_CONTINUECONTROLLER_H_
 

@@ -1,10 +1,3 @@
-/*
- * KlondiqueView.h
- *
- *  Created on: 13 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef VIEWS_KLONDIQUEVIEW_H_
 #define VIEWS_KLONDIQUEVIEW_H_
 

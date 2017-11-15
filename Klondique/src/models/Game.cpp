@@ -1,10 +1,3 @@
-/*
- * Game.cpp
- *
- *  Created on: 8 nov. 2017
- *      Author: eseogaz
- */
-
 #include "Game.h"
 #include "Board.h"
 
@@ -28,13 +21,6 @@ Game::Game() {
 }
 
 Game::~Game() {
-	// TODO Auto-generated destructor stub
-}
-
-void
-Game::initBoard()
-{
-	board->initBoard();
 }
 
 void

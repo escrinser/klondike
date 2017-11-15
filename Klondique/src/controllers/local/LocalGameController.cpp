@@ -6,13 +6,6 @@
 
 
 LocalGameController::~LocalGameController() {
-	// TODO Auto-generated destructor stub
-}
-
-void
-LocalGameController::showBoard()
-{
-	game->showBoard();
 }
 
 void
