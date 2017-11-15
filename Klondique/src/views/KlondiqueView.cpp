@@ -169,7 +169,7 @@ KlondiqueView::visit(GameController* gameController)
 	{
 		cout << "You win!!" << endl;
 	}
-	//gameController->setState(State::FINAL);
+	gameController->setState(State::FINAL);
 }
 
 void

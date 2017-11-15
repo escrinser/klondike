@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "../ContinueController.h"
-//#include "OperationController.h"
+//#include "LocalOperationController.h"
 
 class Game;
 
@@ -17,7 +17,9 @@ public:
 	virtual ~LocalContinueController();
 	void setContinue(int theOption);
 	void accept(OperationControllerVisitor* operationControllerVisitor);
-
+	void clear();
+	void setState(State state);
+	void printBoard();
 private:
 	shared_ptr<Game> game;
 };

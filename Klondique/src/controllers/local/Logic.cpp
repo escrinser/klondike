@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include "OperationController.h"
+//#include "LocalOperationController.h"
 #include "LocalContinueController.h"
 #include "LocalGameController.h"
 #include "LocalStartController.h"
@@ -32,6 +33,7 @@ Logic::~Logic() {
 }
 
 shared_ptr<OperationController>
+//shared_ptr<LocalOperationController>
 Logic::getController()
 {
 		switch (game->getState())

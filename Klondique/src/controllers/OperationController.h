@@ -8,9 +8,11 @@
 #ifndef CONTROLLERS_OPERATIONCONTROLLER_H_
 #define CONTROLLERS_OPERATIONCONTROLLER_H_
 
+#include "Controller.h"
+
 class OperationControllerVisitor;
 
-class OperationController{
+class OperationController : public Controller{
 public:
 	OperationController() {};
 	virtual ~OperationController() {};

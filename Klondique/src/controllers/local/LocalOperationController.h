@@ -3,15 +3,16 @@
 
 #include <memory>
 
-#include "OperationControllerVisitor.h"
+//#include "OperationControllerVisitor.h"
 #include "LocalController.h"
-#include "OperationController.h"
+//#include "OperationController.h"
 
 class Game;
 
 using namespace std;
 
-class LocalOperationController : public OperationController, LocalController {
+//class LocalOperationController : public OperationController, LocalController {
+class LocalOperationController : public LocalController {
 //class LocalOperationController : public OperationController{
 public:
 	LocalOperationController(shared_ptr<Game> theGame): LocalController(theGame) {};

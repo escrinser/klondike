@@ -33,6 +33,25 @@ LocalContinueController::setContinue(int theOption)
 }
 
 void
+LocalContinueController::clear()
+{
+	game->clear();
+}
+
+void
+LocalContinueController::setState(State state)
+{
+	game->setState(state);
+}
+
+void
+LocalContinueController::printBoard()
+{
+	game->showBoard();
+}
+
+
+void
 LocalContinueController::accept(OperationControllerVisitor* operationControllerVisitor)
 {
 	operationControllerVisitor->visit(this);

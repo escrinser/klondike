@@ -15,6 +15,7 @@ public:
 	ContinueController() {};
 	virtual ~ContinueController() {};
 	virtual void setContinue(int theOption) = 0;
+	virtual void clear() = 0;
 };
 
 #endif /* CONTROLLERS_CONTINUECONTROLLER_H_ */

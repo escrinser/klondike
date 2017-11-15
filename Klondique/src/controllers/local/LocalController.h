@@ -4,12 +4,13 @@
 #include <memory>
 
 #include "../../models/State.h"
+#include "../Controller.h"
 
 class Game;
 
 using namespace std;
 
-class LocalController {
+class LocalController : public Controller{
 public:
 	LocalController(shared_ptr<Game> theGame);
 	virtual ~LocalController();
@@ -17,9 +18,7 @@ public:
 	void printBoard();
 
 protected:
-	State getState();
 	void clear();
-	shared_ptr<Game> getGame();
 
 private:
 	shared_ptr<Game> game;

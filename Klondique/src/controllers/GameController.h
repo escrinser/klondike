@@ -14,7 +14,7 @@ class GameController : public OperationController{
 public:
 	GameController() {};
 	virtual ~GameController() {};
-	virtual void showBoard() = 0; //TODO: Colaborate with BoardView
+	//virtual void showBoard() = 0; //TODO: Colaborate with BoardView
 	virtual void deal() = 0;
 
 	virtual void moveBetweenPiles(int thePileOriginNumber,
