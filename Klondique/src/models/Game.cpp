@@ -8,7 +8,7 @@
 Game::Game() {
 	state = State::INITIAL;
 
-	shared_ptr<Deck> deck (new Deck()); //TODO: Load Deck inside Deck constructor
+	shared_ptr<Deck> deck (new Deck());
 	vector<shared_ptr<Suit>> allSuites;
 
 	allSuites.push_back(shared_ptr<Suit>(new Suit(SuitType::HEART, SuitColor::RED, NUMBER_OF_CARDS)));
