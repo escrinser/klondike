@@ -12,8 +12,8 @@
 
 class ContinueController : public OperationController{
 public:
-	ContinueController();
-	virtual ~ContinueController();
+	ContinueController() {};
+	virtual ~ContinueController() {};
 	virtual void setContinue(int theOption) = 0;
 };
 

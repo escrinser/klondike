@@ -24,7 +24,7 @@ Klondike::~Klondike() {
 void
 Klondike::play()
 {
-	shared_ptr<LocalOperationController> controller;
+	shared_ptr<OperationController> controller;
 	do {
 		controller = logic.getController();
 		if (controller != nullptr){

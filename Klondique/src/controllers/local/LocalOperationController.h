@@ -12,10 +12,11 @@ class Game;
 using namespace std;
 
 class LocalOperationController : public OperationController, LocalController {
+//class LocalOperationController : public OperationController{
 public:
-	LocalOperationController(shared_ptr<Game> theGame): LocalController(theGame){};
+	LocalOperationController(shared_ptr<Game> theGame): LocalController(theGame) {};
 	virtual ~LocalOperationController();
-	virtual void accept(OperationControllerVisitor* operationControllerVisitor) = 0;
+	//virtual void accept(OperationControllerVisitor* operationControllerVisitor) = 0;
 };
 
 #endif /* LOCALOPERATIONCONTROLLER_H_ */

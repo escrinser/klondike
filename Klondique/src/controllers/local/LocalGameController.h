@@ -3,16 +3,17 @@
 
 #include <memory>
 
-#include "GameController.h"
-#include "LocalOperationController.h"
+#include "../GameController.h"
+//#include "OperationController.h"
 
 class Game;
 
 using namespace std;
 
-class LocalGameController : public GameController, LocalOperationController{
+class LocalGameController : public GameController{
 public:
-	LocalGameController(shared_ptr<Game> theGame): LocalOperationController(theGame), game(theGame){};
+	//LocalGameController(shared_ptr<Game> theGame): LocalOperationController(theGame), game(theGame){};
+	LocalGameController(shared_ptr<Game> theGame): GameController(), game(theGame){};
 	virtual ~LocalGameController();
 	void showBoard(); //TODO: Colaborate with BoardView
 	void deal();

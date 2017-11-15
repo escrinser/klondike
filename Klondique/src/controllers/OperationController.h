@@ -12,8 +12,8 @@ class OperationControllerVisitor;
 
 class OperationController{
 public:
-	OperationController();
-	virtual ~OperationController();
+	OperationController() {};
+	virtual ~OperationController() {};
 	virtual void accept(OperationControllerVisitor* operationControllerVisitor) = 0;
 };
 

@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-#include "LocalOperationController.h"
+#include "OperationController.h"
 #include "LocalContinueController.h"
 #include "LocalGameController.h"
 #include "LocalStartController.h"
@@ -31,7 +31,7 @@ Logic::~Logic() {
 	// TODO Auto-generated destructor stub
 }
 
-shared_ptr<LocalOperationController>
+shared_ptr<OperationController>
 Logic::getController()
 {
 		switch (game->getState())

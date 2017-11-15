@@ -3,16 +3,17 @@
 
 #include <memory>
 
-#include "ContinueController.h"
-#include "LocalOperationController.h"
+#include "../ContinueController.h"
+//#include "OperationController.h"
 
 class Game;
 
 using namespace std;
 
-class LocalContinueController : public ContinueController, LocalOperationController{
+class LocalContinueController : public ContinueController{
 public:
-	LocalContinueController(shared_ptr<Game> theGame): LocalOperationController(theGame), game(theGame){};
+	//LocalContinueController(shared_ptr<Game> theGame): LocalOperationController(theGame), game(theGame){};
+	LocalContinueController(shared_ptr<Game> theGame): ContinueController(), game(theGame){};
 	virtual ~LocalContinueController();
 	void setContinue(int theOption);
 	void accept(OperationControllerVisitor* operationControllerVisitor);

@@ -12,7 +12,7 @@
 #include <memory>
 
 class Game;
-class LocalOperationController;
+class OperationController;
 class LocalStartController;
 class LocalGameController;
 class LocalContinueController;
@@ -23,7 +23,7 @@ class Logic {
 public:
 	Logic();
 	virtual ~Logic();
-	shared_ptr<LocalOperationController> getController();
+	shared_ptr<OperationController> getController();
 
 private:
 	shared_ptr<Game> game;

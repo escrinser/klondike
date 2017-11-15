@@ -1,4 +1,4 @@
-#include <LocalController.h>
+#include "LocalController.h"
 
 #include "../../models/State.h"
 #include "../../models/Game.h"

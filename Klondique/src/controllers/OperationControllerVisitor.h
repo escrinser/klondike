@@ -15,8 +15,8 @@ class ContinueController;
 
 class OperationControllerVisitor {
 public:
-	OperationControllerVisitor();
-	virtual ~OperationControllerVisitor();
+	OperationControllerVisitor() {};
+	virtual ~OperationControllerVisitor() {};
 	void virtual visit(StartController* startController) = 0;
 	void virtual visit(GameController* gameController) = 0;
 	void virtual visit(ContinueController* continueController) = 0;

@@ -14,8 +14,8 @@
 
 class StartController : public OperationController{
 public:
-	StartController();
-	virtual ~StartController();
+	StartController() {};
+	virtual ~StartController() {};
 	virtual void setStart(State theState) = 0;
 };
 
