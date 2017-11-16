@@ -13,12 +13,13 @@ class CardInBoard;
 
 using namespace std;
 
-#define KING 13 //TODO: Try to put in Deck.h
-#define ACE 1
-
 #define NUMBER_OF_PILES 7
 #define NUMBER_OF_FOUNDATIONS 4
-#define NUMBER_OF_CARDS 13
+
+#define FOUNDATION_HEART 0
+#define FOUNDATION_SPADE 1
+#define FOUNDATION_CLUB 2
+#define FOUNDATION_DIAMOND 3
 
 class Board {
 public:

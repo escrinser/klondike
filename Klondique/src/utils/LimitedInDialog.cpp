@@ -23,7 +23,7 @@ LimitedInDialog::read(){
 			ok = limits.includes(value);
 			if (!ok)
 			{
-				cout << "El valor debe estar entre los límites " + limits.toString() << endl;
+				cout << "The value must be between the limits " + limits.toString() << endl;
 			}
 		} while (!ok);
 		return value;

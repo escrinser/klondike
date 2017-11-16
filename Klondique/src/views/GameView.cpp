@@ -61,7 +61,7 @@ GameView::interact(GameController* gameController)
 			   string lastCard;
 
 			   cin >> lastCard;
-			   if (lastCard == "no") //TODO: LimitedInDialog to string in the ClosedStringInterval.
+			   if (lastCard == "no")
 			   {
 				   cout << "\nPile Origin Card Number: ";
 				   pileNumberOriginNumber = cardDialog.read();

@@ -243,16 +243,16 @@ Board::giveMeTheFoundationNumber(SuitType theSuit)
 	switch(theSuit)
 	{
 	    case SuitType::HEART  :
-	    	return 0;
+	    	return FOUNDATION_HEART;
 	    	break;
 	    case SuitType::SPADE  :
-	    	return 1;
+	    	return FOUNDATION_SPADE;
 	    	break;
 	    case SuitType::CLUB  :
-	    	return 2;
+	    	return FOUNDATION_CLUB;
 	    	break;
 	    case SuitType::DIAMOND  :
-	    	return 3;
+	    	return FOUNDATION_DIAMOND;
 	    	break;
 	}
 	return 0;
@@ -287,19 +287,19 @@ Board::showBoard()
 	for (unsigned int i=0 ; i < foundations.size(); i++)
 	{
 		string foundationName;
-		if (i==0)
+		if (i==FOUNDATION_HEART)
 		{
 			foundationName = "HEART";
 		}
-		else if (i==1)
+		else if (i==FOUNDATION_SPADE)
 		{
 			foundationName = "SPADE";
 		}
-		else if (i==2)
+		else if (i==FOUNDATION_CLUB)
 		{
 			foundationName = "CLUB";
 		}
-		else if (i==3)
+		else if (i==FOUNDATION_DIAMOND)
 		{
 			foundationName = "DIAMOND";
 		}
@@ -350,15 +350,15 @@ Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
 bool
 Board::hasWon()
 {
-	if (!foundations[0].empty()
-			&& !foundations[1].empty()
-				&& !foundations[2].empty()
-					&& !foundations[3].empty())
+	if (!foundations[FOUNDATION_HEART].empty()
+			&& !foundations[FOUNDATION_SPADE].empty()
+				&& !foundations[FOUNDATION_CLUB].empty()
+					&& !foundations[FOUNDATION_DIAMOND].empty())
 	{
-		if (((foundations[0].back()->getCard())->getNumber() == KING)
-				&& (foundations[1].back()->getCard()->getNumber() == KING)
-					 && (foundations[2].back()->getCard()->getNumber() == KING)
-						&& (foundations[3].back()->getCard()->getNumber() == KING))
+		if (((foundations[FOUNDATION_HEART].back()->getCard())->getNumber() == KING)
+				&& (foundations[FOUNDATION_SPADE].back()->getCard()->getNumber() == KING)
+					 && (foundations[FOUNDATION_CLUB].back()->getCard()->getNumber() == KING)
+						&& (foundations[FOUNDATION_DIAMOND].back()->getCard()->getNumber() == KING))
 		{
 			return true;
 		}

@@ -11,6 +11,11 @@ class Suit;
 
 using namespace std;
 
+#define KING 13
+#define ACE 1
+
+#define NUMBER_OF_CARDS 13
+
 class Deck {
 public:
 	Deck();
