@@ -4,6 +4,8 @@
 
 #include "../utils/LimitedInDialog.h"
 
+#include "BoardView.h"
+
 ContinueView::ContinueView() {
 
 }
@@ -18,7 +20,7 @@ ContinueView::interact(ContinueController* continueController)
 			"1  Play again\n"
 			"2  Continue\n"
 			"3  Exit\n"
-			"Enter your choice and press return:", 1, 3);
+			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_3);
 
 	continueController->setContinue(continueMenuDialog.read());
 }

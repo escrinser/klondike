@@ -13,6 +13,13 @@ class CardInBoard;
 
 using namespace std;
 
+#define KING 13 //TODO: Try to put in Deck.h
+#define ACE 1
+
+#define NUMBER_OF_PILES 7
+#define NUMBER_OF_FOUNDATIONS 4
+#define NUMBER_OF_CARDS 13
+
 class Board {
 public:
 	Board();
@@ -22,7 +29,7 @@ public:
 
 	void startPlayingBoard();
 
-	int deal();
+	void deal();
 
 	void moveBetweenPiles(int thePileOriginNumber,
 		     	 	 	  int thePileDestinationNumber,
@@ -36,7 +43,7 @@ public:
 	bool canMoveToFoundation(int theCardNumber, int foundationNumber);
 
 	int giveMeTheFoundationNumber(SuitType theSuit);
-	bool upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
+	void upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
 
 	void showBoard();
 	void showElement(vector<shared_ptr<CardInBoard>> theElement);

@@ -1,10 +1,6 @@
 #include "Game.h"
 #include "Board.h"
 
-#define NUMBER_OF_PILES 7
-#define NUMBER_OF_FOUNDATIONS 4
-#define NUMBER_OF_CARDS 13
-
 Game::Game() {
 	state = State::INITIAL;
 

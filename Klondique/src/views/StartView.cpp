@@ -19,7 +19,7 @@ StartView::interact(StartController* startController)
 	LimitedInDialog startDialog ("Chose one option:\n\n"
 				"1  Play\n"
 				"2  Exit\n"
-				"Enter your choice and press return:", 1, 2);
+				"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_2);
 
 	switch (startDialog.read())
 	{

@@ -6,9 +6,6 @@
 
 #include "BoardView.h"
 
-#define NUMBER_OF_CARDS 13
-#define NUMBER_OF_PILES 7
-
 GameView::GameView() {
 
 }
@@ -19,9 +16,9 @@ GameView::~GameView() {
 void
 GameView::interact(GameController* gameController)
 {
-	LimitedInDialog cardDialog ("Card Number?", 1, NUMBER_OF_CARDS);
+	LimitedInDialog cardDialog ("Card Number?", MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);
 
-	LimitedInDialog pileDialog ("Pile Number?", 1, NUMBER_OF_PILES);
+	LimitedInDialog pileDialog ("Pile Number?", MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES);
 
 	int movement;
 
@@ -36,7 +33,7 @@ GameView::interact(GameController* gameController)
 			"4  Move a card between Pile to Foundation\n"
 			"5  Move a card between Waste Pile to Foundation\n"
 			"6  Menu\n"
-			"Enter your choice and press return:", 1, 6);
+			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_6);
 
 	do
 	{
@@ -114,7 +111,7 @@ GameView::interact(GameController* gameController)
 			   break;
 		}
 	}
-	while ((movement != 6) && (!gameController->hasWon()));
+	while ((movement != MENU_OPTION_6) && (!gameController->hasWon()));
 
 	if (gameController->hasWon())
 	{
