@@ -7,6 +7,8 @@
 #include "CardInBoard.h"
 #include "Card.h"
 
+#include "GameMemento.h"
+
 class Game {
 public:
 	Game();
@@ -54,6 +56,9 @@ public:
 	bool hasWon();
 
 	void clear();
+
+	GameMemento createMemento();
+	void set(GameMemento gameMemento);
 
 private:
 	State state;

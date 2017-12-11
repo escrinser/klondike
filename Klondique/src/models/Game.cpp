@@ -82,3 +82,33 @@ Game::clear()
 	board->clear();
 }
 
+GameMemento
+Game::createMemento()
+{
+	GameMemento gameMemento = new GameMemento();
+	/*for (int i = 0; i < Board.DIMENSION; i++) {
+		for (int j = 0; j < Board.DIMENSION; j++) {
+			Coordinate coordinate = new Coordinate(i, j);
+			for (Token token : Token.values()) {
+				if (board.full(coordinate, token)) {
+					gameMemento.set(coordinate, token);
+				}
+			}
+		}
+	}*/
+	return gameMemento;
+}
+
+void
+Game::set(GameMemento gameMemento)
+{
+	/*turn = new Turn(gameMemento.getTokenTurn());
+	board = new Board();
+	for (int i = 0; i < Board.DIMENSION; i++) {
+		for (int j = 0; j < Board.DIMENSION; j++) {
+			Coordinate coordinate = new Coordinate(i, j);
+			board.put(coordinate, gameMemento.getTokenBoard(coordinate));
+		}
+	}*/
+}
+
