@@ -57,13 +57,18 @@ public:
 
 	void clear();
 
-	GameMemento createMemento();
-	void set(GameMemento gameMemento);
+	void undo();
+
+	shared_ptr<GameMemento> createMemento();
+	void set(shared_ptr<GameMemento> gameMemento);
 
 private:
 	State state;
 	shared_ptr<Deck> deck;
 	shared_ptr<Board> board;
+
+	//TODO: Here or in MementoRegistry?
+	vector<shared_ptr<GameMemento>> mementoList;
 };
 
 #endif /* GAME_H_ */

@@ -32,8 +32,9 @@ GameView::interact(GameController* gameController)
 			"3  Move a card between Piles\n"
 			"4  Move a card between Pile to Foundation\n"
 			"5  Move a card between Waste Pile to Foundation\n"
-			"6  Menu\n"
-			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_6);
+			"6  Undo\n"
+			"7  Menu\n"
+			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_7);
 
 	do
 	{
@@ -105,13 +106,19 @@ GameView::interact(GameController* gameController)
 			   break;
 		   }
 		   case 6:
+		   {
+			   cout << "GameView::Undo"<<endl;
+			   gameController->undo();
+			   break;
+		   }
+		   case 7:
 			   break;
 
 		   default:
 			   break;
 		}
 	}
-	while ((movement != MENU_OPTION_6) && (!gameController->hasWon()));
+	while ((movement != MENU_OPTION_7) && (!gameController->hasWon()));
 
 	if (gameController->hasWon())
 	{

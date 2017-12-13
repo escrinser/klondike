@@ -7,6 +7,7 @@ class OperationController;
 #define MENU_OPTION_2 2
 #define MENU_OPTION_3 3
 #define MENU_OPTION_6 6
+#define MENU_OPTION_7 7
 
 #define MIN_NUMBER_OF_CARDS 1
 #define MAX_NUMBER_OF_CARDS 13

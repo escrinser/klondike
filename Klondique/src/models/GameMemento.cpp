@@ -1,8 +1,8 @@
 #include <GameMemento.h>
 
-GameMemento::GameMemento() {
-	// TODO Auto-generated constructor stub
-
+GameMemento::GameMemento(shared_ptr<Board> theBoard)
+{
+board = theBoard;
 }
 
 GameMemento::~GameMemento() {

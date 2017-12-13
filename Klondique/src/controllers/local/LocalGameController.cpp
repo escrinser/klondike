@@ -63,4 +63,11 @@ LocalGameController::printBoard()
 	game->showBoard();
 }
 
+void
+LocalGameController::undo()
+{
+	cout << "LocalGameController::undo()"<<endl;
+	game->undo();
+}
+
 

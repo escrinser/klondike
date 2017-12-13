@@ -35,6 +35,7 @@ void
 Game::deal()
 {
 	board->deal();
+	mementoList.push_back(createMemento());
 }
 
 void
@@ -43,24 +44,28 @@ Game::moveBetweenPiles(int thePileOriginNumber,
 					  int theCardOriginNumber)
 {
 	board->moveBetweenPiles(thePileOriginNumber, thePileDestinationNumber, theCardOriginNumber);
+	mementoList.push_back(createMemento());
 }
 
 void
 Game::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 {
 	board->moveBetweenWastePileAndPile(thePileDestinationNumber);
+	mementoList.push_back(createMemento());
 }
 
 void
 Game::moveBetweenWastePileAndFoundation()
 {
 	board->moveBetweenWastePileAndFoundation();
+	mementoList.push_back(createMemento());
 }
 
 void
 Game::moveBetweenPileAndFoundation(int thePileOriginNumber)
 {
 	board->moveBetweenPileAndFoundation(thePileOriginNumber);
+	mementoList.push_back(createMemento());
 }
 
 bool
@@ -82,33 +87,28 @@ Game::clear()
 	board->clear();
 }
 
-GameMemento
+void
+Game::undo()
+{
+	cout << "Game::undo"<<endl;
+	set(mementoList.back());
+}
+
+
+shared_ptr<GameMemento>
 Game::createMemento()
 {
-	GameMemento gameMemento = new GameMemento();
-	/*for (int i = 0; i < Board.DIMENSION; i++) {
-		for (int j = 0; j < Board.DIMENSION; j++) {
-			Coordinate coordinate = new Coordinate(i, j);
-			for (Token token : Token.values()) {
-				if (board.full(coordinate, token)) {
-					gameMemento.set(coordinate, token);
-				}
-			}
-		}
-	}*/
-	return gameMemento;
+	cout << "createMemento"<<endl;
+	return shared_ptr<GameMemento>(new GameMemento(board));
 }
 
 void
-Game::set(GameMemento gameMemento)
+Game::set(shared_ptr<GameMemento> gameMemento)
 {
-	/*turn = new Turn(gameMemento.getTokenTurn());
-	board = new Board();
-	for (int i = 0; i < Board.DIMENSION; i++) {
-		for (int j = 0; j < Board.DIMENSION; j++) {
-			Coordinate coordinate = new Coordinate(i, j);
-			board.put(coordinate, gameMemento.getTokenBoard(coordinate));
-		}
-	}*/
+	cout << "Game::set"<<endl;
+	board = gameMemento->board;
+
+	cout << "Game::set"<<endl;
+	showBoard();
 }
 
