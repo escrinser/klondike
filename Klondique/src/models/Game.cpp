@@ -90,8 +90,13 @@ Game::clear()
 void
 Game::undo()
 {
-	cout << "Game::undo"<<endl;
-	set(mementoList.back());
+	if (!mementoList.empty())
+	{
+		cout << "Game::undo " << mementoList.size() <<endl;
+
+		set(mementoList[mementoList.size()-2]); //TODO: Only undo last movement
+		//set(mementoList.back());
+	}
 }
 
 
@@ -99,16 +104,18 @@ shared_ptr<GameMemento>
 Game::createMemento()
 {
 	cout << "createMemento"<<endl;
-	return shared_ptr<GameMemento>(new GameMemento(board));
+	return shared_ptr<GameMemento>(new GameMemento(board->getStock(),
+												   board->getWastePile(),
+												   board->getPiles(),
+												   board->getFoundations()));
 }
 
 void
 Game::set(shared_ptr<GameMemento> gameMemento)
 {
-	cout << "Game::set"<<endl;
-	board = gameMemento->board;
-
-	cout << "Game::set"<<endl;
-	showBoard();
+	board->setStock(gameMemento->getStock());
+	board->setWastePile(gameMemento->getWastePile());
+	board->setPiles(gameMemento->getPiles());
+	board->setFoundations(gameMemento->getFoundations());
 }
 

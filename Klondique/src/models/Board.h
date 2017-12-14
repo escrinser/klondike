@@ -53,6 +53,16 @@ public:
 
 	void clear();
 
+	vector<shared_ptr<CardInBoard>> getStock();
+	vector<shared_ptr<CardInBoard>> getWastePile();
+	vector<vector<shared_ptr<CardInBoard>>> getPiles();
+	vector<vector<shared_ptr<CardInBoard>>> getFoundations();
+
+	void setStock(vector<shared_ptr<CardInBoard>> theStock);
+	void setWastePile(vector<shared_ptr<CardInBoard>> theWastePile);
+	void setPiles(vector<vector<shared_ptr<CardInBoard>>> thePiles);
+	void setFoundations(vector<vector<shared_ptr<CardInBoard>>> theFoundations);
+
 private:
 	shared_ptr<Deck> deck;
 

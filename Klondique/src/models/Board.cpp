@@ -381,3 +381,55 @@ Board::clear()
 	foundations.clear();
 	piles.clear();
 }
+
+vector<shared_ptr<CardInBoard>>
+Board::getStock()
+{
+	return stock;
+}
+
+vector<shared_ptr<CardInBoard>>
+Board::getWastePile()
+{
+	return wastePile;
+}
+
+vector<vector<shared_ptr<CardInBoard>>>
+Board::getPiles()
+{
+	return piles;
+}
+
+vector<vector<shared_ptr<CardInBoard>>>
+Board::getFoundations()
+{
+	return foundations;
+}
+
+void
+Board::setStock(vector<shared_ptr<CardInBoard>> theStock)
+{
+	stock = theStock;
+}
+
+void
+Board::setWastePile(vector<shared_ptr<CardInBoard>> theWastePile)
+{
+	wastePile = theWastePile;
+}
+
+void
+Board::setPiles(vector<vector<shared_ptr<CardInBoard>>> thePiles)
+{
+	piles = thePiles;
+}
+
+void
+Board::setFoundations(vector<vector<shared_ptr<CardInBoard>>> theFoundations)
+{
+	foundations = theFoundations;
+}
+
+
+
+
