@@ -28,7 +28,7 @@ Board::startPlayingBoard()
 	// Foundation Diamonds empty
 	for (int i = 0; i < NUMBER_OF_FOUNDATIONS; i++)
 	{
-		vector<shared_ptr<CardInBoard>> temp;
+		vector<CardInBoard> temp;
 
 		foundations.push_back(temp);
 	}
@@ -36,17 +36,17 @@ Board::startPlayingBoard()
 	// Colocate cards
 	for (int i = 0; i < NUMBER_OF_PILES; i++)
 	{
-		vector<shared_ptr<CardInBoard>> temp; // create an array, don't work directly on buff yet.
+		vector<CardInBoard> temp; // create an array, don't work directly on buff yet.
 		for(int j = 0; j < NUMBER_OF_PILES; j++)
 		{
 			if (j!=i)
 			{
-				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::DOWN)));
+				temp.push_back(CardInBoard (initialDeck.back(), TurnedEnum::DOWN));
 				initialDeck.pop_back();
 			}
 			else if (j==i)
 			{
-				temp.push_back(shared_ptr<CardInBoard>(new CardInBoard (initialDeck.back(), TurnedEnum::UP)));
+				temp.push_back(CardInBoard (initialDeck.back(), TurnedEnum::UP));
 				initialDeck.pop_back();
 				break;
 			}
@@ -56,7 +56,7 @@ Board::startPlayingBoard()
 
 	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(shared_ptr<CardInBoard>(new CardInBoard((*it), TurnedEnum::DOWN)));
+	   stock.push_back(CardInBoard((*it), TurnedEnum::DOWN));
 	}
 }
 
@@ -66,7 +66,7 @@ Board::deal()
 	if (!stock.empty())
 	{
 		wastePile.push_back(stock.back());
-		(wastePile.back())->setUpOrDownTurned(TurnedEnum::UP);
+		(wastePile.back()).setUpOrDownTurned(TurnedEnum::UP);
 		stock.pop_back();
 	}
 	else
@@ -79,7 +79,7 @@ Board::deal()
 		while (!wastePile.empty())
 		{
 			stock.push_back(wastePile.back());
-			(stock.back())->setUpOrDownTurned(TurnedEnum::DOWN);
+			(stock.back()).setUpOrDownTurned(TurnedEnum::DOWN);
 			wastePile.pop_back();
 		}
 
@@ -98,7 +98,7 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 	{
 		if (theCardOriginNumber == 0)
 		{
-			if (canMoveToPile(piles[thePileOriginNumber - 1].back()->getCard(), thePileDestinationNumber))
+			if (canMoveToPile(piles[thePileOriginNumber - 1].back().getCard(), thePileDestinationNumber))
 			{
 				piles[thePileDestinationNumber - 1].push_back(piles[thePileOriginNumber - 1].back());
 				piles[thePileOriginNumber - 1].pop_back();
@@ -107,15 +107,15 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 		}
 		else // Move more than one card from pile to pile
 		{
-			vector<shared_ptr<CardInBoard>> pileOrigin2 = piles[thePileOriginNumber - 1];
-			vector<shared_ptr<CardInBoard>> pileOriginReverse;
+			vector<CardInBoard> pileOrigin2 = piles[thePileOriginNumber - 1];
+			vector<CardInBoard> pileOriginReverse;
 			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
 			do
 			{
-				if (pileOrigin2.back()->getUpOrDownTurned() == TurnedEnum::UP &&
-								pileOrigin2.back()->getCard()->getNumber() == theCardOriginNumber)
+				if (pileOrigin2.back().getUpOrDownTurned() == TurnedEnum::UP &&
+								pileOrigin2.back().getCard()->getNumber() == theCardOriginNumber)
 				{
-					if (canMoveToPile(pileOrigin2.back()->getCard(), thePileDestinationNumber))
+					if (canMoveToPile(pileOrigin2.back().getCard(), thePileDestinationNumber))
 					{
 						// Movement
 						// Put all the cards in the Pile Destination
@@ -164,9 +164,9 @@ Board::moveBetweenPileAndFoundation(int thePileOriginNumber)
 
 	if (!piles[thePileOriginNumber - 1].empty())
 	{
-		foundationNumber = giveMeTheFoundationNumber(piles[thePileOriginNumber - 1].back()->getCard()->getSuit()->getSuit());
+		foundationNumber = giveMeTheFoundationNumber(piles[thePileOriginNumber - 1].back().getCard()->getSuit()->getSuit());
 
-		if (canMoveToFoundation(piles[thePileOriginNumber - 1].back()->getCard()->getNumber(), foundationNumber))
+		if (canMoveToFoundation(piles[thePileOriginNumber - 1].back().getCard()->getNumber(), foundationNumber))
 		{
 			foundations[foundationNumber].push_back(piles[thePileOriginNumber - 1].back());
 			piles[thePileOriginNumber - 1].pop_back();
@@ -180,7 +180,7 @@ Board::moveBetweenWastePileAndPile(int thePileDestinationNumber)
 {
 	if (!wastePile.empty())
 	{
-		if (canMoveToPile(wastePile.back()->getCard(), thePileDestinationNumber))
+		if (canMoveToPile(wastePile.back().getCard(), thePileDestinationNumber))
 		{
 			piles[thePileDestinationNumber - 1].push_back(wastePile.back());
 			wastePile.pop_back();
@@ -195,9 +195,9 @@ Board::moveBetweenWastePileAndFoundation()
 
 	if (!wastePile.empty())
 	{
-		foundationNumber = giveMeTheFoundationNumber(wastePile.back()->getCard()->getSuit()->getSuit());
+		foundationNumber = giveMeTheFoundationNumber(wastePile.back().getCard()->getSuit()->getSuit());
 
-		if (canMoveToFoundation(wastePile.back()->getCard()->getNumber(), foundationNumber))
+		if (canMoveToFoundation(wastePile.back().getCard()->getNumber(), foundationNumber))
 		{
 			foundations[foundationNumber].push_back(wastePile.back());
 			wastePile.pop_back();
@@ -210,9 +210,9 @@ Board::canMoveToPile(shared_ptr<Card> theCard, int thePileDestinationNumber)
 {
 	if((piles[thePileDestinationNumber-1].empty() && (theCard->getNumber() == KING))
 			|| (((theCard->getNumber()) ==
-					(piles[thePileDestinationNumber - 1].back()->getCard()->getNumber() - 1)) &&
+					(piles[thePileDestinationNumber - 1].back().getCard()->getNumber() - 1)) &&
 						(theCard->getSuit()->getColor() !=
-							(piles[thePileDestinationNumber - 1].back()->getCard()->getSuit()->getColor()))))
+							(piles[thePileDestinationNumber - 1].back().getCard()->getSuit()->getColor()))))
 	{
 		return true;
 	}
@@ -227,7 +227,7 @@ Board::canMoveToFoundation(int theCardNumber, int theFoundationNumber)
 {
 	if((foundations[theFoundationNumber].empty() && (theCardNumber == ACE))
 			|| (theCardNumber ==
-					(foundations[theFoundationNumber].back()->getCard()->getNumber() + 1)))
+					(foundations[theFoundationNumber].back().getCard()->getNumber() + 1)))
 	{
 		return true;
 	}
@@ -259,13 +259,13 @@ Board::giveMeTheFoundationNumber(SuitType theSuit)
 }
 
 void
-Board::upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile)
+Board::upturnCardInPile(vector<CardInBoard> thePile)
 {
 	if(!thePile.empty())
 	{
-		if ((thePile.back())->getUpOrDownTurned() == TurnedEnum::DOWN)
+		if ((thePile.back()).getUpOrDownTurned() == TurnedEnum::DOWN)
 		{
-			thePile.back()->setUpOrDownTurned(TurnedEnum::UP);
+			thePile.back().setUpOrDownTurned(TurnedEnum::UP);
 		}
 	}
 }
@@ -317,7 +317,7 @@ Board::showBoard()
 }
 
 void
-Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
+Board::showElement(vector<CardInBoard> theElement)
 {
     if (theElement.empty())
     {
@@ -326,17 +326,17 @@ Board::showElement(vector<shared_ptr<CardInBoard>> theElement)
     else
     {
     	cout << "Cards:";
-    	for(vector<shared_ptr<CardInBoard>>::iterator it = theElement.begin(); it != theElement.end(); it++)
+    	for(vector<CardInBoard>::iterator it = theElement.begin(); it != theElement.end(); it++)
 		{
     		//Only show cards upturned, X for downturned
     		cout << " ";
-    		if ((*it)->getUpOrDownTurned() == TurnedEnum::DOWN)
+    		if ((*it).getUpOrDownTurned() == TurnedEnum::DOWN)
     		{
     			cout << "X";
     		}
-    		else if ((*it)->getUpOrDownTurned() == TurnedEnum::UP)
+    		else if ((*it).getUpOrDownTurned() == TurnedEnum::UP)
     		{
-    			cout << ((*it)->getCard())->getNumber() << (*it)->getCard()->getSuit()->toString((*it)->getCard()->getSuit()->getSuit());
+    			cout << ((*it).getCard())->getNumber() << (*it).getCard()->getSuit()->toString((*it).getCard()->getSuit()->getSuit());
     		}
     		else
     		{
@@ -355,10 +355,10 @@ Board::hasWon()
 				&& !foundations[FOUNDATION_CLUB].empty()
 					&& !foundations[FOUNDATION_DIAMOND].empty())
 	{
-		if (((foundations[FOUNDATION_HEART].back()->getCard())->getNumber() == KING)
-				&& (foundations[FOUNDATION_SPADE].back()->getCard()->getNumber() == KING)
-					 && (foundations[FOUNDATION_CLUB].back()->getCard()->getNumber() == KING)
-						&& (foundations[FOUNDATION_DIAMOND].back()->getCard()->getNumber() == KING))
+		if (((foundations[FOUNDATION_HEART].back().getCard())->getNumber() == KING)
+				&& (foundations[FOUNDATION_SPADE].back().getCard()->getNumber() == KING)
+					 && (foundations[FOUNDATION_CLUB].back().getCard()->getNumber() == KING)
+						&& (foundations[FOUNDATION_DIAMOND].back().getCard()->getNumber() == KING))
 		{
 			return true;
 		}
@@ -382,50 +382,50 @@ Board::clear()
 	piles.clear();
 }
 
-vector<shared_ptr<CardInBoard>>
+vector<CardInBoard>
 Board::getStock()
 {
 	return stock;
 }
 
-vector<shared_ptr<CardInBoard>>
+vector<CardInBoard>
 Board::getWastePile()
 {
 	return wastePile;
 }
 
-vector<vector<shared_ptr<CardInBoard>>>
+vector<vector<CardInBoard>>
 Board::getPiles()
 {
 	return piles;
 }
 
-vector<vector<shared_ptr<CardInBoard>>>
+vector<vector<CardInBoard>>
 Board::getFoundations()
 {
 	return foundations;
 }
 
 void
-Board::setStock(vector<shared_ptr<CardInBoard>> theStock)
+Board::setStock(vector<CardInBoard> theStock)
 {
 	stock = theStock;
 }
 
 void
-Board::setWastePile(vector<shared_ptr<CardInBoard>> theWastePile)
+Board::setWastePile(vector<CardInBoard> theWastePile)
 {
 	wastePile = theWastePile;
 }
 
 void
-Board::setPiles(vector<vector<shared_ptr<CardInBoard>>> thePiles)
+Board::setPiles(vector<vector<CardInBoard>> thePiles)
 {
 	piles = thePiles;
 }
 
 void
-Board::setFoundations(vector<vector<shared_ptr<CardInBoard>>> theFoundations)
+Board::setFoundations(vector<vector<CardInBoard>> theFoundations)
 {
 	foundations = theFoundations;
 }

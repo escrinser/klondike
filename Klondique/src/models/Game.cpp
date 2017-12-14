@@ -23,6 +23,7 @@ void
 Game::startPlayingBoard()
 {
 	board->startPlayingBoard();
+	mementoList.push_back(createMemento());
 }
 
 void

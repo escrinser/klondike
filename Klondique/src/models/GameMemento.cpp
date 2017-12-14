@@ -1,9 +1,9 @@
 #include <GameMemento.h>
 
-GameMemento::GameMemento(vector<shared_ptr<CardInBoard>> theStock,
-					     vector<shared_ptr<CardInBoard>> theWastePile,
-						 vector<vector<shared_ptr<CardInBoard>>> thePiles,
-						 vector<vector<shared_ptr<CardInBoard>>> theFoundations)
+GameMemento::GameMemento(vector<CardInBoard> theStock,
+					     vector<CardInBoard> theWastePile,
+						 vector<vector<CardInBoard>> thePiles,
+						 vector<vector<CardInBoard>> theFoundations)
 {
 	stock = theStock;
 	wastePile = theWastePile;
@@ -15,50 +15,50 @@ GameMemento::~GameMemento() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<shared_ptr<CardInBoard>>
+vector<CardInBoard>
 GameMemento::getStock()
 {
 	return stock;
 }
 
-vector<shared_ptr<CardInBoard>>
+vector<CardInBoard>
 GameMemento::getWastePile()
 {
 	return wastePile;
 }
 
-vector<vector<shared_ptr<CardInBoard>>>
+vector<vector<CardInBoard>>
 GameMemento::getPiles()
 {
 	return piles;
 }
 
-vector<vector<shared_ptr<CardInBoard>>>
+vector<vector<CardInBoard>>
 GameMemento::getFoundations()
 {
 	return foundations;
 }
 
 void
-GameMemento::setStock(vector<shared_ptr<CardInBoard>> theStock)
+GameMemento::setStock(vector<CardInBoard> theStock)
 {
 	stock = theStock;
 }
 
 void
-GameMemento::setWastePile(vector<shared_ptr<CardInBoard>> theWastePile)
+GameMemento::setWastePile(vector<CardInBoard> theWastePile)
 {
 	wastePile = theWastePile;
 }
 
 void
-GameMemento::setPiles(vector<vector<shared_ptr<CardInBoard>>> thePiles)
+GameMemento::setPiles(vector<vector<CardInBoard>> thePiles)
 {
 	piles = thePiles;
 }
 
 void
-GameMemento::setFoundations(vector<vector<shared_ptr<CardInBoard>>> theFoundations)
+GameMemento::setFoundations(vector<vector<CardInBoard>> theFoundations)
 {
 	foundations = theFoundations;
 }

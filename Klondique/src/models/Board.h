@@ -6,10 +6,11 @@
 #include <memory>
 
 #include "Suit.h"
+#include "CardInBoard.h"
 
 class Card;
 class Deck;
-class CardInBoard;
+
 
 using namespace std;
 
@@ -44,32 +45,32 @@ public:
 	bool canMoveToFoundation(int theCardNumber, int foundationNumber);
 
 	int giveMeTheFoundationNumber(SuitType theSuit);
-	void upturnCardInPile(vector<shared_ptr<CardInBoard>> thePile);
+	void upturnCardInPile(vector<CardInBoard> thePile);
 
 	void showBoard();
-	void showElement(vector<shared_ptr<CardInBoard>> theElement);
+	void showElement(vector<CardInBoard> theElement);
 
 	bool hasWon();
 
 	void clear();
 
-	vector<shared_ptr<CardInBoard>> getStock();
-	vector<shared_ptr<CardInBoard>> getWastePile();
-	vector<vector<shared_ptr<CardInBoard>>> getPiles();
-	vector<vector<shared_ptr<CardInBoard>>> getFoundations();
+	vector<CardInBoard> getStock();
+	vector<CardInBoard> getWastePile();
+	vector<vector<CardInBoard>> getPiles();
+	vector<vector<CardInBoard>> getFoundations();
 
-	void setStock(vector<shared_ptr<CardInBoard>> theStock);
-	void setWastePile(vector<shared_ptr<CardInBoard>> theWastePile);
-	void setPiles(vector<vector<shared_ptr<CardInBoard>>> thePiles);
-	void setFoundations(vector<vector<shared_ptr<CardInBoard>>> theFoundations);
+	void setStock(vector<CardInBoard> theStock);
+	void setWastePile(vector<CardInBoard> theWastePile);
+	void setPiles(vector<vector<CardInBoard>> thePiles);
+	void setFoundations(vector<vector<CardInBoard>> theFoundations);
 
 private:
 	shared_ptr<Deck> deck;
 
-	vector<shared_ptr<CardInBoard>> stock;
-	vector<shared_ptr<CardInBoard>> wastePile;
-	vector<vector<shared_ptr<CardInBoard>>> piles;
-	vector<vector<shared_ptr<CardInBoard>>> foundations;
+	vector<CardInBoard> stock;
+	vector<CardInBoard> wastePile;
+	vector<vector<CardInBoard>> piles;
+	vector<vector<CardInBoard>> foundations;
 
 };
 
