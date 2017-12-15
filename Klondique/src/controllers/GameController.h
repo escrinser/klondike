@@ -20,6 +20,7 @@ public:
 	virtual bool hasWon() = 0;
 
 	virtual void undo()=0;
+	virtual void redo()=0;
 };
 
 #endif /* CONTROLLERS_GAMECONTROLLER_H_ */

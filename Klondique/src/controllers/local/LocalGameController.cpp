@@ -70,4 +70,11 @@ LocalGameController::undo()
 	game->undo();
 }
 
+void
+LocalGameController::redo()
+{
+	cout << "LocalGameController::redo()"<<endl;
+	game->redo();
+}
+
 

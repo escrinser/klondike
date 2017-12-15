@@ -100,6 +100,18 @@ Game::undo()
 	}
 }
 
+void
+Game::redo()
+{
+	if (!mementoList.empty())
+	{
+		cout << "Game::redo " << mementoList.size() <<endl;
+
+		set(mementoList[mementoList.size()-1]); //TODO: Only redo last movement
+		//set(mementoList.back());
+	}
+}
+
 
 shared_ptr<GameMemento>
 Game::createMemento()

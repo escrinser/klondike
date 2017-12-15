@@ -112,13 +112,19 @@ GameView::interact(GameController* gameController)
 			   break;
 		   }
 		   case 7:
+		   {
+			   cout << "GameView::Redo"<<endl;
+			   gameController->redo();
+			   break;
+		   }
+		   case 8:
 			   break;
 
 		   default:
 			   break;
 		}
 	}
-	while ((movement != MENU_OPTION_7) && (!gameController->hasWon()));
+	while ((movement != MENU_OPTION_8) && (!gameController->hasWon()));
 
 	if (gameController->hasWon())
 	{

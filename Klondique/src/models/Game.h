@@ -58,6 +58,7 @@ public:
 	void clear();
 
 	void undo();
+	void redo();
 
 	shared_ptr<GameMemento> createMemento();
 	void set(shared_ptr<GameMemento> gameMemento);

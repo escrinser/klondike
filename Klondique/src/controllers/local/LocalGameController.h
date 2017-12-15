@@ -32,6 +32,7 @@ public:
 	void setState(State state);
 	void printBoard();
 	void undo();
+	void redo();
 private:
 	shared_ptr<Game> game;
 };
