@@ -6,8 +6,10 @@
 #include <vector>
 #include <memory>
 
-class Card;
-class Suit;
+#include "Card.h"
+#include "Suit.h"
+//class Card;
+//class Suit;
 
 using namespace std;
 
@@ -17,6 +19,9 @@ using namespace std;
 #define NUMBER_OF_CARDS 13
 
 class Deck {
+private:
+    vector<shared_ptr<Card>> deck;
+
 public:
 	Deck();
 	virtual ~Deck();
@@ -29,8 +34,7 @@ public:
 
     int getNumberOfCards();
 
-private:
-    vector<shared_ptr<Card>> deck;
+    MSGPACK_DEFINE(deck);
 
 };
 

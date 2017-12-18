@@ -14,22 +14,28 @@
 
 class MementoRegistry {
 public:
-	MementoRegistry();
-
 	virtual ~MementoRegistry();
 
-	MementoRegistry(shared_ptr<Game> game);
+	MementoRegistry(Game* game);
 
 	void registry();
 
-	void undo(shared_ptr<Game> game);
+	void undo(Game game);
 
-	void redo(shared_ptr<Game> game);
+	void redo(Game game);
+
+
+	void SaveState();
+
+	void RestoreState(int stateNumber);
 
 private:
-	shared_ptr<Game> game;
+	Game* game;
 
 	vector<shared_ptr<GameMemento>> mementoList;
+
+	int firstPrevious;
+
 };
 
 #endif /* MODELS_MEMENTOREGISTRY_H_ */

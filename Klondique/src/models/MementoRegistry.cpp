@@ -1,50 +1,69 @@
-/*
- * MememtoRegistry.cpp
- *
- *  Created on: 12 dic. 2017
- *      Author: eseogaz
- */
-
 #include <MementoRegistry.h>
-
-MementoRegistry::MementoRegistry() {
-	// TODO Auto-generated constructor stub
-
-}
 
 MementoRegistry::~MementoRegistry() {
 	// TODO Auto-generated destructor stub
 }
 
-MementoRegistry::MementoRegistry(shared_ptr<Game> game)
+MementoRegistry::MementoRegistry(Game* theGame)
 {
-	this->game = game;
-	//mementoList = new vector<shared_ptr<GameMemento>>();
-	mementoList.push_back(game->createMemento());
+	this->game = theGame;
+
+	mementoList.push_back(theGame->createMemento());
+
+	firstPrevious = 0;
 }
 
 void
 MementoRegistry::registry()
 {
-	/*for (int i = 0; i < firstPrevious; i++) {
-		mementoList.pop_back(0);
-	}*/
-	//firstPrevious = 0;
+	for (int i = 0; i < firstPrevious; i++)
+	{
+		mementoList.erase(mementoList.begin()+i);
+	}
+	firstPrevious = 0;
 	mementoList.push_back(game->createMemento());
 }
 
 void
-MementoRegistry::undo(shared_ptr<Game> game)
+MementoRegistry::undo(Game game)
 {
-	//firstPrevious++;
-	game->set(mementoList.back());
+	firstPrevious++;
+	if (!mementoList.empty())
+	{
+		cout << "MementoRegistry::undo " << mementoList.size() <<endl;
+
+		game.set(mementoList[mementoList.size()-2]); //TODO: Only undo last movement
+		//set(mementoList.back());
+	}
 }
 
 void
-MementoRegistry::redo(shared_ptr<Game> game)
+MementoRegistry::redo(Game game)
 {
-	//firstPrevious--;
-	game->set(mementoList[0]);
+	firstPrevious--;
+	//game->set(mementoList[0]);
+	if (!mementoList.empty())
+	{
+		cout << "MementoRegistry::redo " << mementoList.size() <<endl;
+		game.set(mementoList[mementoList.size()-1]); //TODO: Only redo last movement
+		//set(mementoList.back());
+	}
+}
+
+//save state of the originator
+//void
+//MementoRegistry::SaveState(shared_ptr<Game> game
+void
+MementoRegistry::SaveState()
+{
+	mementoList.push_back(game->createMemento());
+}
+
+//restore state of the originator
+void
+MementoRegistry::RestoreState(int stateNumber)
+{
+	game->set(mementoList[stateNumber]);
 }
 
 

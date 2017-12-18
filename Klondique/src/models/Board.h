@@ -4,12 +4,12 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <msgpack.hpp>
 
 #include "Suit.h"
 #include "CardInBoard.h"
-
-class Card;
-class Deck;
+#include "Card.h"
+#include "Deck.h"
 
 
 using namespace std;
@@ -23,6 +23,15 @@ using namespace std;
 #define FOUNDATION_DIAMOND 3
 
 class Board {
+
+private:
+	shared_ptr<Deck> deck;
+
+	vector<CardInBoard> stock;
+	vector<CardInBoard> wastePile;
+	vector<vector<CardInBoard>> piles;
+	vector<vector<CardInBoard>> foundations;
+
 public:
 	Board();
 	virtual ~Board();
@@ -44,7 +53,7 @@ public:
 	bool canMoveToPile(shared_ptr<Card> theCard, int thePileDestionationNumber);
 	bool canMoveToFoundation(int theCardNumber, int foundationNumber);
 
-	int giveMeTheFoundationNumber(SuitType theSuit);
+	int giveMeTheFoundationNumber(Suit::SuitType theSuit);
 	void upturnCardInPile(vector<CardInBoard> thePile);
 
 	void showBoard();
@@ -64,14 +73,7 @@ public:
 	void setPiles(vector<vector<CardInBoard>> thePiles);
 	void setFoundations(vector<vector<CardInBoard>> theFoundations);
 
-private:
-	shared_ptr<Deck> deck;
-
-	vector<CardInBoard> stock;
-	vector<CardInBoard> wastePile;
-	vector<vector<CardInBoard>> piles;
-	vector<vector<CardInBoard>> foundations;
-
+    MSGPACK_DEFINE(deck, stock, wastePile, piles, foundations);
 };
 
 #endif /* BOARD_H_ */

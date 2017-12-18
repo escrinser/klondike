@@ -41,12 +41,12 @@ Board::startPlayingBoard()
 		{
 			if (j!=i)
 			{
-				temp.push_back(CardInBoard (initialDeck.back(), TurnedEnum::DOWN));
+				temp.push_back(CardInBoard (initialDeck.back(), CardInBoard::TurnedEnum::DOWN));
 				initialDeck.pop_back();
 			}
 			else if (j==i)
 			{
-				temp.push_back(CardInBoard (initialDeck.back(), TurnedEnum::UP));
+				temp.push_back(CardInBoard (initialDeck.back(), CardInBoard::TurnedEnum::UP));
 				initialDeck.pop_back();
 				break;
 			}
@@ -56,7 +56,7 @@ Board::startPlayingBoard()
 
 	for(vector<shared_ptr<Card>>::iterator it = initialDeck.begin(); it != initialDeck.end(); it++)
 	{
-	   stock.push_back(CardInBoard((*it), TurnedEnum::DOWN));
+	   stock.push_back(CardInBoard((*it), CardInBoard::TurnedEnum::DOWN));
 	}
 }
 
@@ -66,7 +66,7 @@ Board::deal()
 	if (!stock.empty())
 	{
 		wastePile.push_back(stock.back());
-		(wastePile.back()).setUpOrDownTurned(TurnedEnum::UP);
+		(wastePile.back()).setUpOrDownTurned(CardInBoard::TurnedEnum::UP);
 		stock.pop_back();
 	}
 	else
@@ -79,7 +79,7 @@ Board::deal()
 		while (!wastePile.empty())
 		{
 			stock.push_back(wastePile.back());
-			(stock.back()).setUpOrDownTurned(TurnedEnum::DOWN);
+			(stock.back()).setUpOrDownTurned(CardInBoard::TurnedEnum::DOWN);
 			wastePile.pop_back();
 		}
 
@@ -112,7 +112,7 @@ Board::moveBetweenPiles(int thePileOriginNumber,
 			cout << "Pile Origin size: " << piles[thePileOriginNumber - 1].size() << endl;
 			do
 			{
-				if (pileOrigin2.back().getUpOrDownTurned() == TurnedEnum::UP &&
+				if (pileOrigin2.back().getUpOrDownTurned() == CardInBoard::TurnedEnum::UP &&
 								pileOrigin2.back().getCard()->getNumber() == theCardOriginNumber)
 				{
 					if (canMoveToPile(pileOrigin2.back().getCard(), thePileDestinationNumber))
@@ -238,20 +238,20 @@ Board::canMoveToFoundation(int theCardNumber, int theFoundationNumber)
 }
 
 int
-Board::giveMeTheFoundationNumber(SuitType theSuit)
+Board::giveMeTheFoundationNumber(Suit::SuitType theSuit)
 {
 	switch(theSuit)
 	{
-	    case SuitType::HEART  :
+	    case Suit::SuitType::HEART  :
 	    	return FOUNDATION_HEART;
 	    	break;
-	    case SuitType::SPADE  :
+	    case Suit::SuitType::SPADE  :
 	    	return FOUNDATION_SPADE;
 	    	break;
-	    case SuitType::CLUB  :
+	    case Suit::SuitType::CLUB  :
 	    	return FOUNDATION_CLUB;
 	    	break;
-	    case SuitType::DIAMOND  :
+	    case Suit::SuitType::DIAMOND  :
 	    	return FOUNDATION_DIAMOND;
 	    	break;
 	}
@@ -263,9 +263,9 @@ Board::upturnCardInPile(vector<CardInBoard> thePile)
 {
 	if(!thePile.empty())
 	{
-		if ((thePile.back()).getUpOrDownTurned() == TurnedEnum::DOWN)
+		if ((thePile.back()).getUpOrDownTurned() == CardInBoard::TurnedEnum::DOWN)
 		{
-			thePile.back().setUpOrDownTurned(TurnedEnum::UP);
+			thePile.back().setUpOrDownTurned(CardInBoard::TurnedEnum::UP);
 		}
 	}
 }
@@ -330,11 +330,11 @@ Board::showElement(vector<CardInBoard> theElement)
 		{
     		//Only show cards upturned, X for downturned
     		cout << " ";
-    		if ((*it).getUpOrDownTurned() == TurnedEnum::DOWN)
+    		if ((*it).getUpOrDownTurned() == CardInBoard::TurnedEnum::DOWN)
     		{
     			cout << "X";
     		}
-    		else if ((*it).getUpOrDownTurned() == TurnedEnum::UP)
+    		else if ((*it).getUpOrDownTurned() == CardInBoard::TurnedEnum::UP)
     		{
     			cout << ((*it).getCard())->getNumber() << (*it).getCard()->getSuit()->toString((*it).getCard()->getSuit()->getSuit());
     		}

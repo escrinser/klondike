@@ -2,9 +2,13 @@
 #define SUIT_H_
 
 #include <iostream>
+#include <msgpack.hpp>
 
 using namespace std;
 
+class Suit {
+
+public:
 enum SuitType {
 	HEART=0,
 	SPADE,
@@ -17,21 +21,24 @@ enum SuitColor{
 	BLACK
 };
 
-class Suit {
+private:
+    Suit::SuitType suit;
+    Suit::SuitColor color;
+	int numberOfCards;
+
 public:
 	Suit();
 	virtual ~Suit();
 
-	Suit(SuitType, SuitColor, int);
+	Suit(Suit::SuitType, Suit::SuitColor, int);
 
-	SuitColor getColor();
+	Suit::SuitColor getColor();
 	int getNumberOfCards();
-	SuitType getSuit();
-	string toString(SuitType suitType);
-private:
-	SuitType suit;
-	SuitColor color;
-	int numberOfCards;
+	Suit::SuitType getSuit();
+	string toString(Suit::SuitType suitType);
+	MSGPACK_DEFINE(suit, color);
 };
 
+MSGPACK_ADD_ENUM(Suit::SuitType);
+MSGPACK_ADD_ENUM(Suit::SuitColor);
 #endif /* SUIT_H_ */

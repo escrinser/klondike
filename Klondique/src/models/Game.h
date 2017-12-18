@@ -8,6 +8,7 @@
 #include "Card.h"
 
 #include "GameMemento.h"
+//#include "MementoRegistry.h"
 
 class Game {
 public:
@@ -59,9 +60,12 @@ public:
 
 	void undo();
 	void redo();
+	void registry();
 
 	shared_ptr<GameMemento> createMemento();
 	void set(shared_ptr<GameMemento> gameMemento);
+
+	void serialize();
 
 private:
 	State state;
@@ -70,6 +74,9 @@ private:
 
 	//TODO: Here or in MementoRegistry?
 	vector<shared_ptr<GameMemento>> mementoList;
+	int firstPrevious = 0;
+
+	//MementoRegistry* mementoRegistry;
 };
 
 #endif /* GAME_H_ */

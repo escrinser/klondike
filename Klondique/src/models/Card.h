@@ -4,10 +4,13 @@
 #include <memory>
 
 #include "Suit.h"
-
-class Suit;
+//#include "Suit.cpp"
 
 class Card {
+private:
+	shared_ptr<Suit> suit;
+	int number;
+
 public:
 	Card();
 	virtual ~Card();
@@ -17,9 +20,8 @@ public:
 	shared_ptr<Suit> getSuit();
 	int getNumber();
 
-private:
-	shared_ptr<Suit> suit;
-	int number;
+	//MSGPACK_DEFINE(number);
+	MSGPACK_DEFINE(suit, number);
 };
 
 #endif /* CARD_H_ */
