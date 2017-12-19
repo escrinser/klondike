@@ -23,7 +23,9 @@ Game::Game() {
 	deck->loadDeck(allSuites);
 	board = shared_ptr<Board>(new Board(deck));
 
-	//mementoRegistry = new MementoRegistry(this);
+    std::shared_ptr<Game> sharedGame;
+    sharedGame.reset(this);
+	mementoRegistry = std::make_shared<MementoRegistry>(sharedGame);
 }
 
 Game::~Game() {
@@ -34,7 +36,6 @@ Game::startPlayingBoard()
 {
 	board->startPlayingBoard();
 	registry();
-	//mementoRegistry->SaveState(); //save state of the originator
 }
 
 void
@@ -102,48 +103,24 @@ Game::clear()
 void
 Game::undo()
 {
-	if (firstPrevious <= (mementoList.size() - 1))
-    {
-		firstPrevious++;
-		cout << "Game::undo MEMLIST " << mementoList.size() <<endl;
-		cout << "Game::undo FIRSTPREV " << firstPrevious <<endl;
-		set(mementoList[(mementoList.size()-1)-firstPrevious]);
-    }
+	mementoRegistry->undo();
 }
 
 void
 Game::redo()
 {
-	if (firstPrevious >= 1)
-	{
-		if (!mementoList.empty())
-		{
-			firstPrevious--;
-			cout << "Game::redo MEMLIST " << mementoList.size() <<endl;
-			cout << "Game::redo FIRSTPREV " << firstPrevious <<endl;
-			set(mementoList[(mementoList.size()-1)-firstPrevious]);
-		}
-	}
+	mementoRegistry->redo();
 }
 
 void
 Game::registry()
 {
-	cout << "Game::registry MEMLIST before" << mementoList.size() <<endl;
-	cout << "Game::registry FIRSTPREV " << firstPrevious <<endl;
-	for (int i = 0; i < firstPrevious; i++)
-	{
-		mementoList.erase(mementoList.end());
-	}
-	firstPrevious = 0;
-	mementoList.push_back(createMemento());
-	cout << "Game::registry MEMLIST after " << mementoList.size() <<endl;
+	mementoRegistry->registry();
 }
 
 shared_ptr<GameMemento>
 Game::createMemento()
 {
-	cout << "createMemento"<<endl;
 	return shared_ptr<GameMemento>(new GameMemento(board->getStock(),
 												   board->getWastePile(),
 												   board->getPiles(),
@@ -153,10 +130,10 @@ Game::createMemento()
 void
 Game::set(shared_ptr<GameMemento> gameMemento)
 {
-	board->setStock(gameMemento->getStock());
-	board->setWastePile(gameMemento->getWastePile());
-	board->setPiles(gameMemento->getPiles());
-	board->setFoundations(gameMemento->getFoundations());
+	board->setStock(gameMemento->stock);
+	board->setWastePile(gameMemento->wastePile);
+	board->setPiles(gameMemento->piles);
+	board->setFoundations(gameMemento->foundations);
 }
 
 void

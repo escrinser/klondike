@@ -1,10 +1,3 @@
-/*
- * MememtoRegistry.h
- *
- *  Created on: 12 dic. 2017
- *      Author: eseogaz
- */
-
 #ifndef MODELS_MEMENTOREGISTRY_H_
 #define MODELS_MEMENTOREGISTRY_H_
 
@@ -16,25 +9,22 @@ class MementoRegistry {
 public:
 	virtual ~MementoRegistry();
 
-	MementoRegistry(Game* game);
+	MementoRegistry(shared_ptr<Game> game);
+
+	MementoRegistry();
 
 	void registry();
 
-	void undo(Game game);
+	void undo();
 
-	void redo(Game game);
-
-
-	void SaveState();
-
-	void RestoreState(int stateNumber);
+	void redo();
 
 private:
-	Game* game;
+	shared_ptr<Game> game;
 
 	vector<shared_ptr<GameMemento>> mementoList;
 
-	int firstPrevious;
+	unsigned int redoUndoIndex = 0;
 
 };
 

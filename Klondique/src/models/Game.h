@@ -8,9 +8,12 @@
 #include "Card.h"
 
 #include "GameMemento.h"
-//#include "MementoRegistry.h"
+#include "MementoRegistry.h"
 
-class Game {
+class MementoRegistry;
+
+class Game{
+
 public:
 	Game();
 	virtual ~Game();
@@ -74,10 +77,10 @@ private:
 	shared_ptr<Board> board;
 
 	//TODO: Here or in MementoRegistry?
-	vector<shared_ptr<GameMemento>> mementoList;
-	int firstPrevious = 0;
+	//vector<shared_ptr<GameMemento>> mementoList;
+	//int firstPrevious = 0;
 
-	//MementoRegistry* mementoRegistry;
+	shared_ptr<MementoRegistry> mementoRegistry;
 };
 
 #endif /* GAME_H_ */

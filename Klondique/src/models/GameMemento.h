@@ -4,6 +4,8 @@
 #include "Board.h"
 #include "CardInBoard.h"
 
+class Game;
+
 class GameMemento {
 public:
 	GameMemento(vector<CardInBoard> theStock,
@@ -12,17 +14,10 @@ public:
 			 vector<vector<CardInBoard>> theFoundations);
 	virtual ~GameMemento();
 
-	vector<CardInBoard> getStock();
-	vector<CardInBoard> getWastePile();
-	vector<vector<CardInBoard>> getPiles();
-	vector<vector<CardInBoard>> getFoundations();
-
-	void setStock(vector<CardInBoard> theStock);
-	void setWastePile(vector<CardInBoard> theWastePile);
-	void setPiles(vector<vector<CardInBoard>> thePiles);
-	void setFoundations(vector<vector<CardInBoard>> theFoundations);
-
 private:
+
+	friend class Game;
+
 	vector<CardInBoard> stock;
 	vector<CardInBoard> wastePile;
 	vector<vector<CardInBoard>> piles;
