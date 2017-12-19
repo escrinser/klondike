@@ -18,13 +18,13 @@ StartView::~StartView() {
 void
 StartView::interact(StartController* startController)
 {
-	LimitedInDialog startDialog ("Chose one option:\n\n"
-				"1  Play\n"
-			    "2  Recover game from file\n"
-			    "3  Exit\n"
-				"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_3);
+	string titleStartDialog = "Chose one option:\n\n"
+			"1  Play\n"
+		    "2  Recover game from file\n"
+		    "3  Exit\n"
+			"Enter your choice and press return:";
 
-	switch (startDialog.read())
+	switch (LimitedInDialog::getInstance()->read(titleStartDialog, MENU_OPTION_1, MENU_OPTION_3))
 	{
 	   case 1:
 		   startController->setStart();

@@ -1,11 +1,8 @@
 #include "ClosedInterval.h"
 
-#include <assert.h>     /* assert */
-
 ClosedInterval::ClosedInterval() {
 }
 ClosedInterval::ClosedInterval(int theMin, int theMax) {
-	//assert (min <= max);
 	min = theMin;
 	max = theMax;
 }
@@ -22,5 +19,16 @@ ClosedInterval::includes(int theValue)
 string
 ClosedInterval::toString() {
 	return "[" + to_string(min) + ", " + to_string(max) + "]";
+}
+
+int
+ClosedInterval::getMin()
+{
+	return min;
+}
+
+int
+ClosedInterval::getMax() {
+	return max;
 }
 

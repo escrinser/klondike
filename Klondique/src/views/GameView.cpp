@@ -23,9 +23,12 @@ GameView::~GameView() {
 void
 GameView::interact(GameController* gameController)
 {
-	LimitedInDialog cardDialog ("Card Number?", MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);
+	string titleCardDialog = "Card Number?";
+	//LimitedInDialog::getInstance()->read(titleCardDialog, MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);
+	//cardDialog ("Card Number?", MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);
 
-	LimitedInDialog pileDialog ("Pile Number?", MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES);
+	string titlePileDialog = "Pile Number?";
+	//LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES);
 
 	int movement;
 
@@ -33,7 +36,7 @@ GameView::interact(GameController* gameController)
 	int pileNumberDestination;
 	int pileNumberOriginNumber = 0;
 
-	LimitedInDialog mainMenuDialog ("Chose one option:\n\n"
+	string titleMainMenuDialog = "Chose one option:\n\n"
 			"1  Deal\n"
 			"2  Move a card between Waste Pile to Pile\n"
 			"3  Move a card between Piles\n"
@@ -42,12 +45,15 @@ GameView::interact(GameController* gameController)
 			"6  Undo\n"
 			"7  Redo\n"
 			"8  Menu\n"
-			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_8);
+			"Enter your choice and press return:";
+	LimitedInDialog::getInstance()->read(titleMainMenuDialog, MENU_OPTION_1, MENU_OPTION_8);
 
 	do
 	{
 		BoardView(gameController).showBoard();
-		movement = mainMenuDialog.read();
+		//movement = mainMenuDialog.read();
+		movement = LimitedInDialog::getInstance()->read(titleMainMenuDialog, MENU_OPTION_1, MENU_OPTION_8);
+
 		switch (movement)
 		{
 		   case 1:
@@ -57,14 +63,14 @@ GameView::interact(GameController* gameController)
 
 		   case 2:
 			   cout << "Move a card between Waste Pile to Pile"<<endl;
-			   gameController->moveBetweenWastePileAndPile(pileDialog.read());
+			   gameController->moveBetweenWastePileAndPile(LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES));
 			   break;
 
 		   case 3:
 		   {
 			   cout << "Move card/cards between Piles"<<endl;
 			   cout << "Origin Pile"<<endl;
-			   pileNumberOrigin = pileDialog.read();
+			   pileNumberOrigin = LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES);
 
 			   cout << "\nIs the last card? (yes/no)";
 			   string lastCard;
@@ -73,7 +79,7 @@ GameView::interact(GameController* gameController)
 			   if (lastCard == "no")
 			   {
 				   cout << "\nPile Origin Card Number: ";
-				   pileNumberOriginNumber = cardDialog.read();
+				   pileNumberOriginNumber = LimitedInDialog::getInstance()->read(titleCardDialog, MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);;
 			   }
 			   else
 			   {
@@ -81,7 +87,7 @@ GameView::interact(GameController* gameController)
 			   }
 
 			   cout << "Destination Pile"<<endl;
-			   pileNumberDestination = pileDialog.read();
+			   pileNumberDestination = LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES);;
 			   if (pileNumberOriginNumber != 0)
 			   {
 				   cout << "Pile Origin: " << pileNumberOrigin << " number: " << pileNumberOriginNumber <<" Pile Destination: " << pileNumberDestination  << endl;
@@ -103,7 +109,7 @@ GameView::interact(GameController* gameController)
 		   case 4:
 		   {
 			   cout << "Move a card between Pile and Foundation"<<endl;
-			   gameController->moveBetweenPileAndFoundation(pileDialog.read());
+			   gameController->moveBetweenPileAndFoundation(LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES));
 
 			   break;
 		   }

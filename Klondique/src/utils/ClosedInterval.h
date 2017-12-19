@@ -14,6 +14,10 @@ public:
 	bool includes(int value);
 	string toString();
 
+	int getMin();
+
+	int getMax();
+
 private:
 	int min;
 	int max;
