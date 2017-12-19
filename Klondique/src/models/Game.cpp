@@ -1,5 +1,13 @@
 #include "Game.h"
 #include "Board.h"
+#include <msgpack/fbuffer.hpp>
+
+#include <vector>
+#include <string>
+#include <iostream>
+#include <cstdio>
+#include <fstream>
+#include <sstream>
 
 Game::Game() {
 	state = State::INITIAL;
@@ -94,28 +102,13 @@ Game::clear()
 void
 Game::undo()
 {
+	serialize();
     if (firstPrevious <= (mementoList.size() - 1))
     {
 		firstPrevious++;
 		cout << "Game::undo MEMLIST " << mementoList.size() <<endl;
 		cout << "Game::undo FIRSTPREV " << firstPrevious <<endl;
 		set(mementoList[(mementoList.size()-1)-firstPrevious]);
-		/*if (!mementoList.empty())
-		{
-			cout << "Game::undo MEMLIST " << mementoList.size() <<endl;
-			cout << "Game::undo FIRSTPREV " << firstPrevious <<endl;
-			//serialize();
-			if (firstPrevious >= mementoList.size())
-			{
-				cout << "Game::undo First Element no possible to do undo" <<endl;
-			}
-			else //From second movement we can undo()
-			{
-				firstPrevious++;
-				cout << "Game::undo FIRSTPREV " << firstPrevious <<endl;
-				set(mementoList[(mementoList.size()-1)-firstPrevious]);
-			}
-		}*/
     }
 }
 
@@ -188,19 +181,6 @@ Game::serialize()
     std::vector<CardInBoard> rvec;
     obj.convert(rvec);
 
-
-    /*my m1(42);
-    msgpack::zone z;
-    msgpack::object obj(m1, z);
-    std::cout << obj << std::endl;
-    assert(m1.a == obj.as<my>().a);
-
-    assert(board->getStock() == obj.as<CardInBoard>());*/
-/*}
-
-void
-Game::showElement(vector<CardInBoard> theElement)
-{*/
     if (rvec.empty())
     {
     	cout << "== EMPTY ==" << endl;
@@ -227,5 +207,25 @@ Game::showElement(vector<CardInBoard> theElement)
 		}
     }
     cout << endl;
+
+
+    // This is target object.
+    //my_class classy;
+    //Board board;
+
+    // Serialize it. (THIS WORKS!)
+    {
+        std::ofstream ofs("data.bin");
+        //msgpack::pack(ofs, classy);
+        msgpack::pack(ofs, board->getStock());
+    } // automatically close here.
+
+    // Deserialize the serialized data
+    std::ifstream ifs("data.bin", std::ifstream::in);
+    std::stringstream buffer;
+    buffer << ifs.rdbuf();
+    msgpack::unpacked upd;
+    msgpack::unpack(upd, buffer.str().data(), buffer.str().size());
+    std::cout << upd.get() << std::endl;
 }
 
