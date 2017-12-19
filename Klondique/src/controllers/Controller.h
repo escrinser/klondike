@@ -9,6 +9,8 @@ public:
 	virtual ~Controller();
 	virtual void setState(State state) = 0;
 	virtual void printBoard() = 0;
+	virtual void saveGame() = 0;
+	virtual void recoverGame() = 0;
 };
 
 #endif /* CONTROLLERS_CONTROLLER_H_ */

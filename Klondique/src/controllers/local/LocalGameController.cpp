@@ -64,6 +64,18 @@ LocalGameController::printBoard()
 }
 
 void
+LocalGameController::saveGame()
+{
+	game->saveGame();
+}
+
+void
+LocalGameController::recoverGame()
+{
+	game->recoverGame();
+}
+
+void
 LocalGameController::undo()
 {
 	cout << "LocalGameController::undo()"<<endl;

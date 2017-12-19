@@ -23,6 +23,11 @@ LocalContinueController::setContinue(int theOption)
 		   break;
 
 	   case 3:
+		   game->saveGame();
+		   game->setState(State::EXIT); //Save the game and Exit.
+		   break;
+
+	   case 4:
 		   game->setState(State::EXIT);
 		   break;
 
@@ -49,6 +54,17 @@ LocalContinueController::printBoard()
 	game->showBoard();
 }
 
+void
+LocalContinueController::saveGame()
+{
+	game->saveGame();
+}
+
+void
+LocalContinueController::recoverGame()
+{
+	game->recoverGame();
+}
 
 void
 LocalContinueController::accept(OperationControllerVisitor* operationControllerVisitor)

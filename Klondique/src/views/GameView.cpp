@@ -10,6 +10,13 @@ GameView::GameView() {
 
 }
 
+GameView::GameView(OperationController* theController)
+{
+	//assert theController != nullptr;
+
+	controller = theController;
+}
+
 GameView::~GameView() {
 }
 
@@ -33,8 +40,9 @@ GameView::interact(GameController* gameController)
 			"4  Move a card between Pile to Foundation\n"
 			"5  Move a card between Waste Pile to Foundation\n"
 			"6  Undo\n"
-			"7  Menu\n"
-			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_7);
+			"7  Redo\n"
+			"8  Menu\n"
+			"Enter your choice and press return:", MENU_OPTION_1, MENU_OPTION_8);
 
 	do
 	{
@@ -132,6 +140,19 @@ GameView::interact(GameController* gameController)
 	}
 
 	gameController->setState(State::FINAL);
+}
+
+
+void
+GameView::saveGame()
+{
+	controller->saveGame();
+}
+
+void
+GameView::recoverGame()
+{
+	controller->recoverGame();
 }
 
 

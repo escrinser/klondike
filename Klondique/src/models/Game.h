@@ -65,7 +65,8 @@ public:
 	shared_ptr<GameMemento> createMemento();
 	void set(shared_ptr<GameMemento> gameMemento);
 
-	void serialize();
+	void saveGame();
+	void recoverGame();
 
 private:
 	State state;

@@ -18,6 +18,9 @@ public:
 	void clear();
 	void setState(State state);
 	void printBoard();
+
+	void saveGame();
+	void recoverGame();
 private:
 	shared_ptr<Game> game;
 };

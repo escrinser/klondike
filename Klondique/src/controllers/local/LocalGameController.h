@@ -31,6 +31,10 @@ public:
 
 	void setState(State state);
 	void printBoard();
+
+	void saveGame();
+	void recoverGame();
+
 	void undo();
 	void redo();
 private:

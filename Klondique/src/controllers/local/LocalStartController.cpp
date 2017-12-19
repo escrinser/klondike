@@ -25,6 +25,17 @@ LocalStartController::printBoard()
 	game->showBoard();
 }
 
+void
+LocalStartController::saveGame()
+{
+	game->saveGame();
+}
+
+void
+LocalStartController::recoverGame()
+{
+	game->recoverGame();
+}
 
 void
 LocalStartController::accept(OperationControllerVisitor* operationControllerVisitor)

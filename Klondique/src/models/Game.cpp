@@ -102,8 +102,7 @@ Game::clear()
 void
 Game::undo()
 {
-	serialize();
-    if (firstPrevious <= (mementoList.size() - 1))
+	if (firstPrevious <= (mementoList.size() - 1))
     {
 		firstPrevious++;
 		cout << "Game::undo MEMLIST " << mementoList.size() <<endl;
@@ -161,71 +160,32 @@ Game::set(shared_ptr<GameMemento> gameMemento)
 }
 
 void
-Game::serialize()
+Game::saveGame()
 {
-    //std::vector<CardInBoard> vec;
-    // add some elements into vec...
+	// Serialize it. (THIS WORKS!)
+	{
+		std::ofstream ofs("klondike.bin");
+		msgpack::pack(ofs, board);
+	} // automatically close here.
 
-	std::cout << "Game::serialize()" << std::endl;
-    // you can serialize CardInBoard directly
-    msgpack::sbuffer sbuf;
-    msgpack::pack(sbuf, board->getStock());
-
-    msgpack::object_handle oh =
-        msgpack::unpack(sbuf.data(), sbuf.size());
-
-    msgpack::object obj = oh.get();
-    std::cout << obj << std::endl;
-
-    // you can convert object to CardInBoard directly
-    std::vector<CardInBoard> rvec;
-    obj.convert(rvec);
-
-    if (rvec.empty())
-    {
-    	cout << "== EMPTY ==" << endl;
-    }
-    else
-    {
-    	cout << "Cards:";
-    	for(vector<CardInBoard>::iterator it = rvec.begin(); it != rvec.end(); it++)
-		{
-    		//Only show cards upturned, X for downturned
-    		cout << " ";
-    		if ((*it).getUpOrDownTurned() == CardInBoard::TurnedEnum::DOWN)
-    		{
-    			cout << "X";
-    		}
-    		else if ((*it).getUpOrDownTurned() == CardInBoard::TurnedEnum::UP)
-    		{
-    			cout << ((*it).getCard())->getNumber() << (*it).getCard()->getSuit()->toString((*it).getCard()->getSuit()->getSuit());
-    		}
-    		else
-    		{
-    			cout << "Impossible situation." << endl;
-    		}
-		}
-    }
-    cout << endl;
-
-
-    // This is target object.
-    //my_class classy;
-    //Board board;
-
-    // Serialize it. (THIS WORKS!)
-    {
-        std::ofstream ofs("data.bin");
-        //msgpack::pack(ofs, classy);
-        msgpack::pack(ofs, board->getStock());
-    } // automatically close here.
-
-    // Deserialize the serialized data
-    std::ifstream ifs("data.bin", std::ifstream::in);
-    std::stringstream buffer;
-    buffer << ifs.rdbuf();
-    msgpack::unpacked upd;
-    msgpack::unpack(upd, buffer.str().data(), buffer.str().size());
-    std::cout << upd.get() << std::endl;
+	std::cout << "Board save in file klondike.bin" << std::endl;
 }
 
+void
+Game::recoverGame()
+{
+	// Deserialize the serialized data
+	std::ifstream ifs("klondike.bin", std::ifstream::in);
+	std::stringstream buffer;
+	buffer << ifs.rdbuf();
+	msgpack::unpacked upd;
+	msgpack::unpack(upd, buffer.str().data(), buffer.str().size());
+	//std::cout << upd.get() << std::endl;
+	msgpack::object obj2 = upd.get();
+
+	shared_ptr<Board> recoveredBoard;
+	obj2.convert(recoveredBoard);
+
+	board = recoveredBoard;
+	std::cout << "Board recovered from file klondike.bin" << std::endl;
+}
