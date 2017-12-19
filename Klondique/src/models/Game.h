@@ -76,10 +76,6 @@ private:
 	shared_ptr<Deck> deck;
 	shared_ptr<Board> board;
 
-	//TODO: Here or in MementoRegistry?
-	//vector<shared_ptr<GameMemento>> mementoList;
-	//int firstPrevious = 0;
-
 	shared_ptr<MementoRegistry> mementoRegistry;
 };
 
