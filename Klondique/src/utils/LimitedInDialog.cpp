@@ -11,16 +11,6 @@ LimitedInDialog::~LimitedInDialog(void)
 {
 }
 
-/*LimitedInDialog::LimitedInDialog(string theTitle, int theMin, int theMax) {
-	ClosedInterval closedInterval (theMin, theMax);
-	limits = closedInterval;
-	title = theTitle;
-
-}
-
-LimitedInDialog::~LimitedInDialog() {
-}*/
-
 int
 LimitedInDialog::read(string title, int min, int max)
 {
@@ -38,24 +28,6 @@ LimitedInDialog::read(string title, int min, int max)
 	} while (!ok);
 	return value;
 }
-
-
-/*int
-LimitedInDialog::read()
-{
-	int value;
-	bool ok;
-	do {
-		cout << title;
-		cin >> value;
-		ok = limits.includes(value);
-		if (!ok)
-		{
-			cout << "The value must be between the limits " + limits.toString() << endl;
-		}
-	} while (!ok);
-	return value;
-}*/
 
 int
 LimitedInDialog::read(string title, int max)

@@ -44,25 +44,6 @@ IO::readInt(string title) {
 	return input;
 }
 
-/*char
-IO::readChar(string title) {
-	char charValue = ' ';
-	bool ok = false;
-	do {
-		string input = readstring(title);
-		if (input.length() != 1)
-		{
-			writeError("character");
-		}
-		else
-		{
-			charValue = input.charAt(0);
-			ok = true;
-		}
-	} while (!ok);
-	return charValue;
-}*/
-
 void
 IO::writeln()
 {

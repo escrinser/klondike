@@ -24,11 +24,7 @@ void
 GameView::interact(GameController* gameController)
 {
 	string titleCardDialog = "Card Number?";
-	//LimitedInDialog::getInstance()->read(titleCardDialog, MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);
-	//cardDialog ("Card Number?", MIN_NUMBER_OF_CARDS, MAX_NUMBER_OF_CARDS);
-
 	string titlePileDialog = "Pile Number?";
-	//LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES);
 
 	int movement;
 
@@ -45,13 +41,12 @@ GameView::interact(GameController* gameController)
 			"6  Undo\n"
 			"7  Redo\n"
 			"8  Menu\n"
-			"Enter your choice and press return:";
+			"Enter your choice and press return";
 	LimitedInDialog::getInstance()->read(titleMainMenuDialog, MENU_OPTION_1, MENU_OPTION_8);
 
 	do
 	{
 		BoardView(gameController).showBoard();
-		//movement = mainMenuDialog.read();
 		movement = LimitedInDialog::getInstance()->read(titleMainMenuDialog, MENU_OPTION_1, MENU_OPTION_8);
 
 		switch (movement)

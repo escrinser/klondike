@@ -6,6 +6,7 @@ using namespace std;
 
 Klondike::Klondike()
 {
+	menu = new Menu(shared_ptr<Game>(new Game()));
 }
 
 Klondike::~Klondike() {
@@ -24,12 +25,18 @@ Klondike::play()
 	} while (controller != nullptr);
 }
 
+void
+Klondike::exec()
+{
+	menu->execute();
+}
+
 int main()
 {
    cout << "The First Version of Klondique." << endl;
    Klondike game;
-   game.play();
-
+   //game.play(); //Controllers...
+   game.exec(); //Menus with Command
    return 0;
 }
 

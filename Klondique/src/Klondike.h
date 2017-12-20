@@ -5,6 +5,8 @@
 
 #include "views/KlondiqueView.h"
 
+#include "models/Menu.h"
+
 class Klondike {
 public:
 	Klondike();
@@ -12,10 +14,14 @@ public:
 
 	void play();
 
+    void exec();
+
 private:
 	Logic logic;
 
 	KlondiqueView view;
+
+	Menu* menu;
 };
 
 #endif /* KLONDIKE_H_ */

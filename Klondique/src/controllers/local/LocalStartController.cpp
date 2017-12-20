@@ -25,7 +25,7 @@ LocalStartController::printBoard()
 	game->showBoard();
 }
 
-void
+void //TODO: remove from start
 LocalStartController::saveGame()
 {
 	game->saveGame();

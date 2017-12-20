@@ -20,6 +20,7 @@ ExitCommand::~ExitCommand() {
 void
 ExitCommand::execute()
 {
+	game->setState(State::EXIT);
 	closed_ = true;
 }
 
@@ -38,5 +39,13 @@ ExitCommand::clone()
 bool
 ExitCommand::isActive()
 {
-	return true;
+	if ((game->getState() == State::INITIAL)
+			|| (game->getState() == State::FINAL))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

@@ -1,18 +1,30 @@
-/*
- * PlayCommand.cpp
- *
- *  Created on: 19 dic. 2017
- *      Author: eseogaz
- */
-
 #include <PlayCommand.h>
 
-PlayCommand::PlayCommand() {
-	// TODO Auto-generated constructor stub
-
-}
-
 PlayCommand::~PlayCommand() {
-	// TODO Auto-generated destructor stub
+
 }
 
+PlayCommand::PlayCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
+	Command("Play", game, commandRegistry)
+{
+
+}
+
+void
+PlayCommand::execute()
+{
+	game->startPlayingBoard();
+	game->setState(State::IN_GAME);
+}
+
+bool
+PlayCommand::isActive() {
+	if (game->getState() == State::INITIAL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

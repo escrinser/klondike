@@ -18,22 +18,24 @@ public:
 	virtual ~Menu();
 	void execute();
 
-private:
-	shared_ptr<Game> game;
-
-	shared_ptr<CommandRegistry> commandRegistry;
-
+protected:
 	vector<shared_ptr<Command>> allCommandList;
 
 	shared_ptr<ExitCommand> exitCommand;
 
-	vector<shared_ptr<Command>> actualCommandList;
+	shared_ptr<CommandRegistry> commandRegistry;
 
-	void setActualCommands();
+	shared_ptr<Game> game;
 
 	void write();
 
 	int getOption();
+
+private:
+
+	vector<shared_ptr<Command>> actualCommandList;
+
+	void setActualCommands();
 
 	bool isClosed();
 };

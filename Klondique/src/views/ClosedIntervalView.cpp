@@ -9,7 +9,6 @@
 #include "IO.h"
 
 ClosedIntervalView::~ClosedIntervalView() {
-	// TODO Auto-generated destructor stub
 }
 
 ClosedIntervalView::ClosedIntervalView(std::string theTitle, ClosedInterval* theClosedInterval)
@@ -21,7 +20,6 @@ ClosedIntervalView::ClosedIntervalView(std::string theTitle, ClosedInterval* the
 void
 ClosedIntervalView::writeln()
 {
-	//cout << title << " " << toString() <<endl;
 	IO::getInstance()->writeln(title + " " + toString());
 }
 
@@ -29,6 +27,5 @@ std::string
 ClosedIntervalView::toString()
 {
 	return closedInterval->toString();
-	//return "[" + closedInterval->getMin() + ", " + closedInterval->getMax() + "]";
 }
 

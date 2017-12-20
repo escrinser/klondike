@@ -7,20 +7,6 @@
 
 using namespace std;
 
-/*class LimitedInDialog {
-public:
-
-	LimitedInDialog(string title, int min, int max);
-
-	virtual ~LimitedInDialog();
-
-	int read();
-
-private:
-	ClosedInterval limits;
-	string title;
-};*/
-
 class LimitedInDialog
 {
 private:

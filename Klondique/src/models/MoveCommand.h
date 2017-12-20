@@ -1,12 +1,7 @@
-/*
- * MoveCommand.h
- *
- *  Created on: 19 dic. 2017
- *      Author: eseogaz
- */
-
 #ifndef MODELS_MOVECOMMAND_H_
 #define MODELS_MOVECOMMAND_H_
+
+#include "Command.h"
 
 class MoveCommand {
 public:

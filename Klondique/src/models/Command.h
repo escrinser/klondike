@@ -13,7 +13,8 @@
 
 class Command {
 public:
-	//Command();
+
+	Command(std::string title, shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
 	virtual ~Command();
 	std::string getTitle();
 
@@ -25,10 +26,8 @@ private:
 
 protected:
 	shared_ptr<Game> game;
-
 	shared_ptr<CommandRegistry> commandRegistry;
 
-	Command(std::string title, shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
 };
 
 #endif /* VIEWS_COMMAND_H_ */
