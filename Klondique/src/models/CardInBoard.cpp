@@ -27,5 +27,6 @@ CardInBoard::getUpOrDownTurned()
 void
 CardInBoard::setUpOrDownTurned(CardInBoard::TurnedEnum theUpOrDownTurned)
 {
+	cout << "CardInBoard::setUpOrDownTurned" << endl;
 	upOrDownTurned = theUpOrDownTurned;
 }

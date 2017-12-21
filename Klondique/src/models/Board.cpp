@@ -259,13 +259,14 @@ Board::giveMeTheFoundationNumber(Suit::SuitType theSuit)
 }
 
 void
-Board::upturnCardInPile(vector<CardInBoard> thePile)
+Board::upturnCardInPile(vector<CardInBoard>& thePile)
 {
+	cout << "Board::upturnCardInPile" << endl;
 	if(!thePile.empty())
 	{
 		if ((thePile.back()).getUpOrDownTurned() == CardInBoard::TurnedEnum::DOWN)
 		{
-			thePile.back().setUpOrDownTurned(CardInBoard::TurnedEnum::UP);
+			(thePile.back()).setUpOrDownTurned(CardInBoard::TurnedEnum::UP);
 		}
 	}
 }

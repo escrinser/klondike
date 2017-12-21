@@ -11,13 +11,14 @@ StartMenuCommand::StartMenuCommand(shared_ptr<Game> game, shared_ptr<CommandRegi
 }
 
 void
-StartMenuCommand::execute() {
-
+StartMenuCommand::execute()
+{
+	game->setState(State::INITIAL);
 }
 
 bool
 StartMenuCommand::isActive() {
-	if (game->getState() == State::INITIAL)
+	if (game->getState() == State::IN_GAME)
 	{
 		return true;
 	}

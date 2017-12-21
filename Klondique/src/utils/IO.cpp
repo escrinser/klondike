@@ -33,7 +33,6 @@ IO::readInt(string title) {
 	do {
 		try
 		{
-			//input = Integer.parseInt(readstring(title));
 			input = atoi(readstring(title).c_str());
 			ok = true;
 		}
@@ -59,11 +58,11 @@ IO::write(string string)
 void
 IO::writeln(string string)
 {
-	cout << string;
+	cout << string << endl;
 }
 
 void
 IO::writeError(string format)
 {
-	cout << "FORMAT ERROR! Introduce a value with format " << format << ".";
+	cout << "FORMAT ERROR! Introduce a value with format " << format << "." << endl;
 }

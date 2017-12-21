@@ -1,25 +1,19 @@
-/*
- * ExitCommand.cpp
- *
- *  Created on: 19 dic. 2017
- *      Author: eseogaz
- */
-
 #include <ExitCommand.h>
 
-ExitCommand::ExitCommand() : Command("Exit", nullptr, nullptr), closed_(false)
+ExitCommand::ExitCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry) : Command("Exit", game, commandRegistry), closed_(false)
 {
 
 }
 
 ExitCommand::~ExitCommand() {
-	// TODO Auto-generated destructor stub
+
 }
 
 
 void
 ExitCommand::execute()
 {
+	cout << "ExitCommand::execute" << endl;
 	game->setState(State::EXIT);
 	closed_ = true;
 }

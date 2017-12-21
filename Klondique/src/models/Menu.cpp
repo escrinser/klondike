@@ -9,6 +9,8 @@
 #include "MoveBetweenWastePileAndPile.h"
 #include "MoveBetweenWastePileAndFoundation.h"
 #include "MoveBetweenPiles.h"
+#include "RedoCommand.h"
+#include "UndoCommand.h"
 #include "StartMenuCommand.h"
 
 #include "LimitedInDialog.h"
@@ -19,7 +21,6 @@ Menu::~Menu() {
 
 Menu::Menu(shared_ptr<Game> theGame)
 {
-	cout << "Menu" << endl;
 	game = theGame;
 
 	commandRegistry = shared_ptr<CommandRegistry>(new CommandRegistry());
@@ -32,19 +33,21 @@ Menu::Menu(shared_ptr<Game> theGame)
 	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndPile>(new MoveBetweenWastePileAndPile(game, commandRegistry)));
 	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndFoundation>(new MoveBetweenWastePileAndFoundation(game, commandRegistry)));
 	allCommandList.push_back(shared_ptr<MoveBetweenPiles>(new MoveBetweenPiles(game, commandRegistry)));
-	//allCommandList.push_back(shared_ptr<StartMenuCommand>(new StartMenuCommand(game, commandRegistry)));
+
+	allCommandList.push_back(shared_ptr<UndoCommand>(new UndoCommand(game, commandRegistry)));
+	allCommandList.push_back(shared_ptr<RedoCommand>(new RedoCommand(game, commandRegistry)));
+	allCommandList.push_back(shared_ptr<StartMenuCommand>(new StartMenuCommand(game, commandRegistry)));
 
 	allCommandList.push_back(shared_ptr<ContinueCommand>(new ContinueCommand(game, commandRegistry)));
     allCommandList.push_back(shared_ptr<SaveGameCommand>(new SaveGameCommand(game, commandRegistry)));
 
-	//allCommandList.push_back(shared_ptr<ExitCommand>(new ExitCommand()));
-	cout << "Menu End" << endl;
+    exitCommand = shared_ptr<ExitCommand>(new ExitCommand(game, commandRegistry));
+	allCommandList.push_back(exitCommand);
 }
 
 void
 Menu::setActualCommands()
 {
-	cout << "setActualCommands" << endl;
 	actualCommandList.clear();
 	for(shared_ptr<Command> command: allCommandList)
 	{
@@ -55,7 +58,6 @@ Menu::setActualCommands()
 			actualCommandList.push_back(command);
 		}
 	}
-	cout << "setActualCommands  End" << endl;
 }
 
 void
@@ -87,8 +89,8 @@ Menu::write()
 int
 Menu::getOption()
 {
-	string title = "Option";
-	return LimitedInDialog::getInstance()->read(title, 1, actualCommandList.size()) - 1;
+	string title = "Option ";
+	return LimitedInDialog::getInstance()->read(title, MENU_OPTION_1, actualCommandList.size()) - 1;
 
 	/*string titleStartDialog = "Chose one option:\n\n"
 			"1  Play\n"

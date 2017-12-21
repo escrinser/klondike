@@ -54,7 +54,7 @@ public:
 	bool canMoveToFoundation(int theCardNumber, int foundationNumber);
 
 	int giveMeTheFoundationNumber(Suit::SuitType theSuit);
-	void upturnCardInPile(vector<CardInBoard> thePile);
+	void upturnCardInPile(vector<CardInBoard>& thePile);
 
 	void showBoard();
 	void showElement(vector<CardInBoard> theElement);

@@ -9,7 +9,8 @@
 #include <fstream>
 #include <sstream>
 
-Game::Game() {
+Game::Game()
+{
 	state = State::INITIAL;
 
 	shared_ptr<Deck> deck (new Deck());

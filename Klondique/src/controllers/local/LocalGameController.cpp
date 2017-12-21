@@ -78,14 +78,12 @@ LocalGameController::recoverGame()
 void
 LocalGameController::undo()
 {
-	cout << "LocalGameController::undo()"<<endl;
 	game->undo();
 }
 
 void
 LocalGameController::redo()
 {
-	cout << "LocalGameController::redo()"<<endl;
 	game->redo();
 }
 

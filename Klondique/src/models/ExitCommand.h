@@ -5,7 +5,7 @@
 
 class ExitCommand : public Command {
 public:
-	ExitCommand();
+	ExitCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
 	virtual ~ExitCommand();
 	void execute();
 
