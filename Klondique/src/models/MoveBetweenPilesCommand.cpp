@@ -1,18 +1,17 @@
-#include <MoveBetweenPiles.h>
-
+#include <MoveBetweenPilesCommand.h>
 #include "LimitedInDialog.h"
 
-MoveBetweenPiles::~MoveBetweenPiles() {
+MoveBetweenPilesCommand::~MoveBetweenPilesCommand() {
 }
 
-MoveBetweenPiles::MoveBetweenPiles(shared_ptr<Game> game):
+MoveBetweenPilesCommand::MoveBetweenPilesCommand(shared_ptr<Game> game):
 	UndoableCommand("MoveBetweenPiles", game)
 {
 
 }
 
 void
-MoveBetweenPiles::execute() {
+MoveBetweenPilesCommand::execute() {
 
 	string titleCardDialog = "Card Number?";
 	string titlePileDialog = "Pile Number?";
@@ -62,7 +61,7 @@ MoveBetweenPiles::execute() {
 }
 
 bool
-MoveBetweenPiles::isActive()
+MoveBetweenPilesCommand::isActive()
 {
 	if ((game->getState() == State::IN_GAME)
 			&& !game->hasWon())
@@ -77,14 +76,14 @@ MoveBetweenPiles::isActive()
 
 
 void
-MoveBetweenPiles::undo()
+MoveBetweenPilesCommand::undo()
 {
 	game->undo();
 }
 
 
 void
-MoveBetweenPiles::redo() {
+MoveBetweenPilesCommand::redo() {
 	game->redo();
 }
 
@@ -98,7 +97,7 @@ MoveBetweenPiles::clone() {
 
 
 string
-MoveBetweenPiles::toString()
+MoveBetweenPilesCommand::toString()
 {
 	return "MoveBetweenPiles";
 	//return "MoveCommand [origin=" + origin + ", target=" + target + "]";

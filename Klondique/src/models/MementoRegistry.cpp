@@ -34,8 +34,6 @@ MementoRegistry::undo()
 	if (redoUndoIndex < (mementoList.size() - 1))
     {
 		redoUndoIndex++;
-		cout << "MementoRegistry::undo MEMLIST " << mementoList.size() <<endl;
-		cout << "MementoRegistry::undo FIRSTPREV " << redoUndoIndex <<endl;
 		game->set(mementoList[(mementoList.size()-1)-redoUndoIndex]);
     }
 }
@@ -48,8 +46,6 @@ MementoRegistry::redo()
 		if (!mementoList.empty())
 		{
 			redoUndoIndex--;
-			cout << "MementoRegistry::redo MEMLIST " << mementoList.size() <<endl;
-			cout << "MementoRegistry::redo FIRSTPREV " << redoUndoIndex <<endl;
 			game->set(mementoList[(mementoList.size()-1)-redoUndoIndex]);
 		}
 	}

@@ -20,7 +20,6 @@ KlondiqueView::~KlondiqueView() {
 void
 KlondiqueView::interact(OperationController* controller)
 {
-		//assert controller != nullptr;
 		controller->accept(this);
 }
 

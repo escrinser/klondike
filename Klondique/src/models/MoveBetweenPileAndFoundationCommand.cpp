@@ -1,24 +1,23 @@
-#include <MoveBetweenPileAndFoundation.h>
-
+#include <MoveBetweenPileAndFoundationCommand.h>
 #include "LimitedInDialog.h"
 
-MoveBetweenPileAndFoundation::~MoveBetweenPileAndFoundation() {
+MoveBetweenPileAndFoundationCommand::~MoveBetweenPileAndFoundationCommand() {
 }
 
-MoveBetweenPileAndFoundation::MoveBetweenPileAndFoundation(shared_ptr<Game> game):
+MoveBetweenPileAndFoundationCommand::MoveBetweenPileAndFoundationCommand(shared_ptr<Game> game):
 	UndoableCommand("MoveBetweenPileAndFoundation", game)
 {
 
 }
 
 void
-MoveBetweenPileAndFoundation::execute() {
+MoveBetweenPileAndFoundationCommand::execute() {
 	string titlePileDialog = "Pile Number?";
 	game->moveBetweenPileAndFoundation(LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES));
 }
 
 bool
-MoveBetweenPileAndFoundation::isActive()
+MoveBetweenPileAndFoundationCommand::isActive()
 {
 	if ((game->getState() == State::IN_GAME)
 			&& !game->hasWon())
@@ -33,14 +32,14 @@ MoveBetweenPileAndFoundation::isActive()
 
 
 void
-MoveBetweenPileAndFoundation::undo()
+MoveBetweenPileAndFoundationCommand::undo()
 {
 	game->undo();
 }
 
 
 void
-MoveBetweenPileAndFoundation::redo() {
+MoveBetweenPileAndFoundationCommand::redo() {
 	game->redo();
 }
 
@@ -54,7 +53,7 @@ MoveBetweenPileAndFoundation::clone() {
 
 
 string
-MoveBetweenPileAndFoundation::toString()
+MoveBetweenPileAndFoundationCommand::toString()
 {
 	return "MoveBetweenPileAndFoundation";
 	//return "MoveCommand [origin=" + origin + ", target=" + target + "]";

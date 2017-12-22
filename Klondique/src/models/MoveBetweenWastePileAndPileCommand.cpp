@@ -1,24 +1,23 @@
-#include <MoveBetweenWastePileAndPile.h>
-
+#include <MoveBetweenWastePileAndPileCommand.h>
 #include "LimitedInDialog.h"
 
-MoveBetweenWastePileAndPile::~MoveBetweenWastePileAndPile() {
+MoveBetweenWastePileAndPileCommand::~MoveBetweenWastePileAndPileCommand() {
 }
 
-MoveBetweenWastePileAndPile::MoveBetweenWastePileAndPile(shared_ptr<Game> game):
+MoveBetweenWastePileAndPileCommand::MoveBetweenWastePileAndPileCommand(shared_ptr<Game> game):
 	UndoableCommand("MoveBetweenWastePileAndPile", game)
 {
 
 }
 
 void
-MoveBetweenWastePileAndPile::execute() {
+MoveBetweenWastePileAndPileCommand::execute() {
 	string titlePileDialog = "Pile Number?";
 	game->moveBetweenWastePileAndPile(LimitedInDialog::getInstance()->read(titlePileDialog, MIN_NUMBER_OF_PILES, MAX_NUMBER_OF_PILES));
 }
 
 bool
-MoveBetweenWastePileAndPile::isActive()
+MoveBetweenWastePileAndPileCommand::isActive()
 {
 	if ((game->getState() == State::IN_GAME)
 			&& !game->hasWon())
@@ -33,14 +32,14 @@ MoveBetweenWastePileAndPile::isActive()
 
 
 void
-MoveBetweenWastePileAndPile::undo()
+MoveBetweenWastePileAndPileCommand::undo()
 {
 	game->undo();
 }
 
 
 void
-MoveBetweenWastePileAndPile::redo() {
+MoveBetweenWastePileAndPileCommand::redo() {
 	game->redo();
 }
 
@@ -54,7 +53,7 @@ MoveBetweenWastePileAndPile::clone() {
 
 
 string
-MoveBetweenWastePileAndPile::toString()
+MoveBetweenWastePileAndPileCommand::toString()
 {
 	return "MoveBetweenWastePileAndPile";
 	//return "MoveCommand [origin=" + origin + ", target=" + target + "]";

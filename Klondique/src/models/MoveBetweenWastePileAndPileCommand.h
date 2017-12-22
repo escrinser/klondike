@@ -3,11 +3,11 @@
 
 #include "UndoableCommand.h"
 
-class MoveBetweenWastePileAndPile : public UndoableCommand{
+class MoveBetweenWastePileAndPileCommand : public UndoableCommand{
 public:
-	MoveBetweenWastePileAndPile(shared_ptr<Game> game);
+	MoveBetweenWastePileAndPileCommand(shared_ptr<Game> game);
 
-	virtual ~MoveBetweenWastePileAndPile();
+	virtual ~MoveBetweenWastePileAndPileCommand();
 
 	void execute();
 

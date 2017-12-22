@@ -1,17 +1,16 @@
 #include <Menu.h>
+#include <MoveBetweenPileAndFoundationCommand.h>
+#include <MoveBetweenPilesCommand.h>
+#include <MoveBetweenWastePileAndFoundationCommand.h>
+#include <MoveBetweenWastePileAndPileCommand.h>
 
 #include "PlayCommand.h"
 #include "ContinueCommand.h"
 #include "SaveGameCommand.h"
 #include "RecoverGameCommand.h"
 #include "DealCommand.h"
-#include "MoveBetweenPileAndFoundation.h"
-#include "MoveBetweenWastePileAndPile.h"
-#include "MoveBetweenWastePileAndFoundation.h"
-#include "MoveBetweenPiles.h"
 #include "RedoCommand.h"
 #include "UndoCommand.h"
-//#include "StartMenuCommand.h"
 #include "ContinueMenuCommand.h"
 
 #include "LimitedInDialog.h"
@@ -28,14 +27,13 @@ Menu::Menu(shared_ptr<Game> theGame)
 	allCommandList.push_back(shared_ptr<RecoverGameCommand>(new RecoverGameCommand(game)));
 
 	allCommandList.push_back(shared_ptr<DealCommand>(new DealCommand(game)));
-	allCommandList.push_back(shared_ptr<MoveBetweenPileAndFoundation>(new MoveBetweenPileAndFoundation(game)));
-	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndPile>(new MoveBetweenWastePileAndPile(game)));
-	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndFoundation>(new MoveBetweenWastePileAndFoundation(game)));
-	allCommandList.push_back(shared_ptr<MoveBetweenPiles>(new MoveBetweenPiles(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenPileAndFoundationCommand>(new MoveBetweenPileAndFoundationCommand(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndPileCommand>(new MoveBetweenWastePileAndPileCommand(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndFoundationCommand>(new MoveBetweenWastePileAndFoundationCommand(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenPilesCommand>(new MoveBetweenPilesCommand(game)));
 
 	allCommandList.push_back(shared_ptr<UndoCommand>(new UndoCommand(game)));
 	allCommandList.push_back(shared_ptr<RedoCommand>(new RedoCommand(game)));
-	//allCommandList.push_back(shared_ptr<StartMenuCommand>(new StartMenuCommand(game)));
 	allCommandList.push_back(shared_ptr<ContinueMenuCommand>(new ContinueMenuCommand(game)));
 
 	allCommandList.push_back(shared_ptr<ContinueCommand>(new ContinueCommand(game)));

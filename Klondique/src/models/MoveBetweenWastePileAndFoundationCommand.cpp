@@ -1,23 +1,22 @@
-#include <MoveBetweenWastePileAndFoundation.h>
-
+#include <MoveBetweenWastePileAndFoundationCommand.h>
 #include "LimitedInDialog.h"
 
-MoveBetweenWastePileAndFoundation::~MoveBetweenWastePileAndFoundation() {
+MoveBetweenWastePileAndFoundationCommand::~MoveBetweenWastePileAndFoundationCommand() {
 }
 
-MoveBetweenWastePileAndFoundation::MoveBetweenWastePileAndFoundation(shared_ptr<Game> game):
+MoveBetweenWastePileAndFoundationCommand::MoveBetweenWastePileAndFoundationCommand(shared_ptr<Game> game):
 	UndoableCommand("MoveBetweenWastePileAndFoundation", game)
 {
 
 }
 
 void
-MoveBetweenWastePileAndFoundation::execute() {
+MoveBetweenWastePileAndFoundationCommand::execute() {
 	game->moveBetweenWastePileAndFoundation();
 }
 
 bool
-MoveBetweenWastePileAndFoundation::isActive()
+MoveBetweenWastePileAndFoundationCommand::isActive()
 {
 	if ((game->getState() == State::IN_GAME)
 			&& !game->hasWon())
@@ -32,14 +31,14 @@ MoveBetweenWastePileAndFoundation::isActive()
 
 
 void
-MoveBetweenWastePileAndFoundation::undo()
+MoveBetweenWastePileAndFoundationCommand::undo()
 {
 	game->undo();
 }
 
 
 void
-MoveBetweenWastePileAndFoundation::redo() {
+MoveBetweenWastePileAndFoundationCommand::redo() {
 	game->redo();
 }
 
@@ -53,7 +52,7 @@ MoveBetweenWastePileAndFoundation::clone() {
 
 
 string
-MoveBetweenWastePileAndFoundation::toString()
+MoveBetweenWastePileAndFoundationCommand::toString()
 {
 	return "MoveBetweenWastePileAndFoundation";
 	//return "MoveCommand [origin=" + origin + ", target=" + target + "]";
