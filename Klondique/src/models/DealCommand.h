@@ -5,7 +5,7 @@
 
 class DealCommand : public UndoableCommand{
 public:
-	DealCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	DealCommand(shared_ptr<Game> game);
 
 	virtual ~DealCommand();
 

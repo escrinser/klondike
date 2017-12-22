@@ -4,8 +4,8 @@ RedoCommand::~RedoCommand() {
 
 }
 
-RedoCommand::RedoCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	Command("Redo", game, commandRegistry)
+RedoCommand::RedoCommand(shared_ptr<Game> game):
+	Command("Redo", game)
 {
 
 }

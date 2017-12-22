@@ -19,7 +19,7 @@
 
 class UndoableCommand : public Command{
 public:
-	UndoableCommand(std::string title, shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	UndoableCommand(std::string title, shared_ptr<Game> game);
 
 	virtual ~UndoableCommand();
 

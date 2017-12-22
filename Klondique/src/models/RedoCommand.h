@@ -5,7 +5,7 @@
 
 class RedoCommand : public Command{
 public:
-	RedoCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	RedoCommand(shared_ptr<Game> game);
 
 	virtual ~RedoCommand();
 

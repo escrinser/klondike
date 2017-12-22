@@ -4,8 +4,8 @@ ContinueCommand::~ContinueCommand() {
 
 }
 
-ContinueCommand::ContinueCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	Command("Continue", game, commandRegistry)
+ContinueCommand::ContinueCommand(shared_ptr<Game> game):
+	Command("Continue", game)
 {
 
 }

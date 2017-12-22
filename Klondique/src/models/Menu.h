@@ -1,10 +1,3 @@
-/*
- * Menu.h
- *
- *  Created on: 19 dic. 2017
- *      Author: eseogaz
- */
-
 #ifndef MODELS_MENU_H_
 #define MODELS_MENU_H_
 
@@ -22,8 +15,6 @@ protected:
 	vector<shared_ptr<Command>> allCommandList;
 
 	shared_ptr<ExitCommand> exitCommand;
-
-	shared_ptr<CommandRegistry> commandRegistry;
 
 	shared_ptr<Game> game;
 

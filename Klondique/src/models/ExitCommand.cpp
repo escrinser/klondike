@@ -1,6 +1,6 @@
 #include <ExitCommand.h>
 
-ExitCommand::ExitCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry) : Command("Exit", game, commandRegistry), closed_(false)
+ExitCommand::ExitCommand(shared_ptr<Game> game) : Command("Exit", game), closed_(false)
 {
 
 }

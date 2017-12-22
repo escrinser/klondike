@@ -4,8 +4,8 @@ PlayCommand::~PlayCommand() {
 
 }
 
-PlayCommand::PlayCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	Command("Play", game, commandRegistry)
+PlayCommand::PlayCommand(shared_ptr<Game> game):
+	Command("Play", game)
 {
 
 }

@@ -4,8 +4,8 @@ DealCommand::~DealCommand() {
 
 }
 
-DealCommand::DealCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	UndoableCommand("Deal", game, commandRegistry)
+DealCommand::DealCommand(shared_ptr<Game> game):
+	UndoableCommand("Deal", game)
 {
 
 }
@@ -45,7 +45,7 @@ DealCommand::redo() {
 
 /*UndoableCommand
 DealCommand::clone() {
-	MoveCommand moveCommand = new MoveCommand(game, commandRegistry);
+	MoveCommand moveCommand = new MoveCommand(game);
 	moveCommand.origin = origin.clone();
 	moveCommand.target = target.clone();
 	return moveCommand;

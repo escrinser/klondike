@@ -5,7 +5,7 @@
 
 class PlayCommand : public Command{
 public:
-	PlayCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	PlayCommand(shared_ptr<Game> game);
 
 	virtual ~PlayCommand();
 

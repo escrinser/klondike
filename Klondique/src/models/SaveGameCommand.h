@@ -5,7 +5,7 @@
 
 class SaveGameCommand : public Command{
 public:
-	SaveGameCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	SaveGameCommand(shared_ptr<Game> game);
 
 	virtual ~SaveGameCommand();
 

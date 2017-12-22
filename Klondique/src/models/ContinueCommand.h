@@ -5,7 +5,7 @@
 
 class ContinueCommand : public Command{
 public:
-	ContinueCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	ContinueCommand(shared_ptr<Game> game);
 
 	virtual ~ContinueCommand();
 

@@ -25,8 +25,8 @@ StartMenu::set(){
 void
 StartMenu::activeStartMenu() {
 	allCommandList.clear();
-	allCommandList.push_back(shared_ptr<PlayCommand>(new PlayCommand(game, commandRegistry)));
-    allCommandList.push_back(shared_ptr<RecoverGameCommand>(new RecoverGameCommand(game, commandRegistry)));
+	allCommandList.push_back(shared_ptr<PlayCommand>(new PlayCommand(game)));
+    allCommandList.push_back(shared_ptr<RecoverGameCommand>(new RecoverGameCommand(game)));
 	allCommandList.push_back(exitCommand);
 }
 

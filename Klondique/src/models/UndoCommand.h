@@ -5,7 +5,7 @@
 
 class UndoCommand : public Command{
 public:
-	UndoCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	UndoCommand(shared_ptr<Game> game);
 
 	virtual ~UndoCommand();
 

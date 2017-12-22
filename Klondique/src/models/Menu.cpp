@@ -11,7 +11,8 @@
 #include "MoveBetweenPiles.h"
 #include "RedoCommand.h"
 #include "UndoCommand.h"
-#include "StartMenuCommand.h"
+//#include "StartMenuCommand.h"
+#include "ContinueMenuCommand.h"
 
 #include "LimitedInDialog.h"
 #include "IO.h"
@@ -23,25 +24,24 @@ Menu::Menu(shared_ptr<Game> theGame)
 {
 	game = theGame;
 
-	commandRegistry = shared_ptr<CommandRegistry>(new CommandRegistry());
+	allCommandList.push_back(shared_ptr<PlayCommand>(new PlayCommand(game)));
+	allCommandList.push_back(shared_ptr<RecoverGameCommand>(new RecoverGameCommand(game)));
 
-	allCommandList.push_back(shared_ptr<PlayCommand>(new PlayCommand(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<RecoverGameCommand>(new RecoverGameCommand(game, commandRegistry)));
+	allCommandList.push_back(shared_ptr<DealCommand>(new DealCommand(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenPileAndFoundation>(new MoveBetweenPileAndFoundation(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndPile>(new MoveBetweenWastePileAndPile(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndFoundation>(new MoveBetweenWastePileAndFoundation(game)));
+	allCommandList.push_back(shared_ptr<MoveBetweenPiles>(new MoveBetweenPiles(game)));
 
-	allCommandList.push_back(shared_ptr<DealCommand>(new DealCommand(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<MoveBetweenPileAndFoundation>(new MoveBetweenPileAndFoundation(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndPile>(new MoveBetweenWastePileAndPile(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<MoveBetweenWastePileAndFoundation>(new MoveBetweenWastePileAndFoundation(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<MoveBetweenPiles>(new MoveBetweenPiles(game, commandRegistry)));
+	allCommandList.push_back(shared_ptr<UndoCommand>(new UndoCommand(game)));
+	allCommandList.push_back(shared_ptr<RedoCommand>(new RedoCommand(game)));
+	//allCommandList.push_back(shared_ptr<StartMenuCommand>(new StartMenuCommand(game)));
+	allCommandList.push_back(shared_ptr<ContinueMenuCommand>(new ContinueMenuCommand(game)));
 
-	allCommandList.push_back(shared_ptr<UndoCommand>(new UndoCommand(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<RedoCommand>(new RedoCommand(game, commandRegistry)));
-	allCommandList.push_back(shared_ptr<StartMenuCommand>(new StartMenuCommand(game, commandRegistry)));
+	allCommandList.push_back(shared_ptr<ContinueCommand>(new ContinueCommand(game)));
+    allCommandList.push_back(shared_ptr<SaveGameCommand>(new SaveGameCommand(game)));
 
-	allCommandList.push_back(shared_ptr<ContinueCommand>(new ContinueCommand(game, commandRegistry)));
-    allCommandList.push_back(shared_ptr<SaveGameCommand>(new SaveGameCommand(game, commandRegistry)));
-
-    exitCommand = shared_ptr<ExitCommand>(new ExitCommand(game, commandRegistry));
+    exitCommand = shared_ptr<ExitCommand>(new ExitCommand(game));
 	allCommandList.push_back(exitCommand);
 }
 
@@ -82,7 +82,7 @@ Menu::write()
 	IO::getInstance()->writeln("---------------------");
 	for (int i = 0; i < actualCommandList.size(); i++)
 	{
-		IO::getInstance()->writeln((i + 1) + ". " + actualCommandList[i]->getTitle());
+		IO::getInstance()->writeln(std::to_string(i + 1) + ". " + actualCommandList[i]->getTitle());
 	}
 }
 
@@ -91,13 +91,6 @@ Menu::getOption()
 {
 	string title = "Option ";
 	return LimitedInDialog::getInstance()->read(title, MENU_OPTION_1, actualCommandList.size()) - 1;
-
-	/*string titleStartDialog = "Chose one option:\n\n"
-			"1  Play\n"
-		    "2  Recover game from file\n"
-		    "3  Exit\n"
-			"Enter your choice and press return";
-	return LimitedInDialog::getInstance()->read(titleStartDialog, MENU_OPTION_1, MENU_OPTION_3);*/
 }
 
 bool

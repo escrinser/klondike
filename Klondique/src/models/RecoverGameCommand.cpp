@@ -4,8 +4,8 @@ RecoverGameCommand::~RecoverGameCommand() {
 
 }
 
-RecoverGameCommand::RecoverGameCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	Command("Recover Game", game, commandRegistry)
+RecoverGameCommand::RecoverGameCommand(shared_ptr<Game> game):
+	Command("Recover Game", game)
 {
 
 }

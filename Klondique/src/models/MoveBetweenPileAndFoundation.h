@@ -5,7 +5,7 @@
 
 class MoveBetweenPileAndFoundation : public UndoableCommand{
 public:
-	MoveBetweenPileAndFoundation(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	MoveBetweenPileAndFoundation(shared_ptr<Game> game);
 
 	virtual ~MoveBetweenPileAndFoundation();
 

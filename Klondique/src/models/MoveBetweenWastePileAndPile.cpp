@@ -5,8 +5,8 @@
 MoveBetweenWastePileAndPile::~MoveBetweenWastePileAndPile() {
 }
 
-MoveBetweenWastePileAndPile::MoveBetweenWastePileAndPile(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	UndoableCommand("MoveBetweenWastePileAndPile", game, commandRegistry)
+MoveBetweenWastePileAndPile::MoveBetweenWastePileAndPile(shared_ptr<Game> game):
+	UndoableCommand("MoveBetweenWastePileAndPile", game)
 {
 
 }
@@ -46,7 +46,7 @@ MoveBetweenWastePileAndPile::redo() {
 
 /*UndoableCommand
 MoveBetweenWastePileAndPile::clone() {
-	MoveCommand moveCommand = new MoveCommand(game, commandRegistry);
+	MoveCommand moveCommand = new MoveCommand(game);
 	moveCommand.origin = origin.clone();
 	moveCommand.target = target.clone();
 	return moveCommand;

@@ -1,20 +1,12 @@
-/*
- * Command.h
- *
- *  Created on: 19 dic. 2017
- *      Author: eseogaz
- */
-
 #ifndef VIEWS_COMMAND_H_
 #define VIEWS_COMMAND_H_
 
 #include "Game.h"
-#include "CommandRegistry.h"
 
 class Command {
 public:
 
-	Command(std::string title, shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	Command(std::string title, shared_ptr<Game> game);
 	virtual ~Command();
 	std::string getTitle();
 
@@ -26,7 +18,6 @@ private:
 
 protected:
 	shared_ptr<Game> game;
-	shared_ptr<CommandRegistry> commandRegistry;
 
 };
 

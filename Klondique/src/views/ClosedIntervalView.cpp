@@ -1,10 +1,3 @@
-/*
- * ClosedIntervalView.cpp
- *
- *  Created on: 19 dic. 2017
- *      Author: eseogaz
- */
-
 #include <ClosedIntervalView.h>
 #include "IO.h"
 

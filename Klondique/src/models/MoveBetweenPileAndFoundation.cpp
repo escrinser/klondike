@@ -5,8 +5,8 @@
 MoveBetweenPileAndFoundation::~MoveBetweenPileAndFoundation() {
 }
 
-MoveBetweenPileAndFoundation::MoveBetweenPileAndFoundation(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	UndoableCommand("MoveBetweenPileAndFoundation", game, commandRegistry)
+MoveBetweenPileAndFoundation::MoveBetweenPileAndFoundation(shared_ptr<Game> game):
+	UndoableCommand("MoveBetweenPileAndFoundation", game)
 {
 
 }
@@ -46,7 +46,7 @@ MoveBetweenPileAndFoundation::redo() {
 
 /*UndoableCommand
 MoveBetweenPileAndFoundation::clone() {
-	MoveCommand moveCommand = new MoveCommand(game, commandRegistry);
+	MoveCommand moveCommand = new MoveCommand(game);
 	moveCommand.origin = origin.clone();
 	moveCommand.target = target.clone();
 	return moveCommand;

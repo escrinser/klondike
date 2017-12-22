@@ -5,7 +5,7 @@
 
 class RecoverGameCommand : public Command{
 public:
-	RecoverGameCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry);
+	RecoverGameCommand(shared_ptr<Game> game);
 
 	virtual ~RecoverGameCommand();
 

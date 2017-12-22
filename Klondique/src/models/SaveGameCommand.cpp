@@ -4,8 +4,8 @@ SaveGameCommand::~SaveGameCommand() {
 
 }
 
-SaveGameCommand::SaveGameCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	Command("Save game", game, commandRegistry)
+SaveGameCommand::SaveGameCommand(shared_ptr<Game> game):
+	Command("Save game", game)
 {
 
 }
@@ -14,7 +14,6 @@ void
 SaveGameCommand::execute()
 {
 	game->saveGame();
-	game->setState(State::EXIT); //Save the game and Exit.
 }
 
 bool

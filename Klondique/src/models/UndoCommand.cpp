@@ -4,8 +4,8 @@ UndoCommand::~UndoCommand() {
 
 }
 
-UndoCommand::UndoCommand(shared_ptr<Game> game, shared_ptr<CommandRegistry> commandRegistry):
-	Command("Undo", game, commandRegistry)
+UndoCommand::UndoCommand(shared_ptr<Game> game):
+	Command("Undo", game)
 {
 
 }
