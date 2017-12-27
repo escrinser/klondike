@@ -1,7 +1,7 @@
 #ifndef VIEWS_MENUVIEW_H_
 #define VIEWS_MENUVIEW_H_
 
-#include "Menu.h"
+#include "../controllers/Menu.h"
 
 class MenuView {
 public:

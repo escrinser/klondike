@@ -12,35 +12,17 @@ Klondike::Klondike()
 Klondike::~Klondike() {
 }
 
-
-void
-Klondike::play()
-{
-	shared_ptr<OperationController> controller;
-	do {
-		controller = logic.getController();
-		if (controller != nullptr){
-			view.interact(controller.get());
-		}
-	} while (controller != nullptr);
-}
-
 void
 Klondike::exec()
 {
-	//menu = new Menu(shared_ptr<Game>(new Game()));
 	view.interact(menu);
-
-
-	//menu->execute();
 }
 
 int main()
 {
-   cout << "The First Version of Klondique." << endl;
+   cout << "The Sergio's Klondike." << endl;
    Klondike game;
-   //game.play(); //Controllers...
-   game.exec(); //Menus with Command
+   game.exec();
    return 0;
 }
 
