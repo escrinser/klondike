@@ -12,8 +12,6 @@ GameView::GameView() {
 
 GameView::GameView(OperationController* theController)
 {
-	//assert theController != nullptr;
-
 	controller = theController;
 }
 
@@ -42,8 +40,6 @@ GameView::interact(GameController* gameController)
 			"7  Redo\n"
 			"8  Menu\n"
 			"Enter your choice and press return";
-	//LimitedInDialog::getInstance()->read(titleMainMenuDialog, MENU_OPTION_1, MENU_OPTION_8);
-
 	do
 	{
 		BoardView(gameController).showBoard();

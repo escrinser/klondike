@@ -13,7 +13,6 @@ PlayCommand::PlayCommand(shared_ptr<Game> game):
 void
 PlayCommand::execute()
 {
-	cout << "PlayCommand::execute" << endl;
 	game->startPlayingBoard();
 	game->setState(State::IN_GAME);
 }

@@ -5,9 +5,14 @@
 #include "../controllers/GameController.h"
 #include "../controllers/ContinueController.h"
 
+#include "Menu.h"
+
 KlondiqueView::KlondiqueView()
 {
-		startView = shared_ptr<StartView>(new StartView());
+	    //menu = new Menu(shared_ptr<Game>(new Game()));
+	    menuView = shared_ptr<MenuView>(new MenuView());
+
+	    startView = shared_ptr<StartView>(new StartView());
 
 		gameView = shared_ptr<GameView> (new GameView());
 
@@ -21,6 +26,18 @@ void
 KlondiqueView::interact(OperationController* controller)
 {
 		controller->accept(this);
+}
+
+void
+KlondiqueView::interact(Menu* menu)
+{
+		menu->accept(this);
+}
+
+void
+KlondiqueView::visit(Menu* menu)
+{
+	menuView->interact(menu);
 }
 
 void

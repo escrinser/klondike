@@ -13,7 +13,6 @@ RecoverGameCommand::RecoverGameCommand(shared_ptr<Game> game):
 void
 RecoverGameCommand::execute()
 {
-	cout << "RecoverGameCommand::execute" << endl;
 	game->recoverGame();
 }
 

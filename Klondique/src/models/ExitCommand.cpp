@@ -13,7 +13,6 @@ ExitCommand::~ExitCommand() {
 void
 ExitCommand::execute()
 {
-	cout << "ExitCommand::execute" << endl;
 	game->setState(State::EXIT);
 	closed_ = true;
 }

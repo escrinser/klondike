@@ -28,7 +28,11 @@ Klondike::play()
 void
 Klondike::exec()
 {
-	menu->execute();
+	//menu = new Menu(shared_ptr<Game>(new Game()));
+	view.interact(menu);
+
+
+	//menu->execute();
 }
 
 int main()

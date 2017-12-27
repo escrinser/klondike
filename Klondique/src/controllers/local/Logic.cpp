@@ -1,10 +1,3 @@
-/*
- * Logic.cpp
- *
- *  Created on: 8 nov. 2017
- *      Author: eseogaz
- */
-
 #include "Logic.h"
 
 #include <iostream>

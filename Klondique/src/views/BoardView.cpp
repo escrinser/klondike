@@ -4,8 +4,6 @@
 
 BoardView::BoardView(OperationController* theController)
 {
-	//assert theController != nullptr;
-
 	controller = theController;
 }
 

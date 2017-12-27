@@ -5,11 +5,15 @@
 #include "Command.h"
 #include "ExitCommand.h"
 
+#include "MenuVisitor.h"
+
 class Menu {
 public:
 	Menu(shared_ptr<Game> game);
 	virtual ~Menu();
 	void execute();
+
+	void accept(MenuVisitor* menuVisitor);
 
 protected:
 	vector<shared_ptr<Command>> allCommandList;

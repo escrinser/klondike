@@ -1,10 +1,3 @@
-/*
- * Logic.h
- *
- *  Created on: 8 nov. 2017
- *      Author: eseogaz
- */
-
 #ifndef LOGIC_H_
 #define LOGIC_H_
 

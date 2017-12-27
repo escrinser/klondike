@@ -49,10 +49,8 @@ Menu::setActualCommands()
 	actualCommandList.clear();
 	for(shared_ptr<Command> command: allCommandList)
 	{
-		cout << "Try with Command: " << command->getTitle() << endl;
 		if (command->isActive())
 		{
-			cout << "Actual Command: " << command->getTitle() << endl;
 			actualCommandList.push_back(command);
 		}
 	}
@@ -62,13 +60,11 @@ void
 Menu::execute()
 {
 	do {
-		cout << "execute" << endl;
 		this->setActualCommands();
 		game->showBoard();
 		this->write();
 		int option = this->getOption();
 		actualCommandList[option]->execute();
-		cout << "execute end" << endl;
 	} while (!this->isClosed());
 }
 
@@ -97,3 +93,9 @@ Menu::isClosed()
 	return exitCommand->closed();
 }
 
+
+void
+Menu::accept(MenuVisitor* menuVisitor)
+{
+	menuVisitor->visit(this);
+}

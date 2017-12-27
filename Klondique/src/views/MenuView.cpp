@@ -1,11 +1,17 @@
 #include <MenuView.h>
 
 MenuView::MenuView() {
-	// TODO Auto-generated constructor stub
+
 
 }
 
 MenuView::~MenuView() {
-	// TODO Auto-generated destructor stub
+
+}
+
+void
+MenuView::interact(Menu* menu)
+{
+   menu->execute();
 }
 
