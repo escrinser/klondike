@@ -5,7 +5,7 @@ MoveBetweenPilesCommand::~MoveBetweenPilesCommand() {
 }
 
 MoveBetweenPilesCommand::MoveBetweenPilesCommand(shared_ptr<Game> game):
-	UndoableCommand("MoveBetweenPiles", game)
+	UndoRedoAbleCommand("MoveBetweenPiles", game)
 {
 
 }
@@ -87,20 +87,10 @@ MoveBetweenPilesCommand::redo() {
 	game->redo();
 }
 
-/*UndoableCommand
-MoveBetweenPiles::clone() {
-	MoveCommand moveCommand = new MoveCommand(game);
-	moveCommand.origin = origin.clone();
-	moveCommand.target = target.clone();
-	return moveCommand;
-}*/
-
-
 string
 MoveBetweenPilesCommand::toString()
 {
 	return "MoveBetweenPiles";
-	//return "MoveCommand [origin=" + origin + ", target=" + target + "]";
 }
 
 

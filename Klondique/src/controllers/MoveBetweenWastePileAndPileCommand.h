@@ -1,9 +1,9 @@
 #ifndef VIEWS_MOVEBETWEENWASTEPILEANDPILE_H_
 #define VIEWS_MOVEBETWEENWASTEPILEANDPILE_H_
 
-#include "UndoableCommand.h"
+#include <UndoRedoAbleCommand.h>
 
-class MoveBetweenWastePileAndPileCommand : public UndoableCommand{
+class MoveBetweenWastePileAndPileCommand : public UndoRedoAbleCommand{
 public:
 	MoveBetweenWastePileAndPileCommand(shared_ptr<Game> game);
 
@@ -16,8 +16,6 @@ public:
 	void undo();
 
 	void redo();
-
-	//UndoableCommand clone();
 
 	string toString();
 };

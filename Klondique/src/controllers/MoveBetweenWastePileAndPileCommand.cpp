@@ -5,7 +5,7 @@ MoveBetweenWastePileAndPileCommand::~MoveBetweenWastePileAndPileCommand() {
 }
 
 MoveBetweenWastePileAndPileCommand::MoveBetweenWastePileAndPileCommand(shared_ptr<Game> game):
-	UndoableCommand("MoveBetweenWastePileAndPile", game)
+	UndoRedoAbleCommand("MoveBetweenWastePileAndPile", game)
 {
 
 }
@@ -43,18 +43,8 @@ MoveBetweenWastePileAndPileCommand::redo() {
 	game->redo();
 }
 
-/*UndoableCommand
-MoveBetweenWastePileAndPile::clone() {
-	MoveCommand moveCommand = new MoveCommand(game);
-	moveCommand.origin = origin.clone();
-	moveCommand.target = target.clone();
-	return moveCommand;
-}*/
-
-
 string
 MoveBetweenWastePileAndPileCommand::toString()
 {
 	return "MoveBetweenWastePileAndPile";
-	//return "MoveCommand [origin=" + origin + ", target=" + target + "]";
 }

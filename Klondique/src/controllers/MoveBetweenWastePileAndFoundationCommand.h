@@ -1,9 +1,9 @@
 #ifndef VIEWS_MOVEBETWEENWASTEPILEANDFOUNDATION_H_
 #define VIEWS_MOVEBETWEENWASTEPILEANDFOUNDATION_H_
 
-#include "UndoableCommand.h"
+#include <UndoRedoAbleCommand.h>
 
-class MoveBetweenWastePileAndFoundationCommand : public UndoableCommand{
+class MoveBetweenWastePileAndFoundationCommand : public UndoRedoAbleCommand{
 public:
 	MoveBetweenWastePileAndFoundationCommand(shared_ptr<Game> game);
 
@@ -16,8 +16,6 @@ public:
 	void undo();
 
 	void redo();
-
-	//UndoableCommand clone();
 
 	string toString();
 };

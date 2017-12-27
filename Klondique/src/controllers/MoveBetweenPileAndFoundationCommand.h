@@ -1,9 +1,9 @@
 #ifndef MODELS_MOVEBETWEENPILEANDFOUNDATIONCOMMAND_H_
 #define MODELS_MOVEBETWEENPILEANDFOUNDATIONCOMMAND_H_
 
-#include "UndoableCommand.h"
+#include <UndoRedoAbleCommand.h>
 
-class MoveBetweenPileAndFoundationCommand : public UndoableCommand{
+class MoveBetweenPileAndFoundationCommand : public UndoRedoAbleCommand{
 public:
 	MoveBetweenPileAndFoundationCommand(shared_ptr<Game> game);
 
@@ -16,8 +16,6 @@ public:
 	void undo();
 
 	void redo();
-
-	//UndoableCommand clone();
 
 	string toString();
 };

@@ -17,7 +17,7 @@ RedoCommand::execute() {
 
 bool
 RedoCommand::isActive() {
-	if (game->getState() == State::IN_GAME) //TODO: Add redo only if undo
+	if (game->getState() == State::IN_GAME)
 	{
 		return true;
 	}

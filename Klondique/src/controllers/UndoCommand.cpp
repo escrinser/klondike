@@ -18,7 +18,7 @@ UndoCommand::execute()
 
 bool
 UndoCommand::isActive() {
-	if (game->getState() == State::IN_GAME) //TODO: Add undo only if any movement
+	if (game->getState() == State::IN_GAME)
 	{
 		return true;
 	}

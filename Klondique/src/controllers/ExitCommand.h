@@ -11,8 +11,6 @@ public:
 
 	bool closed();
 
-	//Command clone();
-
 	bool isActive();
 
 private:

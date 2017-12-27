@@ -23,12 +23,6 @@ ExitCommand::closed()
 	return closed_;
 }
 
-/*Command
-ExitCommand::clone()
-{
-	return this;
-}*/
-
 bool
 ExitCommand::isActive()
 {

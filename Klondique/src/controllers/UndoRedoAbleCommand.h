@@ -17,21 +17,15 @@
 
 #include "Command.h"
 
-class UndoableCommand : public Command{
+class UndoRedoAbleCommand : public Command{
 public:
-	UndoableCommand(std::string title, shared_ptr<Game> game);
+	UndoRedoAbleCommand(std::string title, shared_ptr<Game> game);
 
-	virtual ~UndoableCommand();
+	virtual ~UndoRedoAbleCommand();
 
 	virtual void undo() = 0;
 
 	virtual void redo() = 0;
-
-	//virtual UndoableCommand clone() = 0;
-
-	//void execute();
-
-	//bool isActive();
 
 };
 

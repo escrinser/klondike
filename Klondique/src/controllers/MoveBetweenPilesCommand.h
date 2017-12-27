@@ -1,9 +1,9 @@
 #ifndef MODELS_MOVEBETWEENPILESCOMMAND_H_
 #define MODELS_MOVEBETWEENPILESCOMMAND_H_
 
-#include "UndoableCommand.h"
+#include <UndoRedoAbleCommand.h>
 
-class MoveBetweenPilesCommand : public UndoableCommand{
+class MoveBetweenPilesCommand : public UndoRedoAbleCommand{
 public:
 	MoveBetweenPilesCommand(shared_ptr<Game> game);
 
